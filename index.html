@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Susie's MD Pathologist Roadmap 🩺</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -87,7 +87,7 @@
 
   /* OVERALL PROGRESS */
   .overall-progress {
-    background: white;
+    background: var(--white);
     margin: 16px;
     border-radius: var(--radius);
     padding: 20px;
@@ -141,7 +141,7 @@
   /* NAV TABS */
   .nav-tabs {
     display: inline-flex;
-    background: white;
+    background: var(--white);
     border-radius: var(--radius);
     padding: 6px;
     gap: 4px;
@@ -202,7 +202,7 @@
 
   /* PHASE CARDS */
   .phase-card {
-    background: white;
+    background: var(--white);
     border-radius: var(--radius);
     margin-bottom: 16px;
     box-shadow: var(--shadow);
@@ -369,7 +369,7 @@
 
   /* SUBJECT CARDS */
   .subject-card {
-    background: white;
+    background: var(--white);
     border-radius: var(--radius);
     margin-bottom: 16px;
     box-shadow: var(--shadow);
@@ -462,7 +462,7 @@
   }
 
   .resource-item {
-    background: white;
+    background: var(--white);
     border-radius: var(--radius-sm);
     padding: 14px 16px;
     margin-bottom: 10px;
@@ -525,7 +525,7 @@
 
   /* RESUME SECTION */
   .resume-pillar {
-    background: white;
+    background: var(--white);
     border-radius: var(--radius);
     margin-bottom: 16px;
     box-shadow: var(--shadow);
@@ -617,7 +617,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.8);
-    background: white;
+    background: var(--white);
     border-radius: var(--radius);
     padding: 30px 36px;
     text-align: center;
@@ -733,7 +733,7 @@
   }
 
   .stat-pill {
-    background: white;
+    background: var(--white);
     border-radius: var(--radius-sm);
     padding: 12px 16px;
     box-shadow: var(--shadow);
@@ -824,7 +824,7 @@
   .mcat-input:focus { outline:none; border-color:var(--rose); }
   .adj-btn { width:34px; height:34px; border-radius:8px; border:2px solid var(--rose-light); background:transparent; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--rose); font-weight:700; }
   .hours-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0; }
-  .hours-cat { background:white; border-radius:var(--radius-sm); padding:14px; box-shadow:var(--shadow); text-align:center; cursor:pointer; border:2px solid transparent; transition:all 0.2s; }
+  .hours-cat { background:var(--white); border-radius:var(--radius-sm); padding:14px; box-shadow:var(--shadow); text-align:center; cursor:pointer; border:2px solid transparent; transition:all 0.2s; }
   .hours-cat.selected { border-color:var(--rose); }
   .hours-cat-emoji { font-size:26px; }
   .hours-cat-name { font-size:11px; font-weight:700; color:var(--text-mid); margin-top:4px; }
@@ -834,8 +834,8 @@
   .hours-add-form.active { display:block; }
   .hours-form-title { font-size:13px; font-weight:700; color:var(--text-dark); margin-bottom:10px; }
   .hours-form-row { display:flex; gap:8px; margin-bottom:8px; }
-  .hours-form-input { flex:1; padding:8px 10px; border:2px solid var(--rose-light); border-radius:8px; font-family:'Quicksand',sans-serif; font-size:13px; color:var(--text-dark); background:white; }
-  .hours-form-num { width:65px; padding:8px 6px; border:2px solid var(--rose-light); border-radius:8px; font-family:'Quicksand',sans-serif; font-size:13px; font-weight:700; color:var(--text-dark); background:white; text-align:center; }
+  .hours-form-input { flex:1; padding:8px 10px; border:2px solid var(--rose-light); border-radius:8px; font-family:'Quicksand',sans-serif; font-size:13px; color:var(--text-dark); background:var(--white); }
+  .hours-form-num { width:65px; padding:8px 6px; border:2px solid var(--rose-light); border-radius:8px; font-family:'Quicksand',sans-serif; font-size:13px; font-weight:700; color:var(--text-dark); background:var(--white); text-align:center; }
   .hours-form-input:focus,.hours-form-num:focus { outline:none; border-color:var(--rose); }
   .hours-submit { width:100%; padding:12px; border:none; background:linear-gradient(135deg,var(--rose),var(--lavender)); color:white; border-radius:8px; font-family:'Quicksand',sans-serif; font-size:14px; font-weight:700; cursor:pointer; min-height:44px; margin-top:4px; }
   .hours-log-item { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--cream-dark); font-size:12px; gap:6px; }
@@ -844,14 +844,14 @@
   .hours-log-date { color:var(--text-soft); font-size:11px; flex-shrink:0; }
   .hours-log-hrs { color:var(--rose); font-weight:700; flex-shrink:0; }
   .hours-delete { color:var(--text-soft); font-size:14px; padding:4px 8px; cursor:pointer; flex-shrink:0; }
-  .lor-card-item { background:white; border-radius:var(--radius-sm); padding:16px; margin-bottom:10px; box-shadow:var(--shadow); }
+  .lor-card-item { background:var(--white); border-radius:var(--radius-sm); padding:16px; margin-bottom:10px; box-shadow:var(--shadow); }
   .lor-number { font-size:11px; font-weight:700; color:var(--rose); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px; }
   .lor-name-input { width:100%; padding:8px 10px; border:2px solid var(--rose-light); border-radius:8px; font-family:'Quicksand',sans-serif; font-size:13px; color:var(--text-dark); background:var(--cream); margin-bottom:8px; box-sizing:border-box; }
   .lor-name-input:focus { outline:none; border-color:var(--rose); }
   .lor-status-row { display:flex; gap:5px; flex-wrap:wrap; }
   .lor-status-btn { padding:6px 10px; border-radius:99px; border:2px solid var(--rose-light); background:transparent; font-family:'Quicksand',sans-serif; font-size:11px; font-weight:700; color:var(--text-soft); cursor:pointer; transition:all 0.2s; min-height:36px; }
   .lor-status-btn.active { background:linear-gradient(135deg,var(--rose),var(--lavender)); border-color:transparent; color:white; }
-  .school-row-item { background:white; border-radius:var(--radius-sm); padding:14px 16px; margin-bottom:8px; box-shadow:var(--shadow); }
+  .school-row-item { background:var(--white); border-radius:var(--radius-sm); padding:14px 16px; margin-bottom:8px; box-shadow:var(--shadow); }
   .school-row-top { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
   .school-row-name { font-size:14px; font-weight:700; color:var(--text-dark); margin-top:4px; line-height:1.3; }
   .school-row-meta { font-size:11px; color:var(--text-soft); margin-top:2px; font-weight:500; }
@@ -879,7 +879,7 @@
   .phase-sel-btn.active { background:linear-gradient(135deg,var(--rose),var(--lavender)); border-color:transparent; color:white; }
 
   /* SUBSPECIALTIES */
-  .subspec-card { background: white; border-radius: var(--radius); margin-bottom: 12px; box-shadow: var(--shadow); overflow: hidden; }
+  .subspec-card { background: var(--white); border-radius: var(--radius); margin-bottom: 12px; box-shadow: var(--shadow); overflow: hidden; }
   .subspec-header { padding: 16px 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 10px; }
   .subspec-header-left { display: flex; align-items: center; gap: 12px; flex: 1; }
   .subspec-emoji { font-size: 30px; flex-shrink: 0; }
@@ -896,7 +896,7 @@
 
   /* SEMESTER PLANNER */
   .planner-grid { display:flex; flex-direction:column; gap:12px; }
-  .planner-sem { background:white; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; }
+  .planner-sem { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; }
   .planner-sem-header { background:linear-gradient(135deg,#C98DAA,#A86E8A); color:white; padding:12px 16px; display:flex; justify-content:space-between; align-items:center; }
   .planner-sem-title { font-family:'Playfair Display',serif; font-size:15px; font-weight:700; }
   .planner-sem-units { font-size:11px; font-weight:700; opacity:0.85; }
@@ -906,11 +906,11 @@
   .planner-slot-icon { font-size:14px; flex-shrink:0; }
   .planner-slot-text { font-size:12px; font-weight:600; color:var(--text-dark); flex:1; }
   .planner-slot-units { font-size:10px; font-weight:700; color:var(--text-soft); flex-shrink:0; }
-  .planner-add-btn { font-size:11px; font-weight:700; color:var(--rose); padding:4px 8px; border:1px solid var(--rose-light); border-radius:6px; cursor:pointer; background:white; flex-shrink:0; min-height:28px; }
+  .planner-add-btn { font-size:11px; font-weight:700; color:var(--rose); padding:4px 8px; border:1px solid var(--rose-light); border-radius:6px; cursor:pointer; background:var(--white); flex-shrink:0; min-height:28px; }
   .planner-modal { display:none; position:fixed; inset:0; z-index:200; align-items:center; justify-content:center; }
   .planner-modal.open { display:flex; }
   .planner-modal-bg { position:absolute; inset:0; background:rgba(46,15,34,0.5); }
-  .planner-modal-box { position:relative; background:white; border-radius:var(--radius); padding:20px; width:90%; max-width:340px; z-index:201; max-height:80vh; overflow-y:auto; }
+  .planner-modal-box { position:relative; background:var(--white); border-radius:var(--radius); padding:20px; width:90%; max-width:340px; z-index:201; max-height:80vh; overflow-y:auto; }
   .planner-modal-title { font-family:'Playfair Display',serif; font-size:16px; color:var(--text-dark); margin-bottom:12px; }
   .planner-modal-input { width:100%; padding:9px 12px; border:2px solid var(--rose-light); border-radius:8px; font-family:'Quicksand',sans-serif; font-size:13px; color:var(--text-dark); margin-bottom:8px; box-sizing:border-box; }
   .planner-modal-input:focus { outline:none; border-color:var(--rose); }
@@ -933,7 +933,7 @@
   .daytype-btn.active { background:linear-gradient(135deg,#C98DAA,#A86E8A); border-color:transparent; color:white; }
 
   /* SPANISH VOCAB */
-  .vocab-system { background:white; border-radius:var(--radius); margin-bottom:12px; box-shadow:var(--shadow); overflow:hidden; }
+  .vocab-system { background:var(--white); border-radius:var(--radius); margin-bottom:12px; box-shadow:var(--shadow); overflow:hidden; }
   .vocab-system-header { padding:16px 20px; cursor:pointer; display:flex; align-items:center; justify-content:space-between; min-height:56px; }
   .vocab-system-header-left { display:flex; align-items:center; gap:10px; }
   .vocab-system-body { max-height:0; overflow:hidden; opacity:0; padding:0 16px; border-top:1px solid transparent; transition:max-height 0.42s cubic-bezier(0.22,1,0.36,1), opacity 0.3s ease, padding 0.32s ease, border-color 0.3s ease; }
@@ -950,7 +950,7 @@
   .vocab-pron { font-size:11px; color:var(--text-soft); font-style:italic; }
 
   /* MCAT DEEP DIVE */
-  .mcat-section-card { background:white; border-radius:var(--radius); margin-bottom:12px; box-shadow:var(--shadow); overflow:hidden; }
+  .mcat-section-card { background:var(--white); border-radius:var(--radius); margin-bottom:12px; box-shadow:var(--shadow); overflow:hidden; }
   .mcat-section-header { padding:16px 20px; cursor:pointer; display:flex; align-items:center; justify-content:space-between; min-height:60px; }
   .mcat-section-header-left { display:flex; align-items:center; gap:12px; }
   .mcat-section-body { max-height:0; overflow:hidden; opacity:0; padding:0 20px; border-top:1px solid transparent; transition:max-height 0.42s cubic-bezier(0.22,1,0.36,1), opacity 0.3s ease, padding 0.32s ease, border-color 0.3s ease; }
@@ -975,6 +975,308 @@
   .counter-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rose-light); }
   .counter-dot.filled { background: var(--rose); }
 
+
+  /* ===================== SCHOOL TOGGLE ===================== */
+  .school-switch {
+    display:flex; gap:8px; background:var(--white); padding:6px;
+    border-radius:var(--radius); box-shadow:var(--shadow);
+    margin-bottom:16px; align-items:center; flex-wrap:wrap;
+  }
+  .school-switch-label {
+    font-size:12px; font-weight:700; color:var(--text-soft);
+    text-transform:uppercase; letter-spacing:.5px; padding:0 8px;
+  }
+  .school-btn {
+    flex:1 1 120px; padding:10px 12px; border:none; cursor:pointer;
+    border-radius:var(--radius-sm); background:var(--cream);
+    color:var(--text-mid); font-family:inherit; font-size:14px; font-weight:600;
+    transition:all .22s ease;
+  }
+  .school-btn.active {
+    background:linear-gradient(135deg, #A84E6A, #4A0E28);
+    color:#fff; box-shadow:0 4px 12px rgba(168,78,106,.32);
+  }
+  /* A filtered-out school is removed from the list entirely, not just faded.
+     Dimming it still left the card clickable, which read as broken. */
+  .school-hidden { display:none !important; }
+
+  .school-hint {
+    font-size:12.5px; color:var(--text-soft); text-align:center;
+    margin:-6px 0 16px; line-height:1.5;
+  }
+  .school-hint button {
+    border:none; background:none; padding:0; cursor:pointer; font-family:inherit;
+    font-size:12.5px; font-weight:700; color:var(--mauve); text-decoration:underline;
+  }
+
+  /* ===================== CUSTOM COURSES ===================== */
+  .add-course-btn {
+    width:100%; margin-top:10px; padding:12px;
+    border:2px dashed var(--rose-light); background:var(--rose-pale);
+    color:var(--mauve); font-family:inherit; font-size:14px; font-weight:700;
+    border-radius:var(--radius-sm); cursor:pointer; transition:all .2s ease;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .add-course-btn:hover { background:var(--rose-light); color:var(--text-dark); }
+  .course-item.custom { border-left:4px solid var(--rose); }
+  .course-actions { display:flex; gap:6px; margin-left:auto; align-self:flex-start; }
+  .course-mini-btn {
+    border:none; background:var(--cream-dark); color:var(--text-mid);
+    width:30px; height:30px; border-radius:8px; cursor:pointer;
+    font-size:13px; line-height:1; transition:all .18s ease;
+  }
+  .course-mini-btn:hover { background:var(--rose-light); color:var(--text-dark); }
+  .tag-custom { background:var(--lavender-pale); color:var(--mauve); }
+  .tag-upcoming { background:var(--cream-dark); color:var(--text-mid); }
+
+  /* ===================== COURSE MODAL ===================== */
+  .course-modal { position:fixed; inset:0; z-index:400; display:none; }
+  .course-modal.open { display:block; }
+  .course-modal-bg { position:absolute; inset:0; background:rgba(61,32,48,.5); backdrop-filter:blur(3px); }
+  .course-modal-box {
+    position:relative; margin:8vh auto 0; max-width:400px; width:calc(100% - 40px);
+    background:var(--white); border-radius:var(--radius); padding:22px;
+    box-shadow:0 20px 60px rgba(61,32,48,.3); max-height:84vh; overflow-y:auto;
+  }
+  .course-modal-head { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .course-modal-title { font-family:'Playfair Display',serif; font-size:21px; color:var(--text-dark); }
+  .course-modal-input {
+    width:100%; padding:12px 14px; margin-bottom:10px; font-family:inherit; font-size:15px;
+    border:2px solid var(--cream-dark); border-radius:var(--radius-sm);
+    background:var(--cream); color:var(--text-dark); box-sizing:border-box;
+  }
+  .course-modal-input:focus { outline:none; border-color:var(--rose); background:var(--white); }
+  .course-modal-row { display:flex; gap:10px; }
+  .course-modal-row .course-modal-input { flex:1; }
+  .course-modal-save {
+    width:100%; padding:13px; border:none; border-radius:var(--radius-sm); cursor:pointer;
+    background:linear-gradient(135deg, #A84E6A, #4A0E28); color:#fff;
+    font-family:inherit; font-size:15px; font-weight:700; margin-top:6px;
+  }
+  .course-modal-cancel {
+    width:100%; padding:11px; border:none; border-radius:var(--radius-sm); cursor:pointer;
+    background:transparent; color:var(--text-soft); font-family:inherit; font-size:14px; margin-top:4px;
+  }
+  .course-modal-delete {
+    width:100%; padding:11px; border:2px solid var(--rose-light); border-radius:var(--radius-sm);
+    cursor:pointer; background:transparent; color:var(--rose); font-family:inherit;
+    font-size:14px; font-weight:600; margin-top:8px; display:none;
+  }
+  .course-modal-delete.show { display:block; }
+
+
+  /* ===================== POLISH ===================== */
+  /* Cards lift very slightly on hover so tapping feels responsive. */
+  .phase-card, .subject-card, .resume-pillar, .subspec-card { transition: box-shadow .25s ease, transform .25s ease; }
+  .phase-card:hover, .subject-card:hover { box-shadow: var(--shadow-hover); }
+
+  /* Course rows get a soft slide instead of a hard color flip. */
+  .course-item { transition: background .22s ease, border-color .22s ease, transform .18s ease; }
+  .course-item:active { transform: scale(.995); }
+
+  /* Sticky nav gets a soft edge so content scrolling under it stays readable. */
+  .nav-tabs { backdrop-filter: saturate(1.1); border: 2px solid var(--rose-pale); }
+  .nav-tab { transition: background .2s ease, color .2s ease, transform .2s ease; }
+  .nav-tab:not(.active):hover { background: var(--rose-pale); }
+
+  /* Section fade is a touch gentler than before. */
+  .section.active { animation: sectionIn .34s cubic-bezier(.22,.9,.3,1); }
+  @keyframes sectionIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .mochi-footer {
+    text-align:center; padding:34px 20px 46px; color:var(--text-soft); font-size:13px;
+  }
+  .mochi-footer strong { color:var(--mauve); }
+
+
+  /* ===================== HEADER CONTENT ===================== */
+  .header { padding: 34px 24px 26px; }
+  .header-inner { position:relative; z-index:2; max-width:900px; margin:0 auto; }
+
+  /* Current-semester chips */
+  .now-strip {
+    display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+    margin-top:20px;
+  }
+  .now-card {
+    background:rgba(255,255,255,.16); backdrop-filter:blur(6px);
+    border:1.5px solid rgba(255,255,255,.28); border-radius:14px;
+    padding:10px 15px; min-width:132px; text-align:left;
+    transition:background .22s ease, transform .22s ease;
+  }
+  .now-card:hover { background:rgba(255,255,255,.24); transform:translateY(-2px); }
+  .now-card-label {
+    font-size:10px; font-weight:700; letter-spacing:.9px; text-transform:uppercase;
+    color:rgba(255,255,255,.7); margin-bottom:3px;
+  }
+  .now-card-code { font-size:16px; font-weight:700; color:#fff; line-height:1.2; }
+  .now-card-name { font-size:11.5px; color:rgba(255,255,255,.82); margin-top:2px; line-height:1.35; }
+
+  .now-heading {
+    margin-top:22px; font-size:11px; font-weight:700; letter-spacing:1.4px;
+    text-transform:uppercase; color:rgba(255,255,255,.65);
+  }
+
+  /* Focus + countdown row */
+  .header-focus {
+    display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:18px;
+  }
+  .focus-chip {
+    display:flex; align-items:center; gap:10px;
+    background:rgba(255,255,255,.92); border-radius:14px; padding:10px 16px;
+    box-shadow:0 6px 18px rgba(74,14,40,.18);
+  }
+  .focus-chip-icon { font-size:20px; line-height:1; }
+  .focus-chip-text { text-align:left; }
+  .focus-chip-top {
+    font-size:10px; font-weight:700; letter-spacing:.9px; text-transform:uppercase;
+    color:var(--text-soft);
+  }
+  .focus-chip-main { font-size:14px; font-weight:700; color:var(--text-dark); line-height:1.3; }
+
+  @media (max-width: 560px) {
+    .now-card { min-width:0; flex:1 1 44%; }
+    .focus-chip { flex:1 1 100%; }
+  }
+
+
+  /* ===================== EDITABLE HEADER ===================== */
+  .now-card { position:relative; cursor:pointer; }
+  .now-card .now-del {
+    position:absolute; top:5px; right:6px; width:20px; height:20px; line-height:18px;
+    border:none; border-radius:6px; cursor:pointer; font-size:12px;
+    background:rgba(255,255,255,.22); color:#fff; opacity:0; transition:opacity .2s ease;
+  }
+  .now-card:hover .now-del, .now-card:focus-within .now-del { opacity:1; }
+  .now-card.add {
+    display:flex; align-items:center; justify-content:center;
+    border-style:dashed; color:#fff; font-weight:700; font-size:14px; min-height:62px;
+  }
+  .now-heading-row {
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    margin-top:22px; flex-wrap:wrap;
+  }
+  .now-heading-row .now-heading { margin-top:0; }
+  .term-edit-btn {
+    border:1.5px solid rgba(255,255,255,.35); background:rgba(255,255,255,.12);
+    color:#fff; border-radius:20px; padding:3px 11px; font-size:11px; font-weight:600;
+    cursor:pointer; font-family:inherit;
+  }
+  .term-edit-btn:hover { background:rgba(255,255,255,.24); }
+  .focus-chip.editable { cursor:pointer; }
+  .focus-chip.editable:hover { box-shadow:0 8px 22px rgba(74,14,40,.26); }
+  .now-status-toggle {
+    display:flex; gap:6px; margin-bottom:10px;
+  }
+  .now-status-toggle button {
+    flex:1; padding:9px; border:2px solid var(--cream-dark); background:var(--cream);
+    color:var(--text-mid); border-radius:var(--radius-sm); cursor:pointer;
+    font-family:inherit; font-size:13px; font-weight:600;
+  }
+  .now-status-toggle button.active {
+    background:linear-gradient(135deg,#A84E6A,#4A0E28); color:#fff; border-color:transparent;
+  }
+
+
+  /* ===================== DARK MODE =====================
+     Every surface in this file draws its color from the tokens in
+     :root, so a dark theme is a matter of redefining the tokens
+     rather than restyling components. Same rose family, just
+     inverted: deep plum surfaces instead of cream, soft pink text
+     instead of near-black.
+     ====================================================== */
+  :root[data-theme="dark"] {
+    --rose:          #E38DA2;
+    --rose-light:    #6E3F52;
+    --rose-pale:     #3A2130;
+    --lavender:      #C98DAA;
+    --lavender-light:#5C3A4C;
+    --lavender-pale: #33202C;
+    --mauve:         #E0A8C2;
+    --cream:         #2A1723;
+    --cream-dark:    #3A2532;
+    --text-dark:     #F6E6EE;
+    --text-mid:      #D9AFC4;
+    --text-soft:     #A97E92;
+    --white:         #33202C;
+    --shadow:        0 4px 20px rgba(0,0,0,.42);
+    --shadow-hover:  0 8px 30px rgba(0,0,0,.55);
+  }
+  :root[data-theme="dark"] body { background: #1E1019; }
+  :root[data-theme="dark"] .header {
+    background: linear-gradient(135deg, #4A2739 0%, #2A1723 100%);
+  }
+  :root[data-theme="dark"] .nav-tab.active,
+  :root[data-theme="dark"] .school-btn.active,
+  :root[data-theme="dark"] .course-modal-save,
+  :root[data-theme="dark"] .planner-modal-save {
+    background: linear-gradient(135deg, #B85D7C, #6E2A46);
+  }
+  :root[data-theme="dark"] .now-card { background: rgba(255,255,255,.08); }
+  :root[data-theme="dark"] .focus-chip { background: #3A2532; }
+  :root[data-theme="dark"] .focus-chip-main { color: var(--text-dark); }
+  :root[data-theme="dark"] .course-item.done { opacity: .62; }
+  :root[data-theme="dark"] img, :root[data-theme="dark"] .header-emoji { filter: none; }
+
+  /* Follow the iPad's own setting unless she has picked a theme herself. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --rose:#E38DA2; --rose-light:#6E3F52; --rose-pale:#3A2130;
+      --lavender:#C98DAA; --lavender-light:#5C3A4C; --lavender-pale:#33202C;
+      --mauve:#E0A8C2; --cream:#2A1723; --cream-dark:#3A2532;
+      --text-dark:#F6E6EE; --text-mid:#D9AFC4; --text-soft:#A97E92;
+      --white:#33202C;
+      --shadow:0 4px 20px rgba(0,0,0,.42);
+      --shadow-hover:0 8px 30px rgba(0,0,0,.55);
+    }
+    :root:not([data-theme="light"]) body { background:#1E1019; }
+    :root:not([data-theme="light"]) .header {
+      background: linear-gradient(135deg, #4A2739 0%, #2A1723 100%);
+    }
+    :root:not([data-theme="light"]) .nav-tab.active,
+    :root:not([data-theme="light"]) .school-btn.active,
+    :root:not([data-theme="light"]) .course-modal-save,
+    :root:not([data-theme="light"]) .planner-modal-save {
+      background: linear-gradient(135deg, #B85D7C, #6E2A46);
+    }
+    :root:not([data-theme="light"]) .now-card { background: rgba(255,255,255,.08); }
+    :root:not([data-theme="light"]) .focus-chip { background:#3A2532; }
+  }
+
+  .theme-toggle {
+    position:fixed; right:16px; bottom:16px; z-index:300;
+    width:50px; height:50px; border-radius:50%; border:none; cursor:pointer;
+    background:var(--white); color:var(--text-dark); font-size:21px; line-height:1;
+    box-shadow:0 6px 20px rgba(61,32,48,.28);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .theme-toggle:hover { transform:scale(1.08); box-shadow:var(--shadow-hover); }
+  .theme-toggle:active { transform:scale(.94); }
+
+  /* ===================== LEARN SUB-NAV ===================== */
+  .subnav {
+    display:flex; gap:8px; background:var(--white); padding:6px;
+    border-radius:var(--radius); box-shadow:var(--shadow);
+    margin-bottom:18px; overflow-x:auto; scrollbar-width:none;
+  }
+  .subnav::-webkit-scrollbar { display:none; }
+  .subnav button {
+    flex:1 1 auto; white-space:nowrap; padding:10px 14px; border:none; cursor:pointer;
+    border-radius:var(--radius-sm); background:transparent; color:var(--text-mid);
+    font-family:inherit; font-size:14px; font-weight:600; transition:all .2s ease;
+  }
+  .subnav button:hover { background:var(--rose-pale); }
+  .subnav button.active {
+    background:linear-gradient(135deg,#A84E6A,#4A0E28); color:#fff;
+  }
+  :root[data-theme="dark"] .subnav button.active,
+  :root:not([data-theme="light"]) .subnav button.active {
+    background:linear-gradient(135deg,#B85D7C,#6E2A46);
+  }
+
 </style>
 </head>
 <body>
@@ -990,9 +1292,41 @@
 
 <!-- HEADER -->
 <div class="header">
-  <span class="header-emoji">🩺</span>
-  <h1>Susie's MD Pathologist<br>Roadmap</h1>
-  <p>Future Physician-Pathologist</p>
+  <div class="header-inner">
+    <span class="header-emoji">🩺</span>
+    <h1>Susie's MD Pathologist<br>Roadmap</h1>
+    <p>Future Physician-Pathologist</p>
+
+    <div class="now-heading-row">
+      <div class="now-heading" id="termLabel">This Semester</div>
+      <button class="term-edit-btn" onclick="openTermModal()">✎ Rename term</button>
+    </div>
+    <div class="now-strip" id="nowStrip"></div>
+
+    <div class="header-focus">
+      <div class="focus-chip editable" onclick="openFocusModal('milestone')">
+        <span class="focus-chip-icon">🎯</span>
+        <span class="focus-chip-text">
+          <span class="focus-chip-top">Next milestone ✎</span>
+          <span class="focus-chip-main" id="nextMilestone">Finish BIOL 11A strong</span>
+        </span>
+      </div>
+      <div class="focus-chip editable" onclick="openFocusModal('coming')">
+        <span class="focus-chip-icon">🧪</span>
+        <span class="focus-chip-text">
+          <span class="focus-chip-top">Coming up ✎</span>
+          <span class="focus-chip-main" id="comingUp">CHEM 3A &amp; CHEM 1A</span>
+        </span>
+      </div>
+      <div class="focus-chip">
+        <span class="focus-chip-icon">📆</span>
+        <span class="focus-chip-text">
+          <span class="focus-chip-top">Semester ends in</span>
+          <span class="focus-chip-main" id="semCountdown">—</span>
+        </span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- STATS -->
@@ -1055,16 +1389,15 @@
   <button class="nav-tab" onclick="showSection('resume', this)">⭐ Resume</button>
   <button class="nav-tab" onclick="showSection('tools', this)">📊 My Tools</button>
   <button class="nav-tab" onclick="showSection('planner', this)">📅 Planner</button>
-  <button class="nav-tab" onclick="showSection('daylife', this)">🌡️ Day-in-Life</button>
-  <button class="nav-tab" onclick="showSection('spanish', this)">🇪🇸 Spanish</button>
-  <button class="nav-tab" onclick="showSection('mcat', this)">💊 MCAT Dive</button>
+  <button class="nav-tab" id="learnTab" onclick="showSection('daylife', this)">📘 Learn</button>
 </div>
 </div>
 <div class="section active" id="section-roadmap">
   <div class="section-title">🗺️ Your Full Timeline</div>
+  <div class="mochi-note"><div class="mochi-bubble">Every phase below opens up. Nothing here has to happen fast — it just has to keep happening.</div></div>
 
   <div class="info-box">
-    <strong>Where you are:</strong> 3rd year at Fresno City College, currently taking CHEM 3A. You're on track — here's every step from here to becoming Dr. Juarez. 👇
+    <strong>Where you are:</strong> At Fresno City College, taking <strong>BIOL 11A</strong> and <strong>Calculus</strong> this semester, with English already finished. Chemistry is queued up next. Here's every step from here to Dr. Juarez. 👇
   </div>
 
   <div class="phase-card">
@@ -1073,7 +1406,7 @@
         <div class="phase-icon icon-rose">📗</div>
         <div class="phase-title-block">
           <h3>Phase 1 — Finish FCC</h3>
-          <p>~2 more years · Fresno City College</p>
+          <p>Fresno City College · pre-med prerequisites</p>
         </div>
       </div>
       <span class="phase-chevron">▾</span>
@@ -1082,13 +1415,23 @@
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-year">Now</div>
-          <div class="timeline-event">CHEM 3A — Introductory General Chemistry</div>
-          <div class="timeline-note">In progress ✨ Crush this with an A — everything builds on it</div>
+          <div class="timeline-event">BIOL 11A + Calculus (MATH C2210 &amp; 205S)</div>
+          <div class="timeline-note">In progress ✨ BIOL 11A is the gateway to the whole biology sequence — protect this grade</div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-year">Next Semester</div>
-          <div class="timeline-event">CHEM 1A + BIOL 11A</div>
-          <div class="timeline-note">Start the real pre-med sequence</div>
+          <div class="timeline-year">Done</div>
+          <div class="timeline-event">English — completed over the summer ✓</div>
+          <div class="timeline-note">One less thing standing between you and transfer. Summer sessions are a real strategy — use them again.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">Coming Up</div>
+          <div class="timeline-event">CHEM 3A → CHEM 1A</div>
+          <div class="timeline-note">Chemistry is the next sequence to start. Front-load office hours and a study group from week one.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">After That</div>
+          <div class="timeline-event">CHEM 1B + BIOL 11B</div>
+          <div class="timeline-note">The core pre-med sequence continues</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-year">Semester 3</div>
@@ -1232,6 +1575,21 @@
 <div class="section" id="section-courses">
   <div class="section-title">📚 All Courses</div>
 
+  <div class="mochi-note">
+    <div class="mochi-bubble">
+      Tap a course once for <strong>In Progress</strong>, again for <strong>Done</strong>, a third time to clear it.
+      Use <strong>+ Add your own course</strong> at the bottom of any school to put in the exact classes you registered for.
+    </div>
+  </div>
+
+  <div class="school-switch">
+    <span class="school-switch-label">Transfer target</span>
+    <button class="school-btn active" data-schoolbtn="fresno" onclick="setSchool('fresno')">🐾 Fresno State</button>
+    <button class="school-btn" data-schoolbtn="berkeley" onclick="setSchool('berkeley')">🐻 UC Berkeley</button>
+    <button class="school-btn" data-schoolbtn="both" onclick="setSchool('both')">👀 Compare both</button>
+  </div>
+  <div class="school-hint" id="schoolHint"></div>
+
   <!-- FCC -->
   <div class="phase-card">
     <div class="phase-header" onclick="toggleCard(this)">
@@ -1239,20 +1597,20 @@
         <div class="phase-icon icon-rose">🏫</div>
         <div class="phase-title-block">
           <h3>Fresno City College (FCC)</h3>
-          <p>Current — tap any course to mark complete</p>
+          <p>Current — tap once for in progress, twice for done</p>
         </div>
       </div>
       <span class="phase-chevron">▾</span>
     </div>
     <div class="phase-body">
 
-      <div class="course-item in-progress" data-id="c1" data-phase="1" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="c1" data-phase="1" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">CHEM 3A</div>
           <div class="course-name">Introductory General Chemistry</div>
           <div class="course-desc">4 units · Building foundation for CHEM 1A. Focus: dimensional analysis, nomenclature, mole calculations.</div>
-          <span class="course-tag tag-inprogress">In Progress</span>
+          <span class="course-tag tag-upcoming">Coming up</span>
         </div>
       </div>
 
@@ -1278,7 +1636,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="c4" data-phase="1" onclick="toggleCourse(this)">
+      <div class="course-item in-progress" data-id="c4" data-phase="1" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">BIOL 11A</div>
@@ -1372,6 +1730,10 @@
         </div>
       </div>
 
+      <div class="custom-course-host" data-host="fcc" data-phase="1"></div>
+      <button class="add-course-btn" onclick="openCourseModal('fcc')"><span>➕</span> Add your own Fresno City College course</button>
+
+
     </div>
   </div>
 
@@ -1392,7 +1754,7 @@
 
       <div style="font-size:13px; font-weight:700; color:var(--rose); margin: 10px 0 6px; text-transform:uppercase; letter-spacing:0.5px;">Lower Division — Science Core</div>
 
-      <div class="course-item" data-id="t1" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t1" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">BIOL 1A</div>
@@ -1402,7 +1764,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="t2" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t2" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">BIOL 1B + 1BL</div>
@@ -1412,7 +1774,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="t3" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t3" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">CHEM 1A + 1AL</div>
@@ -1422,7 +1784,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="t4" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t4" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">CHEM 1B + 1BL</div>
@@ -1432,7 +1794,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="t5" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t5" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">CHEM 128A + 129A</div>
@@ -1442,7 +1804,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="t6" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t6" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">CHEM 128B + 129B</div>
@@ -1452,7 +1814,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="t7" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t7" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">PHYS 2A</div>
@@ -1462,7 +1824,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="t8" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t8" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">PHYS 2B</div>
@@ -1472,7 +1834,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="t9" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t9" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">MATH 70 or MATH 75</div>
@@ -1482,7 +1844,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="t10" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t10" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">PSYCH 42 or MATH 101</div>
@@ -1494,7 +1856,7 @@
 
       <div style="font-size:13px; font-weight:700; color:var(--lavender); margin: 16px 0 6px; text-transform:uppercase; letter-spacing:0.5px;">Upper Division — Core Major Courses</div>
 
-      <div class="course-item" data-id="t11" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t11" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">CHEM 150</div>
@@ -1505,7 +1867,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="t12" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t12" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">BIOL 101</div>
@@ -1515,7 +1877,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="t13" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t13" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">BIOL 102</div>
@@ -1525,7 +1887,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="t14" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t14" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">BIOL 103 + 104</div>
@@ -1535,7 +1897,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="t15" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t15" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">BIOL 155 or 156</div>
@@ -1547,7 +1909,7 @@
 
       <div style="font-size:13px; font-weight:700; color:var(--mauve); margin: 16px 0 6px; text-transform:uppercase; letter-spacing:0.5px;">MCAT Prep Courses</div>
 
-      <div class="course-item" data-id="t16" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t16" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">PSYCH 10</div>
@@ -1557,7 +1919,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="t17" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="t17" data-phase="2" data-school="fresno" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">SOC 1</div>
@@ -1566,6 +1928,10 @@
           <span class="course-tag tag-mcat">MCAT — full section</span>
         </div>
       </div>
+
+      <div class="custom-course-host" data-host="fresno" data-phase="2"></div>
+      <button class="add-course-btn" onclick="openCourseModal('fresno')"><span>➕</span> Add your own Fresno State course</button>
+
 
     </div>
   </div>
@@ -1587,7 +1953,7 @@
 
       <div style="font-size:13px; font-weight:700; color:var(--rose); margin: 10px 0 6px; text-transform:uppercase; letter-spacing:0.5px;">Lower Division — Core Prerequisites</div>
 
-      <div class="course-item" data-id="b1" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="ucb1" data-phase="2" data-school="berkeley" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">CHEM 1A + 1AL</div>
@@ -1597,7 +1963,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="b2" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="ucb2" data-phase="2" data-school="berkeley" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">CHEM 1B</div>
@@ -1607,7 +1973,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="b3" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="ucb3" data-phase="2" data-school="berkeley" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">CHEM 3A + 3AL</div>
@@ -1617,7 +1983,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="b4" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="ucb4" data-phase="2" data-school="berkeley" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">CHEM 3B + 3BL</div>
@@ -1627,7 +1993,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="b5" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="ucb5" data-phase="2" data-school="berkeley" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">BIO 1A + 1AL</div>
@@ -1637,7 +2003,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="b6" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="ucb6" data-phase="2" data-school="berkeley" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">BIO 1B</div>
@@ -1647,7 +2013,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="b7" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="ucb7" data-phase="2" data-school="berkeley" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">PHYS 8A</div>
@@ -1657,7 +2023,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="b8" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="b8" data-phase="2" data-school="berkeley" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">PHYS 8B</div>
@@ -1667,7 +2033,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="b9" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="b9" data-phase="2" data-school="berkeley" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">MATH 1A + 1B</div>
@@ -1679,7 +2045,7 @@
 
       <div style="font-size:13px; font-weight:700; color:var(--lavender); margin: 16px 0 6px; text-transform:uppercase; letter-spacing:0.5px;">Upper Division — MCB Core + Pathology Track</div>
 
-      <div class="course-item" data-id="b10" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="b10" data-phase="2" data-school="berkeley" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">MCB 102</div>
@@ -1690,7 +2056,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="b11" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="b11" data-phase="2" data-school="berkeley" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">MCB C112</div>
@@ -1700,7 +2066,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="b12" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="b12" data-phase="2" data-school="berkeley" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">MCB 150</div>
@@ -1710,7 +2076,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="b13" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="b13" data-phase="2" data-school="berkeley" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">MCB 132</div>
@@ -1720,7 +2086,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="b14" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="b14" data-phase="2" data-school="berkeley" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">MCB 32</div>
@@ -1732,7 +2098,7 @@
 
       <div style="font-size:13px; font-weight:700; color:var(--mauve); margin: 16px 0 6px; text-transform:uppercase; letter-spacing:0.5px;">MCAT Prep Courses</div>
 
-      <div class="course-item" data-id="b15" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="b15" data-phase="2" data-school="berkeley" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">PSYCH 1</div>
@@ -1742,7 +2108,7 @@
         </div>
       </div>
 
-      <div class="course-item" data-id="b16" data-phase="2" onclick="toggleCourse(this)">
+      <div class="course-item" data-id="b16" data-phase="2" data-school="berkeley" onclick="toggleCourse(this)">
         <div class="course-check"></div>
         <div class="course-info">
           <div class="course-code">SOCIOL 1</div>
@@ -1751,6 +2117,10 @@
           <span class="course-tag tag-mcat">MCAT — full section</span>
         </div>
       </div>
+
+      <div class="custom-course-host" data-host="berkeley" data-phase="2"></div>
+      <button class="add-course-btn" onclick="openCourseModal('berkeley')"><span>➕</span> Add your own UC Berkeley course</button>
+
 
     </div>
   </div>
@@ -1957,6 +2327,10 @@
         </div>
       </div>
 
+      <div class="custom-course-host" data-host="med" data-phase="3"></div>
+      <button class="add-course-btn" onclick="openCourseModal('med')"><span>➕</span> Add your own Medical School course</button>
+
+
     </div>
   </div>
 </div>
@@ -1964,6 +2338,7 @@
 <!-- ===== SUBJECTS SECTION ===== -->
 <div class="section" id="section-subjects">
   <div class="section-title">🔬 Subjects to Master</div>
+  <div class="mochi-note"><div class="mochi-bubble">Master the subject, not the exam. Everything on the MCAT lives somewhere in here first.</div></div>
 
   <div class="info-box">
     Tap each subject to expand topics. Check them off as you learn them. These go deeper than your coursework — this is what separates good pathologists from great ones.
@@ -2523,6 +2898,7 @@
 <!-- ===== RESOURCES SECTION ===== -->
 <div class="section" id="section-resources">
   <div class="section-title">📖 Resources & Links</div>
+  <div class="mochi-note"><div class="mochi-bubble">Bookmark two or three of these, not twenty. The ones you actually open beat the ones you meant to.</div></div>
 
   <!-- YOUTUBE -->
   <div class="resource-category">
@@ -2783,6 +3159,7 @@
 <!-- ===== RESUME / EXPERIENCE SECTION ===== -->
 <div class="section" id="section-resume">
   <div class="section-title">⭐ Resume & Experience</div>
+  <div class="mochi-note"><div class="mochi-bubble">Admissions committees read depth, not length. Long commitments beat a list of one-offs.</div></div>
 
   <div class="info-box">
     <strong>The MCAT and GPA get you screened in. These experiences get you accepted.</strong> Med schools want to see clinical exposure, research, and leadership — especially for competitive schools.
@@ -3031,6 +3408,7 @@
 <!-- ===== TOOLS SECTION ===== -->
 <div class="section" id="section-tools">
   <div class="section-title">📊 My Tools</div>
+  <div class="mochi-note"><div class="mochi-bubble">Everything here saves to this iPad automatically. Log it the same week it happens or you will forget the hours.</div></div>
 
   <!-- THIS SEMESTER -->
   <div class="phase-card">
@@ -3048,8 +3426,8 @@
         <button class="phase-sel-btn" onclick="switchSemPhase('applying',this)">📋 Applying</button>
       </div>
       <div id="sem-fcc">
-        <div class="this-sem-item" data-id="sf1" onclick="toggleThisSem(this)"><div class="this-sem-check"></div><div><div class="this-sem-text">Earn an A in CHEM 3A — no exceptions</div><div class="this-sem-why">Your GPA at FCC determines which transfer schools you can realistically target</div></div></div>
-        <div class="this-sem-item" data-id="sf2" onclick="toggleThisSem(this)"><div class="this-sem-check"></div><div><div class="this-sem-text">Register for CHEM 1A + BIOL 11A next semester</div><div class="this-sem-why">The real pre-med sequence starts here — plan your schedule before registration opens</div></div></div>
+        <div class="this-sem-item" data-id="sf1" onclick="toggleThisSem(this)"><div class="this-sem-check"></div><div><div class="this-sem-text">Protect your grade in BIOL 11A</div><div class="this-sem-why">It's the prerequisite for BIOL 11B and every upper-division bio course after it</div></div></div>
+        <div class="this-sem-item" data-id="sf2" onclick="toggleThisSem(this)"><div class="this-sem-check"></div><div><div class="this-sem-text">Get CHEM 3A onto next semester's schedule</div><div class="this-sem-why">Chemistry is a long sequence — starting it opens up CHEM 1A, 1B and organic behind it</div></div></div>
         <div class="this-sem-item" data-id="sf3" onclick="toggleThisSem(this)"><div class="this-sem-check"></div><div><div class="this-sem-text">Book an appointment with an FCC counselor</div><div class="this-sem-why">Map out your full transfer plan — they can catch issues before they cost you a semester</div></div></div>
         <div class="this-sem-item" data-id="sf4" onclick="toggleThisSem(this)"><div class="this-sem-check"></div><div><div class="this-sem-text">Check ASSIST.org — FCC → Fresno State AND FCC → Berkeley</div><div class="this-sem-why">Confirm every course you take at FCC will transfer as credit before registering</div></div></div>
         <div class="this-sem-item" data-id="sf5" onclick="toggleThisSem(this)"><div class="this-sem-check"></div><div><div class="this-sem-text">Download Anki and build a 15 min/day flashcard habit</div><div class="this-sem-why">This habit started now will save thousands of hours in med school</div></div></div>
@@ -3232,6 +3610,7 @@
 <!-- ===== SEMESTER PLANNER ===== -->
 <div class="section" id="section-planner">
   <div class="section-title">📅 Semester Planner</div>
+  <div class="mochi-note"><div class="mochi-bubble">Plan a semester before you register for it. Tap a filled slot to <strong>edit</strong> it, or the ✕ to clear it.</div></div>
   <div class="info-box">Tap <strong>+ Add</strong> on any slot to fill in your courses. Plan ahead — see what each semester looks like before it starts.</div>
   <div class="planner-grid" id="plannerGrid"></div>
   <div class="planner-modal" id="plannerModal">
@@ -3247,9 +3626,78 @@
   </div>
 </div>
 
+<!-- ===== HEADER: SEMESTER CARD MODAL ===== -->
+<div class="course-modal" id="nowModal">
+  <div class="course-modal-bg" onclick="closeNowModal()"></div>
+  <div class="course-modal-box">
+    <div class="course-modal-head">
+      <div class="course-modal-title" id="nowModalTitle">Add to This Semester</div>
+    </div>
+    <div class="now-status-toggle" id="nowStatusToggle">
+      <button data-nowstatus="In progress" onclick="setNowStatus('In progress')">In progress</button>
+      <button data-nowstatus="Complete" onclick="setNowStatus('Complete')">Complete</button>
+      <button data-nowstatus="Upcoming" onclick="setNowStatus('Upcoming')">Upcoming</button>
+    </div>
+    <input type="text" class="course-modal-input" id="nowCode" placeholder="Course code (e.g. MATH C2210)" />
+    <input type="text" class="course-modal-input" id="nowName" placeholder="Course name (e.g. Calculus)" />
+    <button class="course-modal-save" onclick="saveNowCard()">Save</button>
+    <button class="course-modal-delete" id="nowDelete" onclick="deleteNowCard()">Remove this card</button>
+    <button class="course-modal-cancel" onclick="closeNowModal()">Cancel</button>
+  </div>
+</div>
+
+<!-- ===== HEADER: TERM NAME MODAL ===== -->
+<div class="course-modal" id="termModal">
+  <div class="course-modal-bg" onclick="closeTermModal()"></div>
+  <div class="course-modal-box">
+    <div class="course-modal-head"><div class="course-modal-title">Rename This Term</div></div>
+    <input type="text" class="course-modal-input" id="termInput" placeholder="e.g. This Semester · Spring 2027" />
+    <button class="course-modal-save" onclick="saveTerm()">Save</button>
+    <button class="course-modal-cancel" onclick="closeTermModal()">Cancel</button>
+  </div>
+</div>
+
+<!-- ===== HEADER: FOCUS CHIP MODAL ===== -->
+<div class="course-modal" id="focusModal">
+  <div class="course-modal-bg" onclick="closeFocusModal()"></div>
+  <div class="course-modal-box">
+    <div class="course-modal-head"><div class="course-modal-title" id="focusModalTitle">Edit</div></div>
+    <input type="text" class="course-modal-input" id="focusInput" placeholder="Short and specific" />
+    <button class="course-modal-save" onclick="saveFocus()">Save</button>
+    <button class="course-modal-cancel" onclick="closeFocusModal()">Cancel</button>
+  </div>
+</div>
+
+<!-- ===== ADD/EDIT COURSE MODAL ===== -->
+<div class="course-modal" id="courseModal">
+  <div class="course-modal-bg" onclick="closeCourseModal()"></div>
+  <div class="course-modal-box">
+    <div class="course-modal-head">
+      <div class="course-modal-title" id="courseModalTitle">Add a Course</div>
+    </div>
+    <input type="text" class="course-modal-input" id="ccCode" placeholder="Course code (e.g. CHEM 1A)" />
+    <input type="text" class="course-modal-input" id="ccName" placeholder="Course name (e.g. General Chemistry)" />
+    <div class="course-modal-row">
+      <input type="text" class="course-modal-input" id="ccUnits" placeholder="Units" inputmode="decimal" />
+      <input type="text" class="course-modal-input" id="ccTerm" placeholder="Term (e.g. Fall 26)" />
+    </div>
+    <input type="text" class="course-modal-input" id="ccNotes" placeholder="Notes (e.g. MWF 9am, Prof. Nguyen)" />
+    <button class="course-modal-save" onclick="saveCustomCourse()">Save Course</button>
+    <button class="course-modal-delete" id="ccDelete" onclick="deleteCustomCourse()">Delete this course</button>
+    <button class="course-modal-cancel" onclick="closeCourseModal()">Cancel</button>
+  </div>
+</div>
+
 <!-- ===== DAY IN THE LIFE ===== -->
 <div class="section" id="section-daylife">
   <div class="section-title">🌡️ A Day in the Life</div>
+  <div class="subnav">
+    <button data-learn="daylife" onclick="showLearn('daylife')">🌡️ Day in the Life</button>
+    <button data-learn="spanish" onclick="showLearn('spanish')">🇪🇸 Spanish Vocab</button>
+    <button data-learn="mcat" onclick="showLearn('mcat')">💊 MCAT Deep Dive</button>
+  </div>
+
+  <div class="mochi-note"><div class="mochi-bubble">This is the actual job. Read it when the prerequisites feel abstract.</div></div>
   <div class="info-box">This is what Susie's actual workday looks like as a fully practicing Physician-Pathologist. No two days are identical — but this is the rhythm. Choose between Anatomical and Clinical pathology days.</div>
   <div class="daylife-type-selector">
     <button class="daytype-btn active" onclick="switchDayType('anatomical',this)">🔬 Anatomical Pathologist</button>
@@ -3318,6 +3766,13 @@
 <!-- ===== SPANISH VOCAB ===== -->
 <div class="section" id="section-spanish">
   <div class="section-title">🇪🇸 Spanish Medical Vocabulary</div>
+  <div class="subnav">
+    <button data-learn="daylife" onclick="showLearn('daylife')">🌡️ Day in the Life</button>
+    <button data-learn="spanish" onclick="showLearn('spanish')">🇪🇸 Spanish Vocab</button>
+    <button data-learn="mcat" onclick="showLearn('mcat')">💊 MCAT Deep Dive</button>
+  </div>
+
+  <div class="mochi-note"><div class="mochi-bubble">Being bilingual in the Central Valley is a real clinical skill. Tap a term to mark it learned.</div></div>
   <div class="info-box">Being bilingual is one of your strongest assets as a future physician-pathologist in the Central Valley. Tap any term to mark it as known. These terms appear on the MCAT, in medical school, and in your future career with Spanish-speaking patients and families.</div>
 
   <div class="vocab-system" id="vs-body">
@@ -3398,6 +3853,13 @@
 <!-- ===== MCAT DEEP DIVE ===== -->
 <div class="section" id="section-mcat">
   <div class="section-title">💊 MCAT Deep Dive</div>
+  <div class="subnav">
+    <button data-learn="daylife" onclick="showLearn('daylife')">🌡️ Day in the Life</button>
+    <button data-learn="spanish" onclick="showLearn('spanish')">🇪🇸 Spanish Vocab</button>
+    <button data-learn="mcat" onclick="showLearn('mcat')">💊 MCAT Deep Dive</button>
+  </div>
+
+  <div class="mochi-note"><div class="mochi-bubble">118 to 132 per section, four sections. You are aiming for 511+, which is roughly 128 average.</div></div>
   <div class="mcat-score-ring">
     <div class="score-ring-item"><div class="score-ring-num">511</div><div class="score-ring-label">Target Score</div></div>
     <div class="score-ring-item"><div class="score-ring-num">128</div><div class="score-ring-label">Per Section</div></div>
@@ -3509,21 +3971,44 @@
   }
 
   // ===== TOGGLE COURSE =====
+  // Three-state cycle: not started -> in progress -> done -> not started.
+  // The old version dropped 'in-progress' permanently on the first tap, while
+  // the "In Progress" pill in the markup stayed visible and started lying.
   function toggleCourse(item) {
-    if (item.classList.contains('in-progress')) {
+    var id = item.dataset.id;
+    if (item.classList.contains('done')) {
+      item.classList.remove('done');
+      delete state[id];
+    } else if (item.classList.contains('in-progress')) {
       item.classList.remove('in-progress');
       item.classList.add('done');
-      state[item.dataset.id] = 'done';
-      showMilestone('✨', 'Course Complete!', 'You\'re one step closer, Dr. Juarez!');
-    } else if (item.classList.contains('done')) {
-      item.classList.remove('done');
-      delete state[item.dataset.id];
+      state[id] = 'done';
+      showMilestone('✨', 'Course Complete!', 'One step closer, Dr. Juarez!');
     } else {
-      item.classList.add('done');
-      state[item.dataset.id] = 'done';
-      showMilestone('🎉', 'Course Complete!', 'Another one checked off. Keep going!');
+      item.classList.add('in-progress');
+      state[id] = 'in-progress';
     }
+    syncCourseTag(item);
     save();
+  }
+
+  // Keeps the visible pill in sync with the class actually on the row.
+  function syncCourseTag(item) {
+    var info = item.querySelector('.course-info');
+    if (!info) return;
+    var tag = info.querySelector('.tag-autostate');
+    var baked = info.querySelector('.course-tag.tag-inprogress:not(.tag-autostate)');
+    if (baked) baked.remove();
+    if (item.classList.contains('in-progress')) {
+      if (!tag) {
+        tag = document.createElement('span');
+        tag.className = 'course-tag tag-inprogress tag-autostate';
+        tag.textContent = 'In Progress';
+        info.appendChild(tag);
+      }
+    } else if (tag) {
+      tag.remove();
+    }
   }
 
   // ===== TOGGLE TOPIC =====
@@ -3556,6 +4041,9 @@
     document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
     document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
     btn.classList.add('active');
+    // Day-in-Life, Spanish and MCAT all live under the single "Learn" tab now,
+    // so highlight the sub-nav entry that matches whichever one is showing.
+    syncLearnNav(id);
     var target = document.getElementById('section-' + id);
     // Collapse all open cards in target section
     target.querySelectorAll('.phase-card.open, .subject-card.open, .resume-pillar.open, .subspec-card.open, .vocab-system.open, .mcat-section-card.open').forEach(function(el) {
@@ -3567,6 +4055,7 @@
     target.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
 
   // ===== MILESTONE =====
   function showMilestone(emoji, text, sub) {
@@ -3591,7 +4080,10 @@
       if (state[id] === 'done') {
         item.classList.remove('in-progress');
         item.classList.add('done');
+      } else if (state[id] === 'in-progress') {
+        item.classList.add('in-progress');
       }
+      syncCourseTag(item);
     });
 
     // Load topics
@@ -3614,9 +4106,18 @@
     const phase1Done = document.querySelectorAll('.course-item[data-phase="1"].done');
     const pct1 = phase1Items.length ? Math.round((phase1Done.length / phase1Items.length) * 100) : 0;
 
-    // Phase 2 — transfer
-    const phase2Items = document.querySelectorAll('.course-item[data-phase="2"]');
-    const phase2Done = document.querySelectorAll('.course-item[data-phase="2"].done');
+    // Phase 2 — transfer.
+    // Only count the school she's actually targeting. The old version summed
+    // Fresno State AND Berkeley, so finishing one school capped the bar near 49%.
+    var sch = (typeof currentSchool === 'undefined' || !currentSchool)
+      ? (localStorage.getItem('susie-school') || 'fresno') : currentSchool;
+    const schoolSel = (sch === 'both')
+      ? '.course-item[data-phase="2"]'
+      : '.course-item[data-phase="2"][data-school="' + sch + '"], ' +
+        '.course-item[data-phase="2"]:not([data-school])';
+    const phase2Items = document.querySelectorAll(schoolSel);
+    const phase2Done = document.querySelectorAll(
+      schoolSel.split(', ').map(function(x){ return x + '.done'; }).join(', '));
     const pct2 = phase2Items.length ? Math.round((phase2Done.length / phase2Items.length) * 100) : 0;
 
     // Phase 3 — med school
@@ -3688,6 +4189,27 @@
   ];
 
   let currentHoursCategory = null;
+
+  // Escapes text before it goes into innerHTML, so a course named
+  // "Anatomy & Physiology <lab>" renders instead of breaking the slot.
+  function esc(str) {
+    return String(str).replace(/[&<>"']/g, function(c) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  // "CHEM 1A (5u) \u2014 MWF 9am" -> {name:'CHEM 1A', units:'5', notes:'MWF 9am'}
+  function parsePlannerEntry(str) {
+    if (!str) return {name:'', units:'', notes:''};
+    var notes = '';
+    var em = String(str).split(' \u2014 ');
+    var head = em[0];
+    if (em.length > 1) notes = em.slice(1).join(' \u2014 ');
+    var units = '';
+    var m = head.match(/^(.*?)\s*\((\d+(?:\.\d+)?)u\)\s*$/);
+    if (m) { head = m[1]; units = m[2]; }
+    return {name: head.trim(), units: units, notes: notes.trim()};
+  }
 
   function safeJSON(key, fallback) {
     try { return JSON.parse(localStorage.getItem(key)) || fallback; }
@@ -4054,7 +4576,6 @@
     plannerCurrentSem = semId;
     plannerCurrentSlot = slotIdx;
     const sem = PLANNER_SEMS.find(function(s){ return s.id === semId; });
-    document.getElementById('plannerModalTitle').textContent = 'Add Course — ' + (sem ? sem.label : '');
     const existing = (plannerData[semId] || [])[slotIdx] || '';
     document.getElementById('plannerCourseName').value = existing;
     document.getElementById('plannerCourseUnits').value = '';
@@ -4143,6 +4664,442 @@
   loadMCATTopics();
 
 
+
+  /* ============================================================
+     SCHOOL TOGGLE
+     She'll attend one transfer school, not both. This picks which
+     one counts toward Phase 2 and dims the other so the Courses
+     tab stops looking like twice the work it really is.
+     ============================================================ */
+  var currentSchool = localStorage.getItem('susie-school') || 'fresno';
+
+  function setSchool(which) {
+    currentSchool = which;
+    localStorage.setItem('susie-school', which);
+    applySchool();
+    updateProgress();
+  }
+
+  function applySchool() {
+    document.querySelectorAll('[data-schoolbtn]').forEach(function(b) {
+      b.classList.toggle('active', b.dataset.schoolbtn === currentSchool);
+    });
+
+    var names = {fresno: 'Fresno State', berkeley: 'UC Berkeley'};
+    ['fresno', 'berkeley'].forEach(function(key) {
+      var card = findCardByHeading(names[key]);
+      if (!card) return;
+      var off = (currentSchool !== 'both' && currentSchool !== key);
+      card.classList.toggle('school-hidden', off);
+      // Collapse it on the way out so it isn't left open behind the filter.
+      if (off) card.classList.remove('open');
+    });
+
+    var hint = document.getElementById('schoolHint');
+    if (hint) {
+      if (currentSchool === 'both') {
+        hint.innerHTML = 'Showing both schools. Phase 2 progress counts every course from both lists.';
+      } else {
+        var other = currentSchool === 'fresno' ? 'berkeley' : 'fresno';
+        hint.innerHTML = 'Showing <strong>' + names[currentSchool] + '</strong> only. ' +
+          '<button onclick="setSchool(\'' + other + '\')">Show ' + names[other] + '</button>' +
+          ' or <button onclick="setSchool(\'both\')">compare both</button>.';
+      }
+    }
+  }
+
+  function findCardByHeading(text) {
+    var found = null;
+    document.querySelectorAll('#section-courses .phase-card h3').forEach(function(h) {
+      if (h.textContent.indexOf(text) === 0) found = h.closest('.phase-card');
+    });
+    return found;
+  }
+
+  /* ============================================================
+     CUSTOM COURSES
+     Susie can add, edit and delete her own classes inside any
+     school block. Stored separately from the built-in checkboxes
+     (key: susie-custom-courses) so nothing here can corrupt the
+     original course state.
+     ============================================================ */
+  var customCourses = safeJSON('susie-custom-courses', {});
+  var ccEditingHost = null;
+  var ccEditingId = null;
+
+  var HOST_PHASE = {fcc: '1', fresno: '2', berkeley: '2', med: '3'};
+  var HOST_SCHOOL = {fresno: 'fresno', berkeley: 'berkeley'};
+
+  function saveCustomCourses() {
+    localStorage.setItem('susie-custom-courses', JSON.stringify(customCourses));
+  }
+
+  function renderCustomCourses() {
+    document.querySelectorAll('.custom-course-host').forEach(function(host) {
+      var key = host.dataset.host;
+      var list = customCourses[key] || [];
+      var phase = HOST_PHASE[key] || host.dataset.phase;
+      var schoolAttr = HOST_SCHOOL[key] ? ' data-school="' + HOST_SCHOOL[key] + '"' : '';
+      var html = '';
+      list.forEach(function(c) {
+        var cls = 'course-item custom' + (state[c.id] === 'done' ? ' done'
+                : state[c.id] === 'in-progress' ? ' in-progress' : '');
+        html += '<div class="' + cls + '" data-id="' + c.id + '" data-phase="' + phase + '"' + schoolAttr + '>';
+        html += '<div class="course-check" onclick="toggleCourse(this.parentElement)"></div>';
+        html += '<div class="course-info" onclick="toggleCourse(this.parentElement)">';
+        html += '<div class="course-code">' + esc(c.code || 'COURSE') + '</div>';
+        html += '<div class="course-name">' + esc(c.name || '') + '</div>';
+        if (c.units || c.notes) {
+          html += '<div class="course-desc">' +
+                  (c.units ? esc(c.units) + ' units' : '') +
+                  (c.units && c.notes ? ' \u00b7 ' : '') +
+                  esc(c.notes || '') + '</div>';
+        }
+        html += '<span class="course-tag tag-custom">\u2726 My course</span>';
+        if (c.term) html += '<span class="course-tag tag-prereq">' + esc(c.term) + '</span>';
+        html += '</div>';
+        html += '<div class="course-actions">';
+        html += '<button class="course-mini-btn" title="Edit" onclick="event.stopPropagation();openCourseModal(\'' + key + '\',\'' + c.id + '\')">\u270e</button>';
+        html += '</div>';
+        html += '</div>';
+      });
+      host.innerHTML = html;
+      // Re-attach the in-progress pill logic to the freshly built rows.
+      host.querySelectorAll('.course-item').forEach(syncCourseTag);
+    });
+  }
+
+  function openCourseModal(hostKey, courseId) {
+    ccEditingHost = hostKey;
+    ccEditingId = courseId || null;
+    var existing = null;
+    if (courseId) {
+      existing = (customCourses[hostKey] || []).find(function(c) { return c.id === courseId; });
+    }
+    document.getElementById('courseModalTitle').textContent = existing ? 'Edit Course' : 'Add a Course';
+    document.getElementById('ccCode').value  = existing ? (existing.code  || '') : '';
+    document.getElementById('ccName').value  = existing ? (existing.name  || '') : '';
+    document.getElementById('ccUnits').value = existing ? (existing.units || '') : '';
+    document.getElementById('ccTerm').value  = existing ? (existing.term  || '') : '';
+    document.getElementById('ccNotes').value = existing ? (existing.notes || '') : '';
+    document.getElementById('ccDelete').classList.toggle('show', !!existing);
+    document.getElementById('courseModal').classList.add('open');
+    setTimeout(function() { document.getElementById('ccCode').focus(); }, 80);
+  }
+
+  function closeCourseModal() {
+    document.getElementById('courseModal').classList.remove('open');
+    ccEditingHost = null; ccEditingId = null;
+  }
+
+  function saveCustomCourse() {
+    var code = document.getElementById('ccCode').value.trim();
+    var name = document.getElementById('ccName').value.trim();
+    if (!code && !name) { closeCourseModal(); return; }
+    var rec = {
+      code:  code || name,
+      name:  code ? name : '',
+      units: document.getElementById('ccUnits').value.trim(),
+      term:  document.getElementById('ccTerm').value.trim(),
+      notes: document.getElementById('ccNotes').value.trim()
+    };
+    if (!customCourses[ccEditingHost]) customCourses[ccEditingHost] = [];
+    if (ccEditingId) {
+      var i = customCourses[ccEditingHost].findIndex(function(c) { return c.id === ccEditingId; });
+      if (i > -1) { rec.id = ccEditingId; customCourses[ccEditingHost][i] = rec; }
+    } else {
+      // Prefix keeps custom ids from ever colliding with the built-in c1/b1/m1 ids.
+      rec.id = 'cc_' + Date.now().toString(36) + '_' + Math.floor(Math.random() * 9999);
+      customCourses[ccEditingHost].push(rec);
+      showMilestone('\ud83d\udcda', 'Course Added!', 'Now it lives on your roadmap.');
+    }
+    saveCustomCourses();
+    closeCourseModal();
+    renderCustomCourses();
+    updateProgress();
+  }
+
+  function deleteCustomCourse() {
+    if (!ccEditingHost || !ccEditingId) return;
+    customCourses[ccEditingHost] = (customCourses[ccEditingHost] || [])
+      .filter(function(c) { return c.id !== ccEditingId; });
+    delete state[ccEditingId];
+    saveCustomCourses();
+    save();
+    closeCourseModal();
+    renderCustomCourses();
+    updateProgress();
+  }
+
+  // Esc closes whichever modal is open.
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Escape') return;
+    closeCourseModal();
+    if (typeof closeNowModal === 'function') closeNowModal();
+    if (typeof closeTermModal === 'function') closeTermModal();
+    if (typeof closeFocusModal === 'function') closeFocusModal();
+    if (typeof closePlannerModal === 'function') closePlannerModal();
+    closeMilestone();
+  });
+
+  /* ------------------------------------------------------------
+     FIRST-RUN SEED
+     Sets her actual Fall 2026 courses once, then never touches
+     them again, so anything she changes by hand always wins.
+     ------------------------------------------------------------ */
+  (function seedFall2026() {
+    if (localStorage.getItem('susie-seed-f26b')) return;
+    if (!state['c4']) state['c4'] = 'in-progress';   // BIOL 11A
+    if (!customCourses.fcc) customCourses.fcc = [];
+
+    // Her two calculus courses are separate classes, not a lecture/support pair.
+    var seeds = [
+      {id:'cc_seed_calc',  code:'MATH C2210', name:'Calculus',
+       units:'', term:'Fall 26', notes:'', status:'in-progress'},
+      {id:'cc_seed_calc2', code:'MATH 205S',  name:'Calculus',
+       units:'', term:'Fall 26', notes:'', status:'in-progress'},
+      {id:'cc_seed_engl',  code:'ENGLISH',    name:'English Composition',
+       units:'', term:'Summer 26', notes:'Completed over the summer', status:'done'}
+    ];
+    seeds.forEach(function(sd) {
+      var exists = customCourses.fcc.some(function(c) {
+        return c.id === sd.id || (c.code || '').toUpperCase() === sd.code.toUpperCase();
+      });
+      if (!exists) {
+        customCourses.fcc.push({id:sd.id, code:sd.code, name:sd.name,
+                                units:sd.units, term:sd.term, notes:sd.notes});
+      }
+      if (!state[sd.id]) state[sd.id] = sd.status;
+    });
+
+    // Clean up the old combined entry from the first seed, if it's still there.
+    customCourses.fcc = customCourses.fcc.filter(function(c) {
+      return !(c.id === 'cc_seed_calc' && (c.notes || '').indexOf('support section') > -1);
+    });
+
+    saveCustomCourses();
+    localStorage.setItem('susie-roadmap', JSON.stringify(state));
+    localStorage.setItem('susie-seed-f26b', '1');
+
+    // The seed runs after loadState(), so built-in rows like BIOL 11A never
+    // picked up their new status. Re-run it now that state is populated.
+    loadState();
+  })();
+
+  /* ------------------------------------------------------------
+     SEMESTER COUNTDOWN
+     Fresno City's fall term wraps in mid-December. Recomputed on
+     load so the header never shows a stale number.
+     ------------------------------------------------------------ */
+  (function semesterCountdown() {
+    var el = document.getElementById('semCountdown');
+    if (!el) return;
+    var now = new Date();
+    var year = now.getFullYear();
+    var end = new Date(year, 11, 12);           // Dec 12
+    if (now > end) end = new Date(year + 1, 4, 15);  // else May 15
+    var days = Math.ceil((end - now) / 86400000);
+    var weeks = Math.floor(days / 7);
+    el.textContent = days <= 0 ? 'Break time \u2600\ufe0f'
+                   : weeks >= 2 ? weeks + ' weeks'
+                   : days + (days === 1 ? ' day' : ' days');
+  })();
+
+
+  /* ============================================================
+     EDITABLE HEADER
+     The "This Semester" strip, the term name and the two focus
+     chips all live in localStorage now, so Susie can update them
+     each term without anyone editing the HTML.
+     Key: susie-header
+     ============================================================ */
+  var headerData = safeJSON('susie-header', null);
+  if (!headerData) {
+    headerData = {
+      term: 'This Semester \u00b7 Fall 2026',
+      milestone: 'Finish BIOL 11A strong',
+      coming: 'CHEM 3A & CHEM 1A',
+      cards: [
+        {status:'In progress', code:'BIOL 11A',    name:'Biology for Science Majors I'},
+        {status:'In progress', code:'MATH C2210',  name:'Calculus'},
+        {status:'In progress', code:'MATH 205S',   name:'Calculus'},
+        {status:'Complete',    code:'English',     name:'Finished over the summer'}
+      ]
+    };
+    localStorage.setItem('susie-header', JSON.stringify(headerData));
+  }
+
+  function saveHeader() {
+    localStorage.setItem('susie-header', JSON.stringify(headerData));
+  }
+
+  function renderHeader() {
+    var strip = document.getElementById('nowStrip');
+    if (!strip) return;
+    document.getElementById('termLabel').textContent = headerData.term;
+    document.getElementById('nextMilestone').textContent = headerData.milestone;
+    document.getElementById('comingUp').textContent = headerData.coming;
+
+    var html = '';
+    headerData.cards.forEach(function(c, i) {
+      html += '<div class="now-card" onclick="openNowModal(' + i + ')">';
+      html += '<button class="now-del" title="Remove" onclick="event.stopPropagation();removeNowCard(' + i + ')">\u2715</button>';
+      html += '<div class="now-card-label">' + esc(c.status) + '</div>';
+      html += '<div class="now-card-code">' + esc(c.code) + (c.status === 'Complete' ? ' \u2713' : '') + '</div>';
+      if (c.name) html += '<div class="now-card-name">' + esc(c.name) + '</div>';
+      html += '</div>';
+    });
+    html += '<div class="now-card add" onclick="openNowModal()">\u002b Add course</div>';
+    strip.innerHTML = html;
+  }
+
+  // --- semester card modal ---
+  var nowEditingIdx = null;
+  var nowStatus = 'In progress';
+
+  function setNowStatus(v) {
+    nowStatus = v;
+    document.querySelectorAll('[data-nowstatus]').forEach(function(b) {
+      b.classList.toggle('active', b.dataset.nowstatus === v);
+    });
+  }
+
+  function openNowModal(idx) {
+    nowEditingIdx = (typeof idx === 'number') ? idx : null;
+    var c = (nowEditingIdx !== null) ? headerData.cards[nowEditingIdx] : null;
+    document.getElementById('nowModalTitle').textContent = c ? 'Edit Course' : 'Add to This Semester';
+    document.getElementById('nowCode').value = c ? c.code : '';
+    document.getElementById('nowName').value = c ? (c.name || '') : '';
+    setNowStatus(c ? c.status : 'In progress');
+    document.getElementById('nowDelete').classList.toggle('show', !!c);
+    document.getElementById('nowModal').classList.add('open');
+    setTimeout(function(){ document.getElementById('nowCode').focus(); }, 80);
+  }
+
+  function closeNowModal() {
+    document.getElementById('nowModal').classList.remove('open');
+    nowEditingIdx = null;
+  }
+
+  function saveNowCard() {
+    var code = document.getElementById('nowCode').value.trim();
+    if (!code) { closeNowModal(); return; }
+    var rec = {status: nowStatus, code: code, name: document.getElementById('nowName').value.trim()};
+    if (nowEditingIdx !== null) headerData.cards[nowEditingIdx] = rec;
+    else headerData.cards.push(rec);
+    saveHeader(); closeNowModal(); renderHeader();
+  }
+
+  function deleteNowCard() {
+    if (nowEditingIdx === null) return;
+    headerData.cards.splice(nowEditingIdx, 1);
+    saveHeader(); closeNowModal(); renderHeader();
+  }
+
+  function removeNowCard(i) {
+    headerData.cards.splice(i, 1);
+    saveHeader(); renderHeader();
+  }
+
+  // --- term name modal ---
+  function openTermModal() {
+    document.getElementById('termInput').value = headerData.term;
+    document.getElementById('termModal').classList.add('open');
+    setTimeout(function(){ document.getElementById('termInput').focus(); }, 80);
+  }
+  function closeTermModal() { document.getElementById('termModal').classList.remove('open'); }
+  function saveTerm() {
+    var v = document.getElementById('termInput').value.trim();
+    if (v) { headerData.term = v; saveHeader(); renderHeader(); }
+    closeTermModal();
+  }
+
+  // --- focus chip modal ---
+  var focusField = null;
+  function openFocusModal(which) {
+    focusField = which;
+    document.getElementById('focusModalTitle').textContent =
+      which === 'milestone' ? 'Next Milestone' : 'Coming Up';
+    document.getElementById('focusInput').value =
+      which === 'milestone' ? headerData.milestone : headerData.coming;
+    document.getElementById('focusModal').classList.add('open');
+    setTimeout(function(){ document.getElementById('focusInput').focus(); }, 80);
+  }
+  function closeFocusModal() { document.getElementById('focusModal').classList.remove('open'); focusField = null; }
+  function saveFocus() {
+    var v = document.getElementById('focusInput').value.trim();
+    if (v && focusField) {
+      if (focusField === 'milestone') headerData.milestone = v; else headerData.coming = v;
+      saveHeader(); renderHeader();
+    }
+    closeFocusModal();
+  }
+
+  renderHeader();
+
+  /* ============================================================
+     LEARN GROUP
+     Three reference sections share one nav tab. The tab opens
+     Day in the Life; a sub-nav switches between the three without
+     touching the main tab bar.
+     ============================================================ */
+  var LEARN_IDS = ['daylife', 'spanish', 'mcat'];
+
+  function syncLearnNav(id) {
+    var inLearn = LEARN_IDS.indexOf(id) > -1;
+    document.querySelectorAll('[data-learn]').forEach(function(b) {
+      b.classList.toggle('active', inLearn && b.dataset.learn === id);
+    });
+  }
+
+  function showLearn(id) {
+    var tab = document.getElementById('learnTab');
+    showSection(id, tab);
+  }
+
+  /* ============================================================
+     THEME
+     Follows the iPad's own light/dark setting until she picks one
+     herself; after that her choice wins and persists.
+     Key: susie-theme
+     ============================================================ */
+  function currentTheme() {
+    var saved = localStorage.getItem('susie-theme');
+    if (saved) return saved;
+    return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ? 'dark' : 'light';
+  }
+
+  function applyTheme(mode) {
+    document.documentElement.setAttribute('data-theme', mode);
+    var btn = document.getElementById('themeToggle');
+    if (btn) {
+      btn.textContent = (mode === 'dark') ? '\u2600\ufe0f' : '\ud83c\udf19';
+      btn.title = (mode === 'dark') ? 'Switch to light' : 'Switch to dark';
+    }
+  }
+
+  function toggleTheme() {
+    var next = (currentTheme() === 'dark') ? 'light' : 'dark';
+    localStorage.setItem('susie-theme', next);
+    applyTheme(next);
+  }
+
+  applyTheme(currentTheme());
+  syncLearnNav('roadmap');
+
+
+  renderCustomCourses();
+  applySchool();
+  updateProgress();
+
 </script>
+<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Switch theme" aria-label="Switch between light and dark">🌙</button>
+
+<div class="mochi-footer">
+  <div>Built for <strong>Susie</strong> · Future Dr. Juarez, MD</div>
+  <div style="margin-top:6px;opacity:.75;">One course at a time.</div>
+</div>
+
 </body>
 </html>
