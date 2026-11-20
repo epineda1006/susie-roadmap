@@ -1,2 +1,2 @@
 # susie-roadmap
-Updated September 2026
+Updated November 2026
