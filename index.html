@@ -939,7 +939,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   var savedTheme = loadRaw('susie-theme');
   if (savedTheme === 'dark' || savedTheme === 'light') root.setAttribute('data-theme', savedTheme);
   $('themeBtn2').addEventListener('click', function () { themeBtn.click(); });
-  themeBtn.addEventListener('click', function () { var n = isDark() ? 'light' : 'dark'; root.setAttribute('data-theme', n); store('susie-theme', n); paintTheme(); setTimeout(function () { if (typeof toneAll === 'function') toneAll(); }, 80); });
+  themeBtn.addEventListener('click', function () { var n = isDark() ? 'light' : 'dark'; root.setAttribute('data-theme', n); store('susie-theme', n); paintTheme(); [80, 520].forEach(function (t) { setTimeout(function () { if (typeof toneAll === 'function') toneAll(); }, t); }); });
   try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', paintTheme); } catch (e) {}
   paintTheme();
 
