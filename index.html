@@ -572,6 +572,12 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 .pj p { margin: 0; font-size: 14.5px; line-height: 1.45; }
 .pj .need { font-size: 13px; color: var(--dim); }
 .pj .need b { color: var(--fg); font-weight: 600; }
+.pj .go { margin: 2px 0 0; font-size: 13px; color: var(--dim); }
+.pj .go b { display: block; color: var(--fg); font-weight: 600; margin-bottom: 4px; }
+.pj .go ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+.pj .go li { line-height: 1.35; }
+.pj .go a { color: var(--hi); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 2px; }
+.pj .go a::after { content: " \2197"; font-weight: 400; }
 .pj.done h3 { opacity: .7; }
 .pjdone { display: inline-flex; align-items: center; gap: 7px; font: 600 13px var(--display); color: var(--dim); cursor: pointer; align-self: flex-start; margin-top: 2px; }
 .pjdone input { width: 18px; height: 18px; accent-color: var(--cd); }
@@ -2465,11 +2471,11 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   var PJ = {
     cancer: {
       slides: [
-        { t: 'Spot the tumor', d: 'Put normal tissue next to a tumor from the same organ and find the four clues: *big nuclei*, *odd shapes*, *crowding* and *dividing cells*.', l: 1, tm: '30 min', nd: 'The free slide libraries below', key: 'p1', img: 'pcam',
-          steps: ['Open a normal tissue slide, like colon or breast, and zoom from *low to high power*.', 'Open a tumor slide from the same organ in the slide box.', 'Find the four clues and screenshot each one.', 'Write three sentences on how you could tell them apart.', 'Repeat with a blood cancer slide, like a lymph node.'] },
-        { t: 'Count dividing cells', d: 'Open a breast tumor at high power and count *mitoses*, cells caught mid-division, in ten fields. More of them means a faster-growing tumor.', l: 1, tm: '20 min', nd: 'One breast cancer slide' },
-        { t: 'Benign or malignant?', d: 'Put a harmless mole next to a *melanoma* and list three differences: the overall shape, how the cells spread and what the nuclei look like.', l: 2, tm: '30 min', nd: 'Two skin slides' },
-        { t: 'Grade a breast cancer', d: 'Score *tubules*, *nuclear size* and *mitoses* from 1 to 3 each, add them up, and you have the *Nottingham grade* pathologists put in the report.', l: 3, tm: '45 min', nd: 'One breast cancer slide and the grading rules' }
+        { t: 'Spot the tumor', d: 'Put normal tissue next to a tumor from the same organ and find the four clues: *big nuclei*, *odd shapes*, *crowding* and *dividing cells*.', l: 1, tm: '30 min', nd: 'The WebPath pictures linked below', key: 'p1', img: 'pcam',
+          steps: ['Open a normal tissue slide, like colon or breast, and zoom from *low to high power*.', 'Open a tumor from the same organ, using the links below.', 'Find the four clues and screenshot each one.', 'Write three sentences on how you could tell them apart.', 'Repeat with a blood cancer slide, like a lymph node.'], go: [["Normal colon", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM068.html", "Open first, so you know healthy"], ["Colon polyp", "https://webpath.med.utah.edu/NEOHTML/NEOPL035.html", "Cells starting to change"], ["Colon cancer", "https://webpath.med.utah.edu/NEOHTML/NEOPL037.html", "Find the four clues here"], ["Normal breast", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM005.html", ""], ["Breast cancer", "https://webpath.med.utah.edu/NEOHTML/NEOPL031.html", "Compare with normal breast"], ["Normal lymph node", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM027.html", "For step 5"], ["Lymphoma", "https://webpath.med.utah.edu/HEMEHTML/HEME036.html", "A blood cancer in a lymph node"]] },
+        { t: 'Count dividing cells', d: 'Open a breast tumor at high power and count *mitoses*, cells caught mid-division, in ten fields. More of them means a faster-growing tumor.', l: 1, tm: '20 min', nd: 'Three WebPath pictures, linked below', go: [["One dividing cell", "https://webpath.med.utah.edu/NEOHTML/NEOPL043.html", "Learn what a mitosis looks like"], ["Odd dividing cells", "https://webpath.med.utah.edu/NEOHTML/NEOPL044.html", "The messy kind cancer makes"], ["Breast cancer", "https://webpath.med.utah.edu/NEOHTML/NEOPL031.html", "Count on this one"]] },
+        { t: 'Benign or malignant?', d: 'Put a harmless fat tumor, a *lipoma*, next to a cancer, a *liposarcoma*, and list three differences: how even the cells are, the size of the nuclei and how crowded they look.', l: 2, tm: '30 min', nd: 'Two WebPath pictures, linked below', go: [["Lipoma", "https://webpath.med.utah.edu/NEOHTML/NEOPL013.html", "Harmless: even, calm fat cells"], ["Liposarcoma", "https://webpath.med.utah.edu/NEOHTML/NEOPL053.html", "Cancer: compare the nuclei"]] },
+        { t: 'Grade a breast cancer', d: 'Score *tubules*, *nuclear size* and *mitoses* from 1 to 3 each, add them up, and you have the *Nottingham grade* pathologists put in the report.', l: 3, tm: '45 min', nd: 'One breast cancer slide and the grading rules', go: [["Breast cancer", "https://webpath.med.utah.edu/NEOHTML/NEOPL031.html", "Score this one"], ["How grading works", "https://webpath.med.utah.edu/NEOHTML/NEOPL069.html", "Rules and tables"]] }
       ],
       home: [
         { t: 'Grow a tumor with dice', d: 'Roll a die for each bean: some divide, some die. Then let one bean ignore the stop rule and watch it take over the table, the way a cancer clone does.', l: 1, tm: '30 min', nd: 'Dice and a bag of dry beans' },
@@ -2480,16 +2486,16 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       write: [
         { t: 'Five-line paper summary', d: 'Pick any paper from Papers and fill in five lines: the question, what they did, what they found, why a pathologist cares and what is still open.', l: 1, tm: '1 hr', nd: 'One paper from Papers', key: 'p3', tpl: true,
           steps: ['Write a one-page summary of Hallmarks of Cancer using the five lines.', 'Write one for a paper in a second area, like blood cells or DNA testing.', 'Mini case study: pick one slide from Spot the tumor and write it up as if it came from a patient. Organ, what you see, and your best guess.', 'Pick one open question from Papers and list three papers that touch it.', 'Show one summary to a professor or a lab you’d like to join.'] },
-        { t: 'A pathology report in plain words', d: 'Take a sample breast biopsy report and rewrite each line so the patient would understand it, from *diagnosis* to *margins*.', l: 2, tm: '45 min', nd: 'One sample pathology report' },
-        { t: 'One test, biopsy to treatment', d: 'Read how *HER2* testing works and write one page on how a single result changes the treatment plan.', l: 3, tm: '1 hr', nd: 'One review paper on HER2 testing' }
+        { t: 'A pathology report in plain words', d: 'Take a sample breast biopsy report and rewrite each line so the patient would understand it, from *diagnosis* to *margins*.', l: 2, tm: '45 min', nd: 'One sample pathology report', go: [["Sample breast report", "https://www.pathologyoutlines.com/topic/stainsbreasther2.html", "Scroll to \"Sample pathology report\""], ["How a diagnosis is reported", "https://webpath.med.utah.edu/NEOHTML/NEOPL112.html", "What each part of a report is for"]] },
+        { t: 'One test, biopsy to treatment', d: 'Read how *HER2* testing works and write one page on how a single result changes the treatment plan.', l: 3, tm: '1 hr', nd: 'One review paper on HER2 testing', go: [["HER2 testing explained", "https://www.pathologyoutlines.com/topic/stainsbreasther2.html", "Read Essential features and Uses by pathologists"], ["HER2 review papers", "https://pubmed.ncbi.nlm.nih.gov/?term=HER2+testing+breast+cancer+review", "Pick one from PubMed"]] }
       ]
     },
     blood: {
       slides: [
-        { t: 'Name the five white cells', d: 'Sort smear pictures into *neutrophils*, *lymphocytes*, *monocytes*, *eosinophils* and *basophils*, using the nucleus as your main clue.', l: 1, tm: '20 min', nd: 'Smear pictures from WebPath or the slide box' },
-        { t: 'Do a 100-cell count', d: 'Count 100 white cells on one smear and work out the percent of each kind, the same *differential* a lab reports.', l: 2, tm: '40 min', nd: 'One virtual blood smear' },
-        { t: 'Spot the anemia', d: 'Compare normal red cells with small pale ones from *iron deficiency* and the bent ones from *sickle cell disease*.', l: 2, tm: '30 min', nd: 'Three smear pictures' },
-        { t: 'Find the leukemia', d: 'On a smear from *acute leukemia*, find the *blasts*: big cells with fine chromatin and only a thin rim of cytoplasm.', l: 3, tm: '45 min', nd: 'One leukemia smear' }
+        { t: 'Name the five white cells', d: 'Sort smear pictures into *neutrophils*, *lymphocytes*, *monocytes*, *eosinophils* and *basophils*, using the nucleus as your main clue.', l: 1, tm: '20 min', nd: 'WebPath smear pictures, linked below', go: [["All five in one picture", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM148.html", "Start here. Click each cell to check"], ["Neutrophil and lymphocyte", "https://webpath.med.utah.edu/HEMEHTML/HEME002.html", ""], ["Monocyte", "https://webpath.med.utah.edu/HEMEHTML/HEME003.html", ""], ["Eosinophil", "https://webpath.med.utah.edu/HEMEHTML/HEME004.html", ""], ["Basophil", "https://webpath.med.utah.edu/HEMEHTML/HEME005.html", ""]] },
+        { t: 'Do a 100-cell count', d: 'Count 100 white cells on one smear and work out the percent of each kind, the same *differential* a lab reports.', l: 2, tm: '40 min', nd: 'One virtual blood smear', go: [["Normal blood smear set", "https://imagebank.hematology.org/imageset/668/normal-peripheral-blood-smear", "Count across every picture in the set"]] },
+        { t: 'Spot the anemia', d: 'Compare normal red cells with small pale ones from *iron deficiency* and the bent ones from *sickle cell disease*.', l: 2, tm: '30 min', nd: 'Three smear pictures', go: [["Normal red cells", "https://webpath.med.utah.edu/HEMEHTML/HEME001.html", "Start here"], ["Iron deficiency", "https://webpath.med.utah.edu/HEMEHTML/HEME008.html", "Small and pale"], ["Sickle cell disease", "https://webpath.med.utah.edu/HEMEHTML/HEME015.html", "Bent, stiff cells"]] },
+        { t: 'Find the leukemia', d: 'On a smear from *acute leukemia*, find the *blasts*: big cells with fine chromatin and only a thin rim of cytoplasm.', l: 3, tm: '45 min', nd: 'One leukemia smear', go: [["Acute myeloid leukemia", "https://webpath.med.utah.edu/HEMEHTML/HEME020.html", "Find the blasts here"], ["Acute lymphoblastic leukemia", "https://webpath.med.utah.edu/HEMEHTML/HEME018.html", "Then compare with this one"]] }
       ],
       home: [
         { t: 'Blood in a jar', d: 'Mix corn syrup with red candies, a few white beads and sprinkles in the right amounts to show what blood is made of: mostly *plasma* and *red cells*.', l: 1, tm: '30 min', nd: 'Corn syrup, red candies, white beads, sprinkles' },
@@ -2497,17 +2503,17 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
         { t: 'Sickle cells in a tube', d: 'Shape round and sickled cells from clay and push them through a narrow tube to see why sickled cells *get stuck* and block blood flow.', l: 2, tm: '45 min', nd: 'Clay and a clear tube' }
       ],
       write: [
-        { t: 'Read a blood count', d: 'Take a sample *complete blood count* and write what each line means: red cells, white cells, platelets and hemoglobin.', l: 1, tm: '30 min', nd: 'One sample blood count' },
-        { t: 'Write an anemia case', d: 'Write a one-page case of a patient with *iron-deficiency anemia*: the symptoms, what the smear shows and the fix.', l: 2, tm: '1 hr', nd: 'The anemia paper in Papers' },
-        { t: 'A smear field guide', d: 'Make a one-page guide with a drawing of each white cell and the one clue that names it.', l: 3, tm: '1.5 hr', nd: 'Paper and colored pencils' }
+        { t: 'Read a blood count', d: 'Take a sample *complete blood count* and write what each line means: red cells, white cells, platelets and hemoglobin.', l: 1, tm: '30 min', nd: 'One sample blood count', go: [["A normal blood count", "https://webpath.med.utah.edu/HEMEHTML/HEME023.html", "Start here"], ["Iron deficiency blood count", "https://webpath.med.utah.edu/HEMEHTML/HEME024.html", "See which lines change"]] },
+        { t: 'Write an anemia case', d: 'Write a one-page case of a patient with *iron-deficiency anemia*: the symptoms, what the smear shows and the fix.', l: 2, tm: '1 hr', nd: 'The anemia paper in Papers', go: [["Iron tutorial", "https://webpath.med.utah.edu/TUTORIAL/IRON/IRON.html", "Walks through the lab tests"], ["Iron deficiency smear", "https://webpath.med.utah.edu/HEMEHTML/HEME008.html", "What the smear shows"]] },
+        { t: 'A smear field guide', d: 'Make a one-page guide with a drawing of each white cell and the one clue that names it.', l: 3, tm: '1.5 hr', nd: 'Paper and colored pencils', go: [["All five white cells", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM148.html", "Draw from this one"]] }
       ]
     },
     tissue: {
       slides: [
-        { t: 'Name the four tissue types', d: 'Find *epithelium*, *connective tissue*, *muscle* and *nerve* on normal slides and label each one.', l: 1, tm: '25 min', nd: 'Michigan Histology' },
-        { t: 'Walk the skin layers', d: 'Find the *epidermis*, *dermis* and fat on a skin slide, then compare thick skin from the palm with thin skin from the arm.', l: 1, tm: '20 min', nd: 'Two skin slides' },
-        { t: 'Stain detective', d: 'Look at the same tissue in *H&E* and in a special stain, and write what each one makes stand out.', l: 2, tm: '30 min', nd: 'Two stains of one organ' },
-        { t: 'Spot the artifact', d: 'Find folds, tears and bubbles on slides and learn to tell a *processing artifact* from real disease.', l: 3, tm: '30 min', nd: 'A few slides from the slide box' }
+        { t: 'Name the four tissue types', d: 'Find *epithelium*, *connective tissue*, *muscle* and *nerve* on normal slides and label each one.', l: 1, tm: '25 min', nd: 'Four WebPath pictures, linked below', go: [["Skin", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM038.html", "Epithelium is the top layer"], ["Fat", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM141.html", "Connective tissue"], ["Skeletal muscle", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM033.html", "Muscle"], ["Peripheral nerve", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM059.html", "Nerve"]] },
+        { t: 'Walk the skin layers', d: 'Find the *epidermis*, *dermis* and fat on a skin slide at low power, then zoom in and name the layers of the epidermis.', l: 1, tm: '20 min', nd: 'Two skin pictures, linked below', go: [["Skin, low power", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM038.html", "Find the three big layers"], ["Skin, high power", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM164.html", "Name the layers of the epidermis"]] },
+        { t: 'Stain detective', d: 'Look at the same tissue in *H&E* and in a special stain, and write what each one makes stand out.', l: 2, tm: '30 min', nd: 'Two stains of one organ', go: [["Liver in H&E", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM106.html", "The everyday pink and purple stain"], ["Liver in PAS", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM107.html", "Turns stored sugar magenta"], ["Liver in reticulin", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM040.html", "Shows the thin fiber frame"], ["Special stains guide", "https://webpath.med.utah.edu/HISTHTML/STAINS/STAINS.html", "What each stain is for"]] },
+        { t: 'Spot the artifact', d: 'Find folds, tears and bubbles on slides and learn to tell a *processing artifact* from real disease.', l: 3, tm: '30 min', nd: 'The WebPath tutorial below', go: [["Tissue processing tutorial", "https://webpath.med.utah.edu/HISTHTML/HISTOTCH/HISTOTCH.html", "Scroll to \"Artefacts in Histologic Sections\""]] }
       ],
       home: [
         { t: 'Stain an onion', d: 'Peel the thin skin from inside an onion, add a drop of iodine and find neat rows of *plant cells* with a phone microscope.', l: 1, tm: '30 min', nd: 'An onion, iodine, a phone clip-on microscope' },
@@ -2516,33 +2522,33 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
           steps: ['Gently scrape the inside of your cheek with a clean toothpick or cotton swab.', 'Smear it on a glass slide, add one drop of stain, and lay a cover slip or clear tape on top.', 'Find a flat cell and its *darker nucleus*. Photograph it at two zoom levels.', 'Try an onion skin next, so you can compare *plant and animal cells*.', 'Keep a photo log: date, sample, stain, zoom and one sentence on what you saw.'] }
       ],
       write: [
-        { t: 'Draw and label the skin', d: 'Draw the layers of skin from a real slide and write one line on what each layer does.', l: 1, tm: '40 min', nd: 'Paper and colored pencils' },
-        { t: 'Trace a sample through the lab', d: 'Write the trip a biopsy takes: *fixing* in formalin, *processing*, wax, cutting, staining and then the pathologist.', l: 2, tm: '45 min', nd: 'The tissue processing paper in Papers' },
+        { t: 'Draw and label the skin', d: 'Draw the layers of skin from a real slide and write one line on what each layer does.', l: 1, tm: '40 min', nd: 'Paper and colored pencils', go: [["Skin, low power", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM038.html", "Draw from this one"]] },
+        { t: 'Trace a sample through the lab', d: 'Write the trip a biopsy takes: *fixing* in formalin, *processing*, wax, cutting, staining and then the pathologist.', l: 2, tm: '45 min', nd: 'The tissue processing paper in Papers', go: [["Tissue processing tutorial", "https://webpath.med.utah.edu/HISTHTML/HISTOTCH/HISTOTCH.html", "Every step with pictures"]] },
         { t: 'Why pathologists disagree', d: 'Read the breast biopsy agreement paper and write one page on why two experts can call the same slide differently.', l: 3, tm: '1 hr', nd: 'That paper, in Papers' }
       ]
     },
     dna: {
       slides: [
-        { t: 'Find the extra chromosome', d: 'Read a *karyotype* picture, pair the chromosomes and spot the extra one that causes Down syndrome.', l: 1, tm: '20 min', nd: 'A karyotype picture' },
-        { t: 'Read a DNA gel', d: 'Match the bands on a *DNA gel* picture to the people they came from, the way family and forensic tests work.', l: 2, tm: '25 min', nd: 'A gel picture' },
-        { t: 'Count FISH dots', d: 'Count the glowing dots in *FISH* pictures to see when a gene like *HER2* has too many copies.', l: 3, tm: '30 min', nd: 'FISH pictures' }
+        { t: 'Find the extra chromosome', d: 'Read a *karyotype* picture, pair the chromosomes and spot the extra one that causes Down syndrome.', l: 1, tm: '20 min', nd: 'A karyotype picture', go: [["Make a karyotype", "https://learn.genetics.utah.edu/content/basics/karyotype/", "Pair the chromosomes yourself"]] },
+        { t: 'Read a DNA gel', d: 'Match the bands on a *DNA gel* picture to the people they came from, the way family and forensic tests work.', l: 2, tm: '25 min', nd: 'A gel picture', go: [["Gel lab", "https://learn.genetics.utah.edu/content/labs/gel/", "Run a gel step by step"], ["DNA forensics", "https://learn.genetics.utah.edu/content/science/forensics/", "Match bands to people"]] },
+        { t: 'Count FISH dots', d: 'Count the glowing dots in *FISH* pictures to see when a gene like *HER2* has too many copies.', l: 3, tm: '30 min', nd: 'FISH pictures', go: [["HER2 FISH pictures", "https://www.pathologyoutlines.com/topic/stainsbreasther2.html", "Scroll to \"Molecular / cytogenetics images\""]] }
       ],
       home: [
         { t: 'Pull DNA out of strawberries', d: 'Mash strawberries with dish soap and salt, then pour cold rubbing alcohol on top and watch white strands of *DNA* rise.', l: 1, tm: '30 min', nd: 'Strawberries, soap, salt, cold rubbing alcohol' },
         { t: 'Candy DNA', d: 'Build a twisted ladder from licorice and gumdrops, with one color for each letter so *A pairs with T* and *G pairs with C*.', l: 1, tm: '40 min', nd: 'Licorice, four colors of gumdrops, toothpicks' },
-        { t: 'Paper karyotype', d: 'Cut out a printed set of chromosomes, pair them by size and band pattern, and find what is missing or extra.', l: 2, tm: '45 min', nd: 'A printed karyotype sheet, scissors' }
+        { t: 'Paper karyotype', d: 'Cut out a printed set of chromosomes, pair them by size and band pattern, and find what is missing or extra.', l: 2, tm: '45 min', nd: 'A printed karyotype sheet, scissors', go: [["Printable karyotype sheet", "https://learn-genetics.b-cdn.net/basics/karyotype/karyotype_paper.pdf", "Print it and cut"]] }
       ],
       write: [
         { t: 'Who is in the data?', d: 'Read the diversity paper and write why gene tests can be less sure for people whose ancestors are rarely studied.', l: 2, tm: '45 min', nd: 'That paper, in Papers' },
         { t: 'Explain a liquid biopsy', d: 'Write one page on how a blood draw can find *tumor DNA*, and what it can’t do yet.', l: 2, tm: '1 hr', nd: 'The liquid biopsy paper in Papers' },
-        { t: 'A BRCA letter to a family', d: 'Write a short, kind letter explaining what a positive *BRCA* result means and what comes next.', l: 3, tm: '1 hr', nd: 'One review paper on BRCA' }
+        { t: 'A BRCA letter to a family', d: 'Write a short, kind letter explaining what a positive *BRCA* result means and what comes next.', l: 3, tm: '1 hr', nd: 'One review paper on BRCA', go: [["Genetic testing basics", "https://medlineplus.gov/genetics/understanding/testing", "Plain-language background"], ["BRCA review papers", "https://pubmed.ncbi.nlm.nih.gov/?term=BRCA+genetic+testing+review", "Pick one from PubMed"]] }
       ]
     },
     infect: {
       slides: [
-        { t: 'Read a Gram stain', d: 'Tell purple *Gram-positive* from pink *Gram-negative* bacteria on stained slides, and say if each is round or a rod.', l: 1, tm: '20 min', nd: 'Gram stain pictures' },
-        { t: 'Find malaria in blood', d: 'Look at thin smear pictures for the small ring shapes of *Plasmodium* sitting inside red cells.', l: 2, tm: '30 min', nd: 'Malaria smear pictures' },
-        { t: 'Valley fever in a lung', d: 'Find the big round *spherules* of *Coccidioides*, the fungus behind valley fever, in a lung biopsy picture.', l: 3, tm: '30 min', nd: 'A lung biopsy picture' }
+        { t: 'Read a Gram stain', d: 'Tell purple *Gram-positive* from pink *Gram-negative* bacteria on stained slides, and say if each is round or a rod.', l: 1, tm: '20 min', nd: 'Gram stain pictures', go: [["Gram staining", "https://openstax.org/books/microbiology/pages/2-4-staining-microscopic-specimens", "See Figure 2.34, purple and pink side by side"], ["Gram positive chart", "https://webpath.med.utah.edu/LUNGHTML/LUNG500.html", "How shape narrows it down"]] },
+        { t: 'Find malaria in blood', d: 'Look at thin smear pictures for the small ring shapes of *Plasmodium* sitting inside red cells.', l: 2, tm: '30 min', nd: 'Malaria smear pictures', go: [["Malaria smear", "https://webpath.med.utah.edu/INFEHTML/INFEC042.html", "Find the rings inside red cells"], ["CDC parasite library", "https://www.cdc.gov/dpdx/index.html", "Pick Malaria for more pictures"]] },
+        { t: 'Valley fever in a lung', d: 'Find the big round *spherules* of *Coccidioides*, the fungus behind valley fever, in a lung biopsy picture.', l: 3, tm: '30 min', nd: 'A lung biopsy picture', go: [["Coccidioides", "https://webpath.med.utah.edu/INFEHTML/INFEC023.html", "Find the spherules"], ["Lung, low power", "https://webpath.med.utah.edu/LUNGHTML/LUNG047.html", "Start here"], ["Lung, high power", "https://webpath.med.utah.edu/LUNGHTML/LUNG048.html", "Spherules up close"]] }
       ],
       home: [
         { t: 'Glow germ hand wash', d: 'Rub on a glow lotion, wash your hands, then check under a black light to see the spots washing missed.', l: 1, tm: '20 min', nd: 'Glow germ lotion and a small UV flashlight' },
@@ -2551,15 +2557,15 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       ],
       write: [
         { t: 'Trace an outbreak', d: 'Pick a news story about an outbreak and map how the lab found the cause.', l: 1, tm: '1 hr', nd: 'One news story' },
-        { t: 'Valley fever here at home', d: 'Use the hospitalization paper to write who gets valley fever and how labs confirm it.', l: 2, tm: '1 hr', nd: 'That paper, in Papers' },
-        { t: 'A germ ID flowchart', d: 'Make a flowchart a lab could follow: Gram stain, shape, then the test that names the germ.', l: 3, tm: '1 hr', nd: 'Paper, or any drawing app' }
+        { t: 'Valley fever here at home', d: 'Use the hospitalization paper to write who gets valley fever and how labs confirm it.', l: 2, tm: '1 hr', nd: 'That paper, in Papers', go: [["CDC on valley fever", "https://www.cdc.gov/valley-fever/about/", "Background facts"]] },
+        { t: 'A germ ID flowchart', d: 'Make a flowchart a lab could follow: Gram stain, shape, then the test that names the germ.', l: 3, tm: '1 hr', nd: 'Paper, or any drawing app', go: [["Gram positive chart", "https://webpath.med.utah.edu/LUNGHTML/LUNG500.html", "Copy its logic"], ["Lung germ chart", "https://webpath.med.utah.edu/LUNGHTML/LUNG505.html", "Another example"]] }
       ]
     },
     forensic: {
       slides: [
-        { t: 'Bone or cartilage?', d: 'Compare the two under the microscope and list how to tell them apart.', l: 1, tm: '20 min', nd: 'Michigan Histology' },
-        { t: 'Count the osteons', d: 'Find *osteons*, the ring-shaped units of compact bone, and count their rings. Counting them is one way experts estimate age from bone.', l: 2, tm: '25 min', nd: 'A compact bone slide' },
-        { t: 'A smoker’s lung', d: 'Find the black *carbon* specks in a smoker’s lung next to a healthy one, a clue examiners read at autopsy.', l: 2, tm: '25 min', nd: 'Two lung slides' }
+        { t: 'Bone or cartilage?', d: 'Compare the two under the microscope and list how to tell them apart.', l: 1, tm: '20 min', nd: 'WebPath pictures, linked below', go: [["Compact bone", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM196.html", ""], ["Cartilage", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM157.html", "In the windpipe"], ["Elastic cartilage", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM159.html", "Bonus: a second kind"]] },
+        { t: 'Count the osteons', d: 'Find *osteons*, the ring-shaped units of compact bone, and count their rings. Counting them is one way experts estimate age from bone.', l: 2, tm: '25 min', nd: 'A compact bone slide', go: [["Compact bone", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM196.html", "Count the rings here"]] },
+        { t: 'A smoker’s lung', d: 'Find the black *carbon* specks in a smoker’s lung next to a healthy one, a clue examiners read at autopsy.', l: 2, tm: '25 min', nd: 'Two lung slides', go: [["Healthy lung", "https://webpath.med.utah.edu/HISTHTML/NORMAL/NORM030.html", "Start here"], ["Lung with carbon", "https://webpath.med.utah.edu/LUNGHTML/LUNG085.html", "The black specks are carbon"]] }
       ],
       home: [
         { t: 'Lift a fingerprint', d: 'Dust a glass with cocoa powder, lift the print with clear tape and sort it into *loop*, *whorl* or *arch*.', l: 1, tm: '30 min', nd: 'Cocoa powder, a soft brush, clear tape' },
@@ -2569,7 +2575,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       write: [
         { t: 'What autopsies catch', d: 'Read the Japan autopsy paper and write about one kind of mistake an autopsy found.', l: 2, tm: '45 min', nd: 'That paper, in Papers' },
         { t: 'Time of death in plain words', d: 'Explain the *Henssge* body cooling method and why it gets less sure as time passes.', l: 3, tm: '1 hr', nd: 'The Henssge paper in Papers' },
-        { t: 'A mock autopsy summary', d: 'Read a short practice case and write the *cause* and *manner of death* the way a report would.', l: 3, tm: '1 hr', nd: 'A short practice case' }
+        { t: 'A mock autopsy summary', d: 'Pick a case from WebPath’s forensic section and write the *cause* and *manner of death* the way a report would.', l: 3, tm: '1 hr', nd: 'One WebPath forensic case', go: [["WebPath forensic cases", "https://webpath.med.utah.edu/FORHTML/FORIDX.html", "Pick one case"], ["Forensic pathology overview", "https://nij.ojp.gov/topics/forensics/overview-forensic-pathology", "What a report covers"]] }
       ]
     }
   };
@@ -2596,7 +2602,8 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
         '<ul class="steps" data-proj="' + p.key + '">' + p.steps.map(function (x, i) { var k = 'abcde'[i]; return '<li><label><input type="checkbox" data-step="' + k + '"' + (st[k] ? ' checked' : '') + '><span>' + mk(x) + '</span></label></li>'; }).join('') + '</ul></details>';
     }
     return '<article class="pj' + (done ? ' done' : '') + '" data-n="' + n + '"><div class="pjmeta"><span class="tag">' + LVJ[p.l] + '</span><span class="tag lv">' + esc(p.tm) + '</span></div>' +
-      '<h3>' + esc(p.t) + '</h3><p>' + mk(p.d) + '</p><div class="need"><b>You need:</b> ' + esc(p.nd) + '</div>' + extra +
+      '<h3>' + esc(p.t) + '</h3><p>' + mk(p.d) + '</p><div class="need"><b>You need:</b> ' + esc(p.nd) + '</div>' +
+      (p.go ? '<div class="go"><b>Where to find it</b><ul>' + p.go.map(function (g) { return '<li><a href="' + esc(g[1]) + '" target="_blank" rel="noopener">' + esc(g[0]) + '</a>' + (g[2] ? ', ' + esc(g[2].charAt(0).toLowerCase() + g[2].slice(1)) : '') + '</li>'; }).join('') + '</ul></div>' : '') + extra +
       '<label class="pjdone"><input type="checkbox" data-pj="' + id + '"' + (done ? ' checked' : '') + '><span>Done</span></label></article>';
   }
   function renderProj() {
