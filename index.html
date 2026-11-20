@@ -2765,7 +2765,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       [.15, .5, .85].forEach(function (f) {
         var list = document.elementsFromPoint(r.left + r.width * f, y), hit = null;
         for (var i = 0; i < list.length; i++) if (!el.contains(list[i]) && !list[i].closest('.fglass, .abar, .top')) { hit = list[i]; break; }
-        if (hit) { n++; if (sample(hit) < .18) dark++; }
+        if (hit) { n++; var sv = sample(hit); if (sv < .18) dark++; if (/tonedebug/.test(location.search) && el.id === 'secnav') { var dbg = document.getElementById('tdbg') || document.body.appendChild(Object.assign(document.createElement('pre'), { id: 'tdbg', style: 'position:fixed;left:0;top:70px;z-index:99;background:#fff;color:#000;font:11px monospace;max-width:100vw;white-space:pre-wrap' })); dbg.textContent += (hit.tagName + '#' + hit.id + '.' + String(hit.className).slice(0, 30) + ' bg=' + getComputedStyle(hit).backgroundColor + ' body=' + getComputedStyle(document.body).backgroundColor + ' s=' + sv.toFixed(3)) + '\n'; } }
       });
       el.classList.toggle('dk', n > 0 && dark / n >= .5);
     });
