@@ -1229,7 +1229,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     { id: 'tissue', name: 'Tissue basics', img: 'ihc', blurb: 'How slides are *stained* and how pathologists agree, or don’t, on what they see.' },
     { id: 'dna', name: 'DNA testing', img: 'dna', blurb: '*Gene tests* that now help name diseases, and who they work best for.' },
     { id: 'infect', name: 'Infections', img: 'infect', blurb: 'Finding the germ behind an illness, including *valley fever* right here in the Central Valley.' },
-    { id: 'forensic', name: 'Forensic', img: 'forensic', opt: true, blurb: 'Optional. *Medical examiner* work, for when you are curious.' }
+    { id: 'forensic', name: 'Forensic', img: 'forensic', opt: true, blurb: '*Medical examiner* work, for when you are curious.' }
   ];
   function pm(id) { return 'https://pubmed.ncbi.nlm.nih.gov/' + id + '/'; }
   function pmc(id) { return 'https://pmc.ncbi.nlm.nih.gov/articles/' + id + '/'; }
@@ -2093,7 +2093,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   $('tiles').innerHTML = AREAS.map(function (a) {
     var np = nOf(PAPERS, a.id), ng = nOf(GAPS, a.id);
     return '<button type="button" class="tile t-' + a.id + (a.img ? '' : ' noimg') + '" data-area="' + a.id + '">' + (a.img ? '<img alt="" src="' + IMG[a.img] + '">' : '') +
-      (a.opt ? '<span class="tag">Optional</span>' : '') + '<b>' + esc(a.name) + '</b><span>' + np + (np === 1 ? ' paper' : ' papers') + ' &middot; ' + ng + (ng === 1 ? ' open question' : ' open questions') + '</span></button>';
+      '<b>' + esc(a.name) + '</b><span>' + np + (np === 1 ? ' paper' : ' papers') + ' &middot; ' + ng + (ng === 1 ? ' open question' : ' open questions') + '</span></button>';
   }).join('');
   $('tiles').addEventListener('click', function (e) { var t = e.target.closest('[data-area]'); if (!t) return; area = t.dataset.area; renderPapers(); renderProj(); location.hash = 'explore'; });
   $('plateImg').src = IMG.skin_wide;
