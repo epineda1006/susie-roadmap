@@ -1,5 +1,11 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FCEFF4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <title>Susie’s Pathology Lab</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* Layout: one centered editorial column. iPad landscape (1180 to 1366 wide) gets two and three column rows,
    iPad portrait stacks most rows, iPhone is one column. One frosted top bar, one sliding bottom bar per page. */
@@ -411,6 +417,8 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 }
 @media (prefers-reduced-transparency: reduce) { .fglass, .abar { background: var(--bg2) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; } }
 </style>
+</head>
+<body>
 
 <header class="top" id="top">
   <div class="in">
@@ -1547,3 +1555,6 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   route();
 })();
 </script>
+
+</body>
+</html>
