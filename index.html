@@ -135,7 +135,8 @@ main { padding-top: calc(env(safe-area-inset-top, 0px) + var(--topH) + 10px); pa
     inset 0 0 18px rgba(255,255,255,.08), 0 10px 28px -12px rgba(0,0,0,.5); }
 .brand, .iconbtn { position: relative; }
 .brand > *, .iconbtn > * { position: relative; z-index: 1; }
-.fglass.dk.brand, .fglass.dk.iconbtn { color: #fff; }
+.fglass.brand.onDark, .fglass.iconbtn.onDark { color: #fff; }
+.fglass.brand.onLight, .fglass.iconbtn.onLight { color: #120e10; }
 .fglass.brand, .fglass.iconbtn { transition: color .3s var(--ease), background-color .35s var(--ease), box-shadow .35s var(--ease); }
 
 /* ---------- Top bar: same on every page, always in place ---------- */
@@ -171,7 +172,8 @@ main { padding-top: calc(env(safe-area-inset-top, 0px) + var(--topH) + 10px); pa
 .pills a svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 /* The selection pill. On press it lifts into a clear lens that magnifies the labels under it. */
 .glassbar { --itc: var(--dim); --its: var(--hi); --ipc: var(--pg); }
-.glassbar.dk { --itc: rgba(255,255,255,.86); --its: #fff; --ipc: #fff; }
+.glassbar > a.onDark { --itc: rgba(255,255,255,.88); --its: #fff; --ipc: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.28); }
+.glassbar > a.onLight { --itc: #4a3f45; --its: #120e10; --ipc: #120e10; }
 .glassbar > a, .glassbar .mag > a { color: var(--itc); }
 .glassbar > a[aria-current="page"], .glassbar > a.near, .glassbar .mag > a.near { color: var(--its); }
 .glassbar > a[aria-current="page"] svg { color: var(--ipc); }
@@ -180,7 +182,7 @@ main { padding-top: calc(env(safe-area-inset-top, 0px) + var(--topH) + 10px); pa
   box-shadow: inset 0 1px 0 rgba(255,255,255,.7), inset 0 0 0 .5px rgba(0,0,0,.06);
   transition: background-color .25s var(--ease), box-shadow .25s var(--ease), opacity .2s var(--ease); }
 .glassbar .pill.on { opacity: 1; }
-.glassbar.dk .pill { background: rgba(255,255,255,.16); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 0 0 .5px rgba(255,255,255,.14); }
+.glassbar .pill.dk { background: rgba(255,255,255,.16); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 0 0 .5px rgba(255,255,255,.14); }
 .glassbar .pill.snap { transition: transform .72s var(--glide), width .72s var(--glide), background-color .25s var(--ease), box-shadow .25s var(--ease), opacity .2s var(--ease); }
 .glassbar .mag { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity .18s var(--ease); will-change: transform; pointer-events: none; }
 .glassbar .mag > a { pointer-events: none; }
@@ -2784,26 +2786,52 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     return b && b.a > .5 ? lum(b) : (isDark() ? 0 : 1);
   }
   /* Reads a grid of spots behind the glass and averages them, the way a blurred backdrop averages what is under it.
+     Each label in a bar decides on its own, so a bar half over a dark picture shows white words only where it is dark.
      Two thresholds (dark under .2, light again over .34) and a short wait stop it flickering at the edge of a card. */
+  function behind(el, r, cols, rows) {
+    var sum = 0, n = 0;
+    for (var cy = 0; cy < rows; cy++) for (var cx = 0; cx < cols; cx++) {
+      var list = document.elementsFromPoint(r.left + r.width * (cx + .5) / cols, r.top + r.height * (cy + .5) / rows), hit = null;
+      for (var i = 0; i < list.length; i++) if (!el.contains(list[i]) && !list[i].closest('.fglass, .abar, .top')) { hit = list[i]; break; }
+      if (hit) { sum += sample(hit); n++; }
+    }
+    return n ? sum / n : null;
+  }
+  function decide(node, avg) {
+    if (avg == null) return false;
+    if (node._dk == null) { node._dk = avg < .27; return false; }
+    var want = node._dk ? avg < .34 : avg < .2;
+    if (want === node._dk) { node._pend = null; return false; }
+    var t = Date.now();
+    if (!node._pend || node._pend.s !== want) { node._pend = { s: want, t: t }; return true; }
+    if (t - node._pend.t < 140) return true;
+    node._pend = null; node._dk = want; return false;
+  }
+  function ink(node) {
+    var dkPage = isDark();
+    node.classList.toggle('onDark', !!node._dk && !dkPage);
+    node.classList.toggle('onLight', !node._dk && dkPage);
+  }
   function tone(el) {
     if (!el || el._t || !document.elementsFromPoint) return;
     el._t = requestAnimationFrame(function () {
       el._t = 0;
       var r = el.getBoundingClientRect(); if (!r.width || r.bottom < 0 || r.top > innerHeight) return;
-      var cols = Math.max(3, Math.min(7, Math.round(r.width / 48))), sum = 0, n = 0;
-      for (var cy = 0; cy < 3; cy++) for (var cx = 0; cx < cols; cx++) {
-        var px = r.left + r.width * (cx + .5) / cols, py = r.top + r.height * (.25 + cy * .25);
-        var list = document.elementsFromPoint(px, py), hit = null;
-        for (var i = 0; i < list.length; i++) if (!el.contains(list[i]) && !list[i].closest('.fglass, .abar, .top')) { hit = list[i]; break; }
-        if (hit) { sum += sample(hit); n++; }
+      var again = false;
+      if (el._its) {
+        var tot = 0, k = 0;
+        el._its.forEach(function (a) {
+          var v = behind(el, a.getBoundingClientRect(), 3, 2); if (v == null) return;
+          tot += v; k++; again = decide(a, v) || again; ink(a);
+        });
+        if (k) again = decide(el, tot / k) || again;
+        var c = el._cur(); el._pill.classList.toggle('dk', !!(c && c._dk));
+      } else {
+        again = decide(el, behind(el, r, Math.max(3, Math.min(5, Math.round(r.width / 40))), 3));
+        ink(el);
       }
-      if (!n) return;
-      var avg = sum / n, now = el.classList.contains('dk'), want = now ? avg < .34 : avg < .2;
-      if (want === now) { el._pend = null; return; }
-      var t = Date.now();
-      if (!el._pend || el._pend.s !== want) { el._pend = { s: want, t: t }; setTimeout(function () { tone(el); }, 160); return; }
-      if (t - el._pend.t < 140) { setTimeout(function () { tone(el); }, 160); return; }
-      el._pend = null; el.classList.toggle('dk', want);
+      el.classList.toggle('dk', !!el._dk);
+      if (again) setTimeout(function () { tone(el); }, 160);
     });
   }
   function toneAll() { glassEls.forEach(function (el) { if (el.offsetParent !== null || getComputedStyle(el).position === 'fixed') tone(el); }); }
@@ -2841,6 +2869,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       if (instant) { void pill.offsetWidth; pill.classList.add('snap'); }
       tone(g);
     }
+    g._its = its; g._pill = pill; g._cur = cur;
     function real(a) { return a && mag.contains(a) ? its[[].indexOf.call(mag.children, a)] : a; }
     function set(a) { a = real(a); if (!a) return; its.forEach(function (b) { if (b === a) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); }); place('stretch'); }
     var ptrAt = 0;
