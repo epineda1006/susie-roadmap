@@ -1999,7 +1999,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   function chipsHTML() {
     return AREAS.map(function (a) {
       return '<button type="button" role="tab" class="chip t-' + a.id + (a.id === area ? ' on' : '') + '" data-area="' + a.id + '" aria-selected="' + (a.id === area) + '"><span class="dot"></span>' + esc(a.name) +
-        (a.id === 'cancer' ? ' <span class="tiny">Main</span>' : a.opt ? ' <span class="tiny">Optional</span>' : '') + '</button>';
+        '</button>';
     }).join('');
   }
   function renderPaperList() {
@@ -2779,6 +2779,9 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     for (; el && el !== document.documentElement; el = el.parentElement) {
       if (el.dataset && el.dataset.tone) return el.dataset.tone === 'dark' ? 0 : 1;
       if (el.tagName === 'IMG') { var il = imgLum(el); if (il != null) return il; continue; }
+      /* A card with a picture laid over its whole area (like the topic tiles) reads as that picture, not its own color */
+      var cov = el.querySelector && el.querySelector(':scope > img');
+      if (cov && getComputedStyle(cov).position === 'absolute') { var cl = imgLum(cov); if (cl != null) return cl; }
       var c = parseColor(getComputedStyle(el).backgroundColor);
       if (c && c.a > .5) return lum(c);
     }
