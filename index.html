@@ -136,6 +136,7 @@ main { padding-top: calc(env(safe-area-inset-top, 0px) + var(--topH) + 10px); pa
 .brand, .iconbtn { position: relative; }
 .brand > *, .iconbtn > * { position: relative; z-index: 1; }
 .fglass.dk.brand, .fglass.dk.iconbtn { color: #fff; }
+.fglass.brand, .fglass.iconbtn { transition: color .3s var(--ease), background-color .35s var(--ease), box-shadow .35s var(--ease); }
 
 /* ---------- Top bar: same on every page, always in place ---------- */
 .top { position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; z-index: 30; }
@@ -2757,27 +2758,52 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     } catch (e) { return null; }
   }
   function lum(c) { function f(v) { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); } return .2126 * f(c.r) + .7152 * f(c.g) + .0722 * f(c.b); }
+  /* A picture counts as its average brightness, measured once on a tiny canvas */
+  var icache = typeof WeakMap === 'function' ? new WeakMap() : null;
+  function imgLum(img) {
+    if (!icache || !img.complete || !img.naturalWidth) return null;
+    if (icache.has(img)) return icache.get(img);
+    var L = null;
+    try {
+      var c = document.createElement('canvas'); c.width = c.height = 16;
+      var x = c.getContext('2d', { willReadFrequently: true }); x.drawImage(img, 0, 0, 16, 16);
+      var d = x.getImageData(0, 0, 16, 16).data, t = 0;
+      for (var i = 0; i < d.length; i += 4) t += lum({ r: d[i], g: d[i + 1], b: d[i + 2] });
+      L = t / (d.length / 4);
+    } catch (e) {}
+    icache.set(img, L); return L;
+  }
   function sample(el) {
     for (; el && el !== document.documentElement; el = el.parentElement) {
       if (el.dataset && el.dataset.tone) return el.dataset.tone === 'dark' ? 0 : 1;
+      if (el.tagName === 'IMG') { var il = imgLum(el); if (il != null) return il; continue; }
       var c = parseColor(getComputedStyle(el).backgroundColor);
       if (c && c.a > .5) return lum(c);
     }
     var b = parseColor(getComputedStyle(document.body).backgroundColor);
     return b && b.a > .5 ? lum(b) : (isDark() ? 0 : 1);
   }
+  /* Reads a grid of spots behind the glass and averages them, the way a blurred backdrop averages what is under it.
+     Two thresholds (dark under .2, light again over .34) and a short wait stop it flickering at the edge of a card. */
   function tone(el) {
     if (!el || el._t || !document.elementsFromPoint) return;
     el._t = requestAnimationFrame(function () {
       el._t = 0;
-      var r = el.getBoundingClientRect(); if (!r.width) return;
-      var y = r.top + r.height / 2, dark = 0, n = 0;
-      [.15, .5, .85].forEach(function (f) {
-        var list = document.elementsFromPoint(r.left + r.width * f, y), hit = null;
+      var r = el.getBoundingClientRect(); if (!r.width || r.bottom < 0 || r.top > innerHeight) return;
+      var cols = Math.max(3, Math.min(7, Math.round(r.width / 48))), sum = 0, n = 0;
+      for (var cy = 0; cy < 3; cy++) for (var cx = 0; cx < cols; cx++) {
+        var px = r.left + r.width * (cx + .5) / cols, py = r.top + r.height * (.25 + cy * .25);
+        var list = document.elementsFromPoint(px, py), hit = null;
         for (var i = 0; i < list.length; i++) if (!el.contains(list[i]) && !list[i].closest('.fglass, .abar, .top')) { hit = list[i]; break; }
-        if (hit) { n++; if (sample(hit) < .18) dark++; }
-      });
-      el.classList.toggle('dk', n > 0 && dark / n >= .5);
+        if (hit) { sum += sample(hit); n++; }
+      }
+      if (!n) return;
+      var avg = sum / n, now = el.classList.contains('dk'), want = now ? avg < .34 : avg < .2;
+      if (want === now) { el._pend = null; return; }
+      var t = Date.now();
+      if (!el._pend || el._pend.s !== want) { el._pend = { s: want, t: t }; setTimeout(function () { tone(el); }, 160); return; }
+      if (t - el._pend.t < 140) { setTimeout(function () { tone(el); }, 160); return; }
+      el._pend = null; el.classList.toggle('dk', want);
     });
   }
   function toneAll() { glassEls.forEach(function (el) { if (el.offsetParent !== null || getComputedStyle(el).position === 'fixed') tone(el); }); }
