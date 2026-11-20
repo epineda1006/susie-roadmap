@@ -40,7 +40,7 @@
   --text: -apple-system, "SF Pro Text", BlinkMacSystemFont, "Helvetica Neue", system-ui, sans-serif;
   --display: -apple-system, "SF Pro Display", BlinkMacSystemFont, "Helvetica Neue", system-ui, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, monospace;
-  --ease: cubic-bezier(.2,.7,.2,1); --spring: cubic-bezier(.3, 1.32, .5, 1);
+  --ease: cubic-bezier(.2,.7,.2,1); --spring: cubic-bezier(.3, 1.32, .5, 1); --glide: cubic-bezier(.22, 1.1, .36, 1);
   --g: 28px; --topH: 62px; --colW: 1760px; /* wide enough that iPad and laptop screens fill edge to edge, only giant monitors get side margins */
   /* Bar buttons: Apple Music tab bar size on iPhone, every button the same width in both bars */
   --tbw: 96px; --tbh: 56px; --tbi: 21px; --tbf: 11.5px; --ttbh: 52px; --ttf: 14px;
@@ -180,15 +180,14 @@ main { padding-top: calc(env(safe-area-inset-top, 0px) + var(--topH) + 10px); pa
   transition: background-color .25s var(--ease), box-shadow .25s var(--ease), opacity .2s var(--ease); }
 .glassbar .pill.on { opacity: 1; }
 .glassbar.dk .pill { background: rgba(255,255,255,.16); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 0 0 .5px rgba(255,255,255,.14); }
-.glassbar .pill.snap { transition: transform .5s var(--spring), width .5s var(--spring), background-color .25s var(--ease), box-shadow .25s var(--ease), opacity .2s var(--ease); }
+.glassbar .pill.snap { transition: transform .72s var(--glide), width .72s var(--glide), background-color .25s var(--ease), box-shadow .25s var(--ease), opacity .2s var(--ease); }
 .glassbar .mag { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity .18s var(--ease); will-change: transform; pointer-events: none; }
 .glassbar .mag > a { pointer-events: none; }
-.glassbar.up .pill { background: rgba(255,255,255,.06); z-index: 3;
-  -webkit-backdrop-filter: blur(.5px) brightness(1.08); backdrop-filter: blur(.5px) brightness(1.08);
+.glassbar.up .pill { background: color-mix(in srgb, var(--bg) 82%, transparent); z-index: 3;
+  -webkit-backdrop-filter: blur(10px) saturate(160%); backdrop-filter: blur(10px) saturate(160%);
   box-shadow: inset 2px 2px 1px -1px rgba(255,255,255,.95), inset -2px -2px 1px -1px rgba(255,255,255,.6), inset 0 0 10px rgba(255,255,255,.35),
     inset 4px 0 6px -4px rgba(255,60,120,.35), inset -4px 0 6px -4px rgba(40,140,255,.38), 0 6px 18px -6px rgba(0,0,0,.28); }
 .glassbar.up .mag { opacity: 1; }
-.glassbar.up .mag > a { filter: drop-shadow(.6px 0 0 rgba(255,40,110,.45)) drop-shadow(-.6px 0 0 rgba(30,130,255,.45)); }
 .abar, .secnav, .pills { touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 
 /* School switch on Classes: the same glass and lens as the bottom bar, so the two match */
@@ -534,6 +533,12 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 .sect.enter { animation: rise .4s var(--ease); }
 .view .col > [data-pane]:not([data-pane="all"]):not([hidden]) ~ [data-pane]:not([hidden]) { border-top: 1px solid var(--rule); }
 
+/* ---------- Explore: one line that says what the current view is ---------- */
+.xhint { margin: 16px auto 0; max-width: 60ch; font: 500 14px/1.45 var(--text); color: var(--dim); text-wrap: balance; }
+.xhint b { color: var(--hi); font-weight: 700; }
+/* Home and Classes read as one long page */
+.view[data-scroll] .col > .sect.first ~ .sect.first { padding-top: 28px; }
+
 /* ---------- Paper filters ---------- */
 .fbar { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; margin: 14px 0 10px; padding: 12px 14px; border-radius: 18px; background: var(--card); box-shadow: inset 0 0 0 .5px var(--rule); }
 .fgrp { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
@@ -620,8 +625,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     <nav class="secnav fglass" id="secnav" aria-label="Pages">
       <a class="sec" data-p="home" href="#home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-6.5 8 6.5M6.5 9.5V19h11V9.5"/></svg><span class="L">Home</span></a>
       <a class="sec" data-p="classes" href="#classes"><span class="L">Classes</span></a>
-      <a class="sec" data-p="papers" href="#papers"><span class="L">Papers</span></a>
-      <a class="sec" data-p="projects" href="#projects"><span class="L">Projects</span></a>
+      <a class="sec" data-p="explore" href="#explore"><span class="L">Explore</span></a>
       <a class="sec" data-p="standout" href="#standout"><span class="L">Stand out</span></a>
     </nav>
     <button class="iconbtn fglass" type="button" id="themeBtn" aria-label="Switch light or dark"></button>
@@ -630,10 +634,10 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 
 <main>
 <!-- ======================= HOME ======================= -->
-<section class="view" data-view="home" id="v-home">
+<section class="view" data-view="home" id="v-home" data-scroll>
   <div class="col">
     <section class="sect first" id="h-areas" data-sec data-pane="h-areas">
-      <div class="row"><h2 class="h2 sm">Areas to explore</h2><a class="more" href="#papers">All papers</a></div>
+      <div class="row"><h2 class="h2 sm">Areas to explore</h2><a class="more" href="#explore">All papers</a></div>
       <div class="tiles" id="tiles"></div>
     </section>
 
@@ -701,7 +705,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 </section>
 
 <!-- ======================= CLASSES ======================= -->
-<section class="view" data-view="classes" id="v-classes" hidden>
+<section class="view" data-view="classes" id="v-classes" data-scroll hidden>
   <div class="col">
     <section class="sect first" id="c-top" data-sec data-pane="c-top">
       <div class="center">
@@ -753,30 +757,56 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   </div>
 </section>
 
-<!-- ======================= PAPERS ======================= -->
-<section class="view" data-view="papers" id="v-papers" hidden>
+<!-- ======================= EXPLORE: papers, projects and research for one topic ======================= -->
+<section class="view" data-view="explore" id="v-explore" hidden>
   <div class="col">
-    <section class="sect first center" id="p-top" data-sec data-pane="all">
-      <div class="k">Papers</div>
-      <h1 class="giant">Read like a pathologist</h1>
+<section class="sect first center" id="p-top" data-sec data-pane="all">
+      <div class="k">Explore</div>
+      <h1 class="giant">Read, make, wonder</h1>
       <p class="lede" id="areaBlurb"></p>
       <div class="areachips" id="areaChips" role="tablist" aria-label="Topics"></div>
+      <p class="xhint" id="xHint" aria-live="polite"></p>
     </section>
-    <section class="sect" id="p-picks" data-sec data-pane="p-picks">
-      <div class="row"><h2 class="h2">Hand-picked</h2><span class="k">Short summaries first</span></div>
+<section class="sect" id="p-picks" data-sec data-pane="x-papers">
+      <div class="row"><h2 class="h2">Papers</h2><span class="k">Hand-picked, short summaries first</span></div>
       <div id="pfilters"></div>
       <p class="pcount" id="pcount"></p>
       <ul class="plist" id="paperList"></ul>
     </section>
-    <section class="sect" id="p-gaps" data-sec data-pane="p-gaps">
+<section class="sect center" id="p-search" data-sec data-pane="x-papers">
+      <h2 class="h2">Find more papers</h2><p class="lede">Search PubMed, the free library of medical research.</p>
+      <form class="search" id="searchForm" role="search"><label class="sr" for="q">Search papers</label><input class="inp" id="q" type="search" placeholder="Try: Pap smear cytology"><button class="btn solid" type="submit">Search</button></form>
+      <div class="quick" id="quickQ"></div>
+      <p class="status" id="searchStatus"></p>
+      <ul class="results" id="results"></ul>
+    </section>
+<section class="sect" id="j-slides" data-sec data-pane="x-proj">
+      <div class="row"><h2 class="h2">Look at real slides</h2><span class="k">Free, the same ones medical students use</span></div>
+      <div class="jpath" data-kind="slides"></div>
+      <details class="card libs"><summary>Free virtual slide libraries</summary>
+        <ul class="links">
+          <li><a href="https://www.pathology.med.umich.edu/slides/" target="_blank" rel="noopener">University of Michigan Virtual Slide Box</a>Disease slides you can zoom like a real microscope. Start here.</li>
+          <li><a href="https://histology.medicine.umich.edu/" target="_blank" rel="noopener">Michigan Histology</a>Normal tissue, so you know what healthy looks like first.</li>
+          <li><a href="https://vpathwebdev.virtualpathology.leeds.ac.uk/Slides/library" target="_blank" rel="noopener">Leeds Virtual Pathology Slide Library</a>A big library of scanned slides from a UK medical school.</li>
+          <li><a href="https://webpath.med.utah.edu" target="_blank" rel="noopener">WebPath, University of Utah</a>Labeled images by organ, good for quick checks.</li>
+          <li><a href="https://peir.path.uab.edu/library" target="_blank" rel="noopener">PEIR Digital Library</a>Thousands of teaching photos from UAB pathology.</li>
+        </ul>
+      </details>
+    </section>
+<section class="sect" id="j-home" data-sec data-pane="x-proj">
+      <div class="row"><h2 class="h2">Hands-on at home</h2><span class="k">Kitchen-table safe</span></div>
+      <div class="jpath" data-kind="home"></div>
+    </section>
+<section class="sect" id="j-write" data-sec data-pane="x-proj">
+      <div class="row"><h2 class="h2">Read and write</h2><span class="k">Each one becomes an interview story</span></div>
+      <div class="jpath" data-kind="write"></div>
+    </section>
+<section class="sect" id="p-gaps" data-sec data-pane="x-research">
       <div class="center"><h2 class="h2">Open questions</h2><p class="lede">Places where the answers aren’t in yet, and where you could add something.</p></div>
       <ul class="gaps" id="gapList" style="margin-top:16px"></ul>
     </section>
-    <section class="sect" id="p-learn" data-sec data-pane="p-learn">
-      <div class="center"><h2 class="h2">Learn</h2><p class="lede">Sites, videos and tools for this topic, from first look to expert.</p></div>
-      <div class="lvls" id="learnList"></div>
-    </section>
-    <section class="sect" id="p-3d" data-sec data-pane="p-3d">
+<section class="sect" id="p-3d" data-sec data-pane="x-research">
+      <div class="center" style="margin-bottom:16px"><h2 class="h2">Look inside in 3D</h2><p class="lede">Turn it, cut it open and tap a part to learn what it does.</p></div>
       <div class="lab3d">
         <div class="stage3" id="stage3" data-tone="dark">
           <div class="s3head"><span class="s3k" id="s3k">3D model</span><span class="s3t" id="s3t"></span></div>
@@ -795,45 +825,9 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       </div>
       <div id="deep3d" style="margin-top:18px"></div>
     </section>
-    <section class="sect center" id="p-search" data-sec data-pane="p-search">
-      <h2 class="h2">Search PubMed</h2>
-      <form class="search" id="searchForm" role="search"><label class="sr" for="q">Search papers</label><input class="inp" id="q" type="search" placeholder="Try: Pap smear cytology"><button class="btn solid" type="submit">Search</button></form>
-      <div class="quick" id="quickQ"></div>
-      <p class="status" id="searchStatus"></p>
-      <ul class="results" id="results"></ul>
-    </section>
-  </div>
-</section>
-
-<!-- ======================= PROJECTS ======================= -->
-<section class="view" data-view="projects" id="v-projects" hidden>
-  <div class="col">
-    <section class="sect first center" data-sec id="j-top" data-pane="all">
-      <div class="k">Projects</div>
-      <h1 class="giant">Small projects, real skills</h1>
-      <p class="lede" id="projBlurb">Pick a topic, then start at the top of the path. Each one is a little harder than the last.</p>
-      <div class="areachips" id="projChips" role="tablist" aria-label="Topics"></div>
-    </section>
-    <section class="sect" id="j-slides" data-sec data-pane="j-slides">
-      <div class="row"><h2 class="h2">Look at real slides</h2><span class="k">Free, the same ones medical students use</span></div>
-      <div class="jpath" data-kind="slides"></div>
-      <details class="card libs"><summary>Free virtual slide libraries</summary>
-        <ul class="links">
-          <li><a href="https://www.pathology.med.umich.edu/slides/" target="_blank" rel="noopener">University of Michigan Virtual Slide Box</a>Disease slides you can zoom like a real microscope. Start here.</li>
-          <li><a href="https://histology.medicine.umich.edu/" target="_blank" rel="noopener">Michigan Histology</a>Normal tissue, so you know what healthy looks like first.</li>
-          <li><a href="https://vpathwebdev.virtualpathology.leeds.ac.uk/Slides/library" target="_blank" rel="noopener">Leeds Virtual Pathology Slide Library</a>A big library of scanned slides from a UK medical school.</li>
-          <li><a href="https://webpath.med.utah.edu" target="_blank" rel="noopener">WebPath, University of Utah</a>Labeled images by organ, good for quick checks.</li>
-          <li><a href="https://peir.path.uab.edu/library" target="_blank" rel="noopener">PEIR Digital Library</a>Thousands of teaching photos from UAB pathology.</li>
-        </ul>
-      </details>
-    </section>
-    <section class="sect" id="j-home" data-sec data-pane="j-home">
-      <div class="row"><h2 class="h2">Hands-on at home</h2><span class="k">Kitchen-table safe</span></div>
-      <div class="jpath" data-kind="home"></div>
-    </section>
-    <section class="sect" id="j-write" data-sec data-pane="j-write">
-      <div class="row"><h2 class="h2">Read and write</h2><span class="k">Each one becomes an interview story</span></div>
-      <div class="jpath" data-kind="write"></div>
+<section class="sect" id="p-learn" data-sec data-pane="x-research">
+      <div class="center"><h2 class="h2">Learn more</h2><p class="lede">Sites, videos and tools for this topic, from first look to expert.</p></div>
+      <div class="lvls" id="learnList"></div>
     </section>
   </div>
 </section>
@@ -2031,7 +2025,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     $('areaChips').innerHTML = chipsHTML();
     var A = AREAS.filter(function (a) { return a.id === area; })[0];
     $('areaBlurb').innerHTML = mk(A.blurb);
-    renderPaperList();
+    renderPaperList(); xhint();
     $('gapList').innerHTML = GAPS.filter(function (g) { return g.a === area; }).map(function (g) {
       var p = paperFor(g.from);
       return '<li class="t-' + g.a + '"><span class="qmark">?</span><div><div class="q">' + esc(g.q) + '</div><div class="how">' + mk(g.how) + '</div>' +
@@ -2054,7 +2048,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       return '<div class="card lvl t-' + area + '"><h3>' + L[1] + ' <small>' + L[2] + '</small></h3><ul class="res">' + rs.map(resLi).join('') + '</ul></div>';
     }).join('');
   }
-  $('areaChips').addEventListener('click', function (e) { var c = e.target.closest('[data-area]'); if (!c) return; area = c.dataset.area; renderPapers(); renderProj(); setDye(); if (pane.papers === 'p-3d') open3D(); });
+  $('areaChips').addEventListener('click', function (e) { var c = e.target.closest('[data-area]'); if (!c) return; area = c.dataset.area; renderPapers(); renderProj(); setDye(); if (pane.explore === 'x-research') open3D(); });
 
   /* PubMed search through NCBI E-utilities. Where the page can't reach it, it hands off to pubmed.gov. */
   var EU = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/';
@@ -2092,7 +2086,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     return '<button type="button" class="tile t-' + a.id + (a.img ? '' : ' noimg') + '" data-area="' + a.id + '">' + (a.img ? '<img alt="" src="' + IMG[a.img] + '">' : '') +
       (a.opt ? '<span class="tag">Optional</span>' : '') + '<b>' + esc(a.name) + '</b><span>' + np + (np === 1 ? ' paper' : ' papers') + ' &middot; ' + ng + (ng === 1 ? ' open question' : ' open questions') + '</span></button>';
   }).join('');
-  $('tiles').addEventListener('click', function (e) { var t = e.target.closest('[data-area]'); if (!t) return; area = t.dataset.area; renderPapers(); location.hash = 'papers'; });
+  $('tiles').addEventListener('click', function (e) { var t = e.target.closest('[data-area]'); if (!t) return; area = t.dataset.area; renderPapers(); renderProj(); location.hash = 'explore'; });
   $('plateImg').src = IMG.skin_wide;
 
   /* Slide of the day: a real slide and one quick question, a new one each day */
@@ -2379,7 +2373,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     { t: 'Get ready before you ask', s: 'Hospitals move faster when you already have these.', steps: [
       ['g1', 'Make a one-page resume: classes, jobs, volunteering, languages'],
       ['g2', 'Gather your vaccine records: *flu shot*, *TB test*, MMR, chickenpox, hepatitis B and whooping cough'],
-      ['g3', 'Read one Learn list on the Papers page so you can talk about what pathologists do'],
+      ['g3', 'Read one Learn more list in Explore, under Research, so you can talk about what pathologists do'],
       ['g4', 'Write down 3 things you want to see, like a *frozen section* or the blood bank']] },
     { t: 'Find who to ask', s: 'Most Fresno hospitals need a pathologist to agree first, then you fill out their form. So the real goal is meeting one pathologist. Start with SJV-MedBridge and volunteering, where you meet people.', places: 1, wide: 1, steps: [
       ['g5', 'Look into SJV-MedBridge and go to its next info session'],
@@ -2603,9 +2597,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       '<label class="pjdone"><input type="checkbox" data-pj="' + id + '"' + (done ? ' checked' : '') + '><span>Done</span></label></article>';
   }
   function renderProj() {
-    $('projChips').innerHTML = chipsHTML();
     var A = AREAS.filter(function (a) { return a.id === area; })[0];
-    $('projBlurb').innerHTML = 'Projects for <b class="kt">' + esc(A.name) + '</b>. Start at the top of the path. Each one is a little harder than the last.';
     document.querySelectorAll('.jpath').forEach(function (box) {
       var kind = box.dataset.kind, L = (PJ[area][kind] || []).slice().sort(function (a, b) { return a.l - b.l; }), n = 0;
       box.innerHTML = [[1, 'Start here'], [2, 'Next'], [3, 'Stretch']].map(function (g) {
@@ -2614,8 +2606,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       }).join('');
     });
   }
-  $('projChips').addEventListener('click', function (e) { var c = e.target.closest('[data-area]'); if (!c) return; area = c.dataset.area; renderPapers(); renderProj(); setDye(); });
-  $('v-projects').addEventListener('change', function (e) {
+  $('v-explore').addEventListener('change', function (e) {
     var t = e.target;
     if (t.dataset.pj) { if (t.checked) proj.done[t.dataset.pj] = true; else delete proj.done[t.dataset.pj]; store('susie-path-projects', proj); t.closest('.pj').classList.toggle('done', t.checked); }
     if (t.dataset.step) { var p = t.closest('[data-proj]').dataset.proj; proj[p] = proj[p] || {}; proj[p][t.dataset.step] = t.checked; store('susie-path-projects', proj);
@@ -2797,10 +2788,10 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     }
     function draw(lift) {
       pill.style.width = w + 'px'; pill.style.height = h + 'px';
-      pill.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)' + (lift ? ' scale(1.16,1.22)' : '');
+      pill.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)' + (lift ? ' scale(1.07,1.1)' : '');
       mag.style.transform = 'translate3d(' + (-x) + 'px,' + (-y) + 'px,0)';
     }
-    function frame() { raf = 0; x += (tx - x) * .55; w += (tw - w) * .55; if (Math.abs(tx - x) < .3 && Math.abs(tw - w) < .3) { x = tx; w = tw; } else raf = requestAnimationFrame(frame); draw(true); }
+    function frame() { raf = 0; x += (tx - x) * .2; w += (tw - w) * .2; if (Math.abs(tx - x) < .3 && Math.abs(tw - w) < .3) { x = tx; w = tw; } else raf = requestAnimationFrame(frame); draw(true); }
     function nearest(px) { var b = 0, bd = 1e9; geo.forEach(function (q, i) { var dd = Math.abs(q.l + q.w / 2 - px); if (dd < bd) { bd = dd; b = i; } }); return b; }
     function clampX(v) { var lo = geo[0].l, last = geo[geo.length - 1]; return Math.min(Math.max(v, lo), last.l + last.w - tw); }
     function near(i) { its.forEach(function (a, j) { a.classList.toggle('near', j === i); }); [].forEach.call(mag.children, function (c, j) { c.classList.toggle('near', j === i); }); }
@@ -2856,19 +2847,50 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 
   /* ================= Bottom bars, one per page. Each button opens its own view of the page. ================= */
   var TABS = {
-    home: [['h-areas', 'compass', 'Explore'], ['h-hero', 'scope', 'Slide'], ['h-next', 'arrow', 'Next step'], ['h-plan', 'cal', 'Plan']],
+    home: [['h-areas', 'compass', 'Topics'], ['h-hero', 'scope', 'Slide'], ['h-next', 'arrow', 'Next step'], ['h-plan', 'cal', 'Plan']],
     classes: [['c-top', 'cells', 'Cells'], ['c-gpa', 'chart', 'GPA'], ['c-add', 'plus', 'Add']],
-    papers: [['p-picks', 'book', 'Papers'], ['p-gaps', 'ques', 'Questions'], ['p-learn', 'compass', 'Learn'], ['p-3d', 'cube', '3D'], ['p-search', 'search', 'Search']],
-    projects: [['j-slides', 'scope', 'Slides'], ['j-home', 'drop', 'At home'], ['j-write', 'pen', 'Write']],
+    explore: [['x-papers', 'book', 'Papers'], ['x-proj', 'scope', 'Projects'], ['x-research', 'flask', 'Research']],
     standout: [['s-shadow', 'scope', 'Shadow'], ['s-research', 'flask', 'Experience'], ['s-apart', 'star', 'Set apart'], ['s-hours', 'clock', 'Hours'], ['s-time', 'path', 'Timeline']]
   };
-  var BARS = {}, view = 'home', pane = {};
+  var BARS = {}, view = 'home', pane = {}, jumping = 0;
+  var XHINT = { 'x-papers': ['Papers', 'real studies about {T}, easiest first. Read the short summary, then tap Read it for the full paper.'],
+    'x-proj': ['Projects', 'small things you can do yourself for {T}. Start at number 1 and tick Done as you go.'],
+    'x-research': ['Research', 'questions about {T} nobody has fully answered yet, a 3D model to explore, and sites to learn more.'] };
+  function xhint() {
+    var h = XHINT[pane.explore || 'x-papers'], A = AREAS.filter(function (a) { return a.id === area; })[0], el = $('xHint');
+    if (el && h && A) el.innerHTML = '<b>' + h[0] + ':</b> ' + esc(h[1]).replace('{T}', '<b class="kt">' + esc(A.name) + '</b>');
+  }
+  function isScroll(v) { var el = $('v-' + v); return !!(el && el.hasAttribute('data-scroll')); }
+  /* Home and Classes are one long page: the bottom bar jumps to a section and follows the scroll */
+  function firstOf(v, id) { return document.querySelector('#v-' + v + ' [data-pane="' + id + '"]'); }
+  function jumpTo(v, id) {
+    var el = firstOf(v, id); if (!el) return;
+    jumping = Date.now();
+    var y = id === TABS[v][0][0] ? 0 : el.getBoundingClientRect().top + (window.scrollY || 0) - (topEl.offsetHeight || 62) - 8;
+    window.scrollTo({ top: Math.max(0, y), behavior: RM.matches ? 'auto' : 'smooth' });
+  }
+  var marks = null;
+  function dirty() { marks = null; }
+  function spy(y) {
+    if (!isScroll(view) || Date.now() - jumping < 900) return;
+    var bar = BARS[view]; if (!bar) return;
+    if (!marks) { var sy = window.scrollY || 0; marks = TABS[view].map(function (t) { var el = firstOf(view, t[0]); return { id: t[0], y: el ? el.getBoundingClientRect().top + sy : 0 }; }); }
+    var line = y + (topEl.offsetHeight || 62) + 90, best = marks[0];
+    marks.forEach(function (m) { if (m.y <= line) best = m; });
+    if (window.innerHeight + y >= document.documentElement.scrollHeight - 4) best = marks[marks.length - 1];
+    if (best && pane[view] !== best.id) { pane[view] = best.id; bar.set(bar.g.querySelector('[data-go="' + best.id + '"]')); }
+  }
   function paneOf(v, id) {
     if (TABS[v].some(function (t) { return t[0] === id; })) return id;
     var el = $(id), box = el && el.closest('[data-pane]'); return box && box.dataset.pane !== 'all' ? box.dataset.pane : TABS[v][0][0];
   }
   function showPane(v, id, keep) {
     pane[v] = id;
+    if (isScroll(v)) {
+      document.querySelectorAll('#v-' + v + ' [data-pane]').forEach(function (s) { s.hidden = false; });
+      if (!keep) jumpTo(v, id);
+      toneAll(); return;
+    }
     document.querySelectorAll('#v-' + v + ' [data-pane]').forEach(function (s) {
       var on = s.dataset.pane === 'all' || s.dataset.pane === id;
       if (on && s.hidden) { s.hidden = false; if (!RM.matches) { s.classList.remove('enter'); void s.offsetWidth; s.classList.add('enter'); } }
@@ -2876,7 +2898,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     });
     if (!keep) window.scrollTo(0, 0);
     if (v === 'classes' && id === 'c-top') placeAll();
-    if (v === 'papers') { if (id === 'p-3d') open3D(); else pause3D(); }
+    if (v === 'explore') { xhint(); if (id === 'x-research') open3D(); else pause3D(); }
     toneAll();
   }
   Object.keys(TABS).forEach(function (v) {
@@ -2888,7 +2910,8 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   var pillsBar = wireBar($('grpPills'), 'a', function (a) { setGroup(a.dataset.g); });
   var secBar = wireBar($('secnav'), '.sec', function (a) { var p = a.dataset.p; if (location.hash.slice(1) !== p) location.hash = p; else window.scrollTo({ top: 0, behavior: RM.matches ? 'auto' : 'smooth' }); });
   glassEls.push(document.querySelector('.brand'), themeBtn);
-  function dirty() {}
+  window.addEventListener('resize', dirty, { passive: true });
+  if (window.ResizeObserver) new ResizeObserver(dirty).observe(document.querySelector('main'));
 
   /* Top bar stays put. While the page moves, hover effects pause so the mouse wheel stays smooth, and the glass rechecks what is behind it. */
   var topEl = $('top'), ticking = false, isScrolled = false, stillT = 0, root = document.documentElement;
@@ -2896,7 +2919,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     ticking = false;
     var y = Math.max(0, window.scrollY || 0);
     if ((y > 6) !== isScrolled) { isScrolled = y > 6; topEl.classList.toggle('scrolled', isScrolled); }
-    toneAll();
+    spy(y); toneAll();
   }
   window.addEventListener('scroll', function () {
     if (!root.classList.contains('scrolling')) root.classList.add('scrolling');
@@ -2905,13 +2928,15 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   }, { passive: true });
   function showTop() {}
 
-  /* ================= Router: #home, #classes, #papers, #projects, #standout, with an optional /view ================= */
+  /* ================= Router: #home, #classes, #explore, #standout, with an optional /view. Old #papers and #projects links still land in Explore. ================= */
   var VIEWS = Object.keys(TABS);
-  function setDye() { var r = document.documentElement; if (view === 'papers' || view === 'projects') r.dataset.dye = area; else delete r.dataset.dye; if (lab) lab3dSide(); setTimeout(toneAll, 60); }
+  function setDye() { var r = document.documentElement; if (view === 'explore') r.dataset.dye = area; else delete r.dataset.dye; if (lab) lab3dSide(); setTimeout(toneAll, 60); }
   function route() {
     var h = (location.hash || '').slice(1).split('/'), v = h[0], sub = h[1];
+    if (v === 'papers') { v = 'explore'; sub = sub || 'x-papers'; }
+    if (v === 'projects') { v = 'explore'; sub = sub || 'x-proj'; }
     if (VIEWS.indexOf(v) < 0) v = 'home';
-    view = v;
+    view = v; dirty();
     document.querySelectorAll('.view').forEach(function (s) {
       var on = s.dataset.view === v;
       if (on && s.hidden) { s.hidden = false; s.classList.remove('enter'); void s.offsetWidth; s.classList.add('enter'); }
@@ -2921,11 +2946,12 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     Object.keys(BARS).forEach(function (k) { BARS[k].g.hidden = k !== v; });
     secBar.set(document.querySelector('#secnav [data-p="' + v + '"]'));
     topEl.classList.remove('scrolled'); isScrolled = false;
-    var bar = BARS[v], id = sub ? paneOf(v, sub) : (pane[v] || TABS[v][0][0]);
+    var bar = BARS[v], id = sub ? paneOf(v, sub) : isScroll(v) ? TABS[v][0][0] : (pane[v] || TABS[v][0][0]);
     bar.set(bar.g.querySelector('[data-go="' + id + '"]')); bar.place('snap');
-    showPane(v, id);
+    showPane(v, id, isScroll(v));
+    if (isScroll(v) && !sub) window.scrollTo(0, 0);
     if (v === 'classes') { pillsBar.place('snap'); setGroup(grp); }
-    if (v !== 'papers') pause3D();
+    if (v !== 'explore') pause3D();
     placeAll();
     if (sub && sub !== id) setTimeout(function () { var el = $(sub); if (el) window.scrollTo({ top: Math.max(0, el.getBoundingClientRect().top + window.scrollY - (topEl.offsetHeight || 62) - 8), behavior: RM.matches ? 'auto' : 'smooth' }); }, 60);
   }
