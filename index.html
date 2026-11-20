@@ -33,32 +33,36 @@
   --rule: rgba(70,20,45,.2); --faint: rgba(80,20,50,.07); --acc: #6B4226; --pg: #6B4226; --on-acc: #FFF7FA;
   --fld: #FBEAF1;
   --glass-tint: rgba(252,239,244,.02); --spec: rgba(255,255,255,.95); --spec-lo: rgba(0,0,0,.06); --rim: rgba(70,20,45,.1); --drop: rgba(70,20,45,.14);
-  --cancer: #E8749F; --blood: #E8847C; --infect: #62C292; --dna: #7BA6E6; --tissue: #B096E0; --forensic: #E8A466; --chem: #5CBEC6; --math: #DDC267; --people: #A5C86C;
-  --cancer-d: #A8355F; --blood-d: #A63B35; --infect-d: #276C49; --dna-d: #2F5E9E; --tissue-d: #6A4BA0; --forensic-d: #8A521F; --chem-d: #23707A; --math-d: #6B5A1B; --people-d: #4A6620;
-  --good: #4A6620; --mid: #6B5A1B; --low: #A8355F;
+  --cancer: #D0167A; --blood: #D92D20; --infect: #2F9E44; --dna: #1C7ED6; --tissue: #7048E8; --forensic: #D98A00; --chem: #5CBEC6; --math: #DDC267; --people: #A5C86C;
+  --cancer-d: #9C1060; --blood-d: #A3221A; --infect-d: #237733; --dna-d: #155FA1; --tissue-d: #5436AE; --forensic-d: #8F5B00; --chem-d: #23707A; --math-d: #6B5A1B; --people-d: #4A6620;
+  --good: #4A6620; --mid: #6B5A1B; --low: #A8355F; --kh: #E0408A;
   --tile: var(--tile-l);
   --text: -apple-system, "SF Pro Text", BlinkMacSystemFont, "Helvetica Neue", system-ui, sans-serif;
   --display: -apple-system, "SF Pro Display", BlinkMacSystemFont, "Helvetica Neue", system-ui, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, monospace;
   --ease: cubic-bezier(.2,.7,.2,1); --spring: cubic-bezier(.3, 1.32, .5, 1);
-  --g: 28px; --topH: 62px; --colW: 1240px;
+  --g: 28px; --topH: 62px; --colW: 1760px; /* wide enough that iPad and laptop screens fill edge to edge, only giant monitors get side margins */
+  /* Bar buttons: Apple Music tab bar size on iPhone, every button the same width in both bars */
+  --tbw: 96px; --tbh: 56px; --tbi: 21px; --tbf: 11.5px; --ttbh: 52px; --ttf: 14px;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #000; --bg2: #161616; --card: #121212; --fg: #F5F5F5; --hi: #fff; --dim: #CFCFCF;
   --rule: rgba(255,255,255,.18); --faint: rgba(255,255,255,.07); --acc: #F2B872; --pg: #F2B872; --on-acc: #000;
   --fld: #170F13;
   --glass-tint: rgba(0,0,0,.02); --spec: rgba(255,255,255,.22); --spec-lo: rgba(0,0,0,.4); --rim: rgba(255,255,255,.2); --drop: rgba(0,0,0,.55);
-  --good: #A5C86C; --mid: #DDC267; --low: #E8749F; --tile: var(--tile-d);
+  --cancer: #F2479A; --blood: #F0544A; --infect: #4CC266; --dna: #4A9EF0; --tissue: #9A7BF5; --forensic: #F2A73A;
+  --good: #A5C86C; --mid: #DDC267; --low: #F2479A; --kh: #F472B0; --tile: var(--tile-d);
   color-scheme: dark; } }
 :root[data-theme="dark"] {
   --bg: #000; --bg2: #161616; --card: #121212; --fg: #F5F5F5; --hi: #fff; --dim: #CFCFCF;
   --rule: rgba(255,255,255,.18); --faint: rgba(255,255,255,.07); --acc: #F2B872; --pg: #F2B872; --on-acc: #000;
   --fld: #170F13;
   --glass-tint: rgba(0,0,0,.02); --spec: rgba(255,255,255,.22); --spec-lo: rgba(0,0,0,.4); --rim: rgba(255,255,255,.2); --drop: rgba(0,0,0,.55);
-  --good: #A5C86C; --mid: #DDC267; --low: #E8749F; --tile: var(--tile-d);
+  --cancer: #F2479A; --blood: #F0544A; --infect: #4CC266; --dna: #4A9EF0; --tissue: #9A7BF5; --forensic: #F2A73A;
+  --good: #A5C86C; --mid: #DDC267; --low: #F2479A; --kh: #F472B0; --tile: var(--tile-d);
   color-scheme: dark; }
 @media (min-width: 1000px) { :root { --g: 32px; } }
-@media (max-width: 699px) { :root { --g: 16px; --topH: 58px; } }
+@media (max-width: 699px) { :root { --g: 16px; --topH: 58px; --tbw: min(70px, calc((100vw - 2 * var(--g) - 8px) / 5)); --tbh: 62px; --tbi: 24px; --tbf: 10.5px; --ttbh: 48px; --ttf: 13px; } }
 
 /* Topic classes: --c fill, --cd deep, --ci the one that reads as text on the page */
 .t-cancer { --c: var(--cancer); --cd: var(--cancer-d); } .t-blood { --c: var(--blood); --cd: var(--blood-d); } .t-infect { --c: var(--infect); --cd: var(--infect-d); }
@@ -67,6 +71,40 @@
 [class*="t-"] { --ci: var(--cd); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) [class*="t-"] { --ci: var(--c); } }
 :root[data-theme="dark"] [class*="t-"] { --ci: var(--c); }
+
+/* Full dye: when a topic is open (Papers), the whole page takes that topic's color. --dc is the dye. */
+:root[data-dye="cancer"] { --dc: var(--cancer); } :root[data-dye="blood"] { --dc: var(--blood); } :root[data-dye="infect"] { --dc: var(--infect); }
+:root[data-dye="dna"] { --dc: var(--dna); } :root[data-dye="tissue"] { --dc: var(--tissue); } :root[data-dye="forensic"] { --dc: var(--forensic); }
+:root[data-dye] {
+  --bg: color-mix(in srgb, var(--dc) 24%, #fff); --bg2: color-mix(in srgb, var(--dc) 32%, #fff); --card: #fff;
+  --fld: color-mix(in srgb, var(--dc) 10%, #fff);
+  --fg: color-mix(in srgb, var(--dc) 22%, #141214); --hi: color-mix(in srgb, var(--dc) 45%, #000); --dim: color-mix(in srgb, var(--dc) 30%, #3e383b);
+  --rule: color-mix(in srgb, var(--dc) 40%, transparent); --faint: color-mix(in srgb, var(--dc) 10%, transparent);
+  --acc: color-mix(in srgb, var(--dc) 70%, #000); --pg: var(--acc); --on-acc: #fff;
+  --glass-tint: color-mix(in srgb, var(--dc) 6%, transparent); --rim: color-mix(in srgb, var(--dc) 30%, transparent);
+  --kt: color-mix(in srgb, var(--dc) 85%, #000);
+}
+@media (prefers-color-scheme: dark) { :root[data-dye]:not([data-theme="light"]) {
+  --bg: color-mix(in srgb, var(--dc) 34%, #050505); --bg2: color-mix(in srgb, var(--dc) 40%, #0a0a0a); --card: color-mix(in srgb, var(--dc) 16%, #101010);
+  --fld: color-mix(in srgb, var(--dc) 24%, #0c0c0c);
+  --fg: color-mix(in srgb, var(--dc) 8%, #f6f3f4); --hi: #fff; --dim: color-mix(in srgb, var(--dc) 22%, #cfc8cc);
+  --rule: color-mix(in srgb, var(--dc) 50%, transparent); --faint: color-mix(in srgb, var(--dc) 14%, transparent);
+  --acc: color-mix(in srgb, var(--dc) 50%, #fff); --pg: var(--acc); --on-acc: #000;
+  --glass-tint: color-mix(in srgb, var(--dc) 8%, transparent); --rim: color-mix(in srgb, var(--dc) 40%, transparent);
+  --kt: color-mix(in srgb, var(--dc) 55%, #fff); } }
+:root[data-dye][data-theme="dark"] {
+  --bg: color-mix(in srgb, var(--dc) 34%, #050505); --bg2: color-mix(in srgb, var(--dc) 40%, #0a0a0a); --card: color-mix(in srgb, var(--dc) 16%, #101010);
+  --fld: color-mix(in srgb, var(--dc) 24%, #0c0c0c);
+  --fg: color-mix(in srgb, var(--dc) 8%, #f6f3f4); --hi: #fff; --dim: color-mix(in srgb, var(--dc) 22%, #cfc8cc);
+  --rule: color-mix(in srgb, var(--dc) 50%, transparent); --faint: color-mix(in srgb, var(--dc) 14%, transparent);
+  --acc: color-mix(in srgb, var(--dc) 50%, #fff); --pg: var(--acc); --on-acc: #000;
+  --glass-tint: color-mix(in srgb, var(--dc) 8%, transparent); --rim: color-mix(in srgb, var(--dc) 40%, transparent);
+  --kt: color-mix(in srgb, var(--dc) 55%, #fff); }
+body, body::before { transition: background-color .45s var(--ease); }
+@media (prefers-reduced-motion: reduce) { body, body::before { transition: none; } }
+/* Key terms: bold with the topic's color as an underline */
+:root[data-dye] .gaps .from a { color: var(--hi); text-decoration-color: var(--kt); }
+b.kt { font-weight: 750; color: var(--hi); text-decoration: underline; text-decoration-color: var(--kt, var(--c, var(--kh))); text-decoration-thickness: 3px; text-underline-offset: 3px; text-decoration-skip-ink: none; }
 
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -88,39 +126,40 @@ main { padding-top: calc(env(safe-area-inset-top, 0px) + var(--topH) + 10px); pa
 .fglass, .abar { background: var(--glass-tint); -webkit-backdrop-filter: blur(5px) saturate(150%); backdrop-filter: blur(5px) saturate(150%);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--spec) 45%, transparent), inset 0 -1px 0 color-mix(in srgb, var(--spec-lo) 35%, transparent), inset 0 0 0 .5px var(--rim), 0 10px 28px -16px color-mix(in srgb, var(--drop) 35%, transparent); }
 
-/* ---------- Top bar: same on every page, frosts once you scroll, tucks away going down ---------- */
-.top { position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; z-index: 30; transition: transform .45s var(--ease); }
+/* ---------- Top bar: same on every page, always in place ---------- */
+.top { position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; z-index: 30; }
 .top::before { content: ""; position: absolute; inset: 0; background: color-mix(in srgb, var(--bg) 72%, transparent); -webkit-backdrop-filter: blur(16px) saturate(170%); backdrop-filter: blur(16px) saturate(170%); border-bottom: .5px solid var(--rule); opacity: 0; transition: opacity .3s var(--ease); }
 .top::before, .top.scrolled::before { display: none; }
-.top.away { transform: translateY(calc(-100% - env(safe-area-inset-top, 0px) - 4px)); }
 .top .in { position: relative; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; max-width: var(--colW); margin: 0 auto;
   padding: 10px max(var(--g), env(safe-area-inset-right, 0px)) 10px max(var(--g), env(safe-area-inset-left, 0px)); }
 .brand { justify-self: start; font: 700 14px var(--display); letter-spacing: -.02em; color: var(--hi); display: flex; align-items: center; gap: 8px; text-decoration: none; padding: 5px 13px 5px 5px; border-radius: 999px; }
 .brand i { width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--cancer) 0 22%, transparent 23%), radial-gradient(circle at 68% 62%, var(--tissue) 0 18%, transparent 19%), var(--fld); box-shadow: inset 0 0 0 1.5px var(--rule); }
-.secnav { grid-column: 2; position: relative; display: flex; gap: 2px; padding: 4px; border-radius: 999px; }
-.secnav .sec { position: relative; z-index: 1; display: inline-flex; align-items: center; font: 600 13.5px var(--display); letter-spacing: -.005em; color: var(--dim); padding: 8px 13px; border-radius: 999px; text-decoration: none; white-space: nowrap; transition: color .25s var(--ease); cursor: pointer; }
+.secnav { grid-column: 2; position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: var(--tbw); height: var(--ttbh); padding: 4px; border-radius: 999px; }
+.secnav .sec { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; font: 600 var(--ttf) var(--display); letter-spacing: -.005em; color: var(--dim); padding: 0; border-radius: 999px; text-decoration: none; white-space: nowrap; transition: color .25s var(--ease); cursor: pointer; }
 .secnav .sec[aria-current="page"], .secnav .sec.near { color: var(--hi); }
 .secnav .sec svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; display: none; }
 .iconbtn { justify-self: end; width: 40px; height: 40px; border-radius: 50%; border: 0; display: grid; place-items: center; color: var(--fg); cursor: pointer; padding: 0; }
 .iconbtn svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 @media (max-width: 699px) {
-  .top .in { grid-template-columns: 1fr auto; padding-block: 8px; }
+  .top .in { grid-template-columns: minmax(0, 1fr); padding-block: 8px; }
   .brand { display: none; }
   .secnav { grid-column: 1; justify-self: center; }
-  .secnav .sec { padding: 8px 8px; font-size: 12.5px; }
-  .secnav .sec[data-p="home"] .L { display: none; }
-  .secnav .sec[data-p="home"] svg { display: block; }
+  .top .iconbtn { display: none; }
 }
-@media (max-width: 374px) { .secnav .sec { padding: 7px 6px; font-size: 11.5px; } .iconbtn { width: 36px; height: 36px; } }
+@media (max-width: 374px) { .secnav .sec { font-size: 12px; } }
 
 /* ---------- Bottom bar: sections of the open page, sliding lens, never collapses ---------- */
-.abar { position: fixed; left: 50%; bottom: max(14px, calc(env(safe-area-inset-bottom, 0px) + 6px)); transform: translateX(-50%); z-index: 30; display: flex; gap: 2px; padding: 3px 4px; border-radius: 999px; max-width: calc(100% - 24px); }
+.abar { position: fixed; left: 50%; bottom: max(14px, calc(env(safe-area-inset-bottom, 0px) + 6px)); transform: translateX(-50%); z-index: 30; display: grid; grid-auto-flow: column; grid-auto-columns: var(--tbw); height: var(--tbh); padding: 4px; border-radius: 999px; }
 .abar[hidden] { display: none; }
-.abar a { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1px; min-width: 62px; padding: 5px 12px 4px; color: var(--dim); text-decoration: none; font: 600 11px/1.15 var(--text); letter-spacing: -.005em; border-radius: 999px; white-space: nowrap; cursor: pointer; transition: color .25s var(--ease); }
-.abar a svg, .pills a svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.top, .abar { will-change: transform; }
+.scrolling main { pointer-events: none; }
+.foottheme { display: none; }
+@media (max-width: 699px) { .foottheme { display: flex; justify-content: center; padding-top: 28px; } }
+.abar a { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 0; color: var(--dim); text-decoration: none; font: 600 var(--tbf)/1.1 var(--text); letter-spacing: -.005em; border-radius: 999px; white-space: nowrap; cursor: pointer; transition: color .25s var(--ease); }
+.abar a svg { width: var(--tbi); height: var(--tbi); fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.pills a svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .abar a[aria-current="page"], .abar a.near { color: var(--hi); }
 .abar a[aria-current="page"] svg { color: var(--pg); }
-@media (max-width: 699px) { .abar a { min-width: 0; padding: 5px 8px 4px; } }
 .lens { position: absolute; left: 0; top: 0; z-index: 0; pointer-events: none; border-radius: 999px; opacity: 0; width: var(--lw, 0px); height: var(--lh, 0px);
   transform: translate3d(var(--lx, 0px), var(--ly, 0px), 0) scale(var(--lsx, 1), var(--lsy, 1));
   background: color-mix(in srgb, var(--pg) 24%, transparent);
@@ -140,6 +179,7 @@ main { padding-top: calc(env(safe-area-inset-top, 0px) + var(--topH) + 10px); pa
 .pills a[aria-current="page"] svg { color: var(--pg); }
 @media (max-width: 699px) { .pills a { padding: 7px 10px; font-size: 12.5px; gap: 5px; } .pills a svg { width: 15px; height: 15px; } }
 .seg2 { display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px; background: var(--bg2); box-shadow: inset 0 0 0 .5px var(--rule); margin-top: 10px; }
+.seg2[hidden] { display: none; }
 .seg2 button { border: 0; background: none; font: 600 13px var(--display); color: var(--dim); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
 .seg2 button[aria-pressed="true"] { background: var(--card); color: var(--hi); box-shadow: 0 1px 2px var(--faint), inset 0 0 0 .5px var(--rule); }
 
@@ -349,6 +389,24 @@ main { padding-top: calc(env(safe-area-inset-top, 0px) + var(--topH) + 10px); pa
 .paper .meta { font-size: 13px; color: var(--dim); }
 .paper p { margin: 0; font-size: 14.5px; line-height: 1.45; }
 .paper a.btn { justify-self: start; margin-top: 4px; }
+.lvls { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); margin-top: 18px; }
+@media (min-width: 1000px) { .lvls { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.lvl { border-top: 3px solid var(--c); }
+.lvl h3 { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; font: 700 17px var(--display); letter-spacing: -.02em; color: var(--hi); margin: 0 0 4px; }
+.lvl h3 small { font: 600 12.5px var(--text); color: var(--dim); }
+.res { list-style: none; margin: 0; padding: 0; }
+.res li { border-top: 1px solid var(--rule); padding-block: 11px; display: grid; gap: 3px; }
+.res li:first-child { border-top: 0; }
+.res a { font: 650 15px/1.3 var(--display); color: var(--hi); text-decoration: none; }
+.res a:hover { text-decoration: underline; text-decoration-color: var(--c); text-decoration-thickness: 2px; }
+.res .ty { display: inline-flex; align-items: center; gap: 5px; font: 700 10.5px var(--display); letter-spacing: .05em; text-transform: uppercase; color: var(--ci); }
+.res .ty svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.res p { margin: 0; font-size: 14px; line-height: 1.42; color: var(--fg); }
+.res .note { font-size: 12.5px; color: var(--dim); }
+.deep { margin-top: 18px; border-top: 3px solid var(--c); }
+.deep .row { margin-bottom: 6px; }
+.deep .res { display: grid; column-gap: 28px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 700px) { .deep .res { grid-template-columns: repeat(2, minmax(0, 1fr)); } .deep .res li:nth-child(2) { border-top: 0; } }
 .gaps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
 @media (min-width: 1000px) { .gaps { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; } }
 .gaps li { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 12px; border-top: 1px solid var(--rule); padding-block: 14px; text-align: left; }
@@ -406,6 +464,22 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 .ticks b { display: block; font: 650 15.5px/1.25 var(--display); color: var(--hi); }
 .ticks small { display: block; font-size: 13.5px; color: var(--dim); margin-top: 2px; }
 .ticks label { --cd: var(--acc); }
+.guide { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 14px; counter-reset: g; text-align: left; }
+@media (min-width: 1000px) { .guide { grid-template-columns: repeat(2, minmax(0, 1fr)); } .guide .wide { grid-column: 1 / -1; } }
+.guide > li { counter-increment: g; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; align-content: start; }
+.guide > li::before { content: counter(g); width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font: 700 14px var(--display); color: var(--on-acc); background: var(--acc); }
+.guide h3 { font: 700 17px/1.25 var(--display); letter-spacing: -.02em; color: var(--hi); margin: 3px 0 6px; }
+.guide p { margin: 0 0 8px; font-size: 14.5px; line-height: 1.45; }
+.guide .steps { margin: 0; padding: 0; list-style: none; }
+.guide .steps li { border-top: 1px solid var(--rule); }
+.guide .steps label { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; padding-block: 9px; font-size: 14.5px; line-height: 1.4; cursor: pointer; --cd: var(--acc); }
+.guide .steps input { margin-top: 2px; width: 18px; height: 18px; accent-color: var(--acc); }
+.guide .steps input:checked + span { color: var(--dim); text-decoration: line-through; text-decoration-color: var(--rule); }
+.guide .places { list-style: none; margin: 4px 0 0; padding: 0; }
+.guide .places li { border-top: 1px solid var(--rule); padding-block: 10px; }
+.guide .places a { font: 650 15px var(--display); color: var(--hi); text-decoration: underline; text-decoration-color: var(--acc); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.guide .places p { margin: 3px 0 0; font-size: 14px; color: var(--fg); }
+.mail { background: var(--bg); border-radius: 14px; box-shadow: inset 0 0 0 1px var(--rule); padding: 14px; font: 14px/1.5 var(--text); white-space: pre-wrap; margin: 6px 0 10px; color: var(--fg); }
 .grouph { font: 700 13px var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--dim); margin: 22px 0 8px; text-align: left; }
 .hours { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
 @media (max-width: 699px) { .hours { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -471,7 +545,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
         <p class="lede">One slide, one class and one paper at a time.</p>
       </div>
       <div class="herogrid">
-        <figure class="plate"><img id="plateImg" alt="Normal skin under the microscope, stained pink and purple"><figcaption class="cap"><b>Plate 1. Normal skin, H&amp;E, 10x.</b> The purple layer on top is the epidermis, the pink below is the dermis, and the small purple nest low in the middle is a harmless mole.</figcaption></figure>
+        <figure class="plate"><img id="plateImg" alt="Normal skin under the microscope, stained pink and purple"><figcaption class="cap"><b>Plate 1. Normal skin, H&amp;E, 10x.</b> The purple layer on top is the <b class="kt">epidermis</b>, the pink below is the <b class="kt">dermis</b>, and the small purple nest low in the middle is a <b class="kt">harmless mole</b>.</figcaption></figure>
         <aside class="card sotd" id="sotd" aria-live="polite"></aside>
       </div>
     </section>
@@ -533,7 +607,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     <section class="sect first" id="c-top" data-sec>
       <div class="center">
         <div class="k">Classes</div>
-        <h1 class="giant" id="clsTitle">Your path to Fresno State</h1>
+        <h1 class="giant" id="clsTitle">Your path to graduation</h1>
         <nav class="pills fglass" id="grpPills" aria-label="Which classes">
           <a data-g="fcc"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="9" r="3.5"/><circle cx="16" cy="9" r="3.5"/><circle cx="12" cy="16" r="3.5"/></svg>Fresno City</a>
           <a data-g="transfer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-4.5L21 9l-9 4.5zM7 11v4.5c3 2 7 2 10 0V11"/></svg>Transfer</a>
@@ -551,14 +625,14 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
           <button type="button" class="btn sm" id="tidyBtn">Tidy the cells</button>
         </div>
         <div>
-          <div class="listhead"><div class="counts" id="clsCounts" style="margin:0"></div><div class="legend" id="clsLegend"></div></div>
+          <div class="listhead" id="c-list" data-sec><div class="counts" id="clsCounts" style="margin:0"></div><div class="legend" id="clsLegend"></div></div>
           <ul class="list" id="clsList"></ul>
         </div>
       </div>
     </section>
 
     <section class="sect" id="c-gpa" data-sec>
-      <div class="center"><h2 class="h2">GPA</h2><p class="lede">Your goal is 3.7 or higher. Add each term when grades post.</p></div>
+      <div class="center"><h2 class="h2">GPA</h2><p class="lede">Your goal is <b class="kt">3.7 or higher</b>. Add each term when grades post.</p></div>
       <div class="gpagrid">
         <div class="card gpabig" id="gpaBig"></div>
         <div class="card">
@@ -597,6 +671,11 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       <div class="center"><h2 class="h2">Open questions</h2><p class="lede">Places where the answers aren’t in yet, and where you could add something.</p></div>
       <ul class="gaps" id="gapList" style="margin-top:16px"></ul>
     </section>
+    <section class="sect" id="p-learn" data-sec>
+      <div class="center"><h2 class="h2">Learn</h2><p class="lede">Sites, videos, tools and 3D models for this topic, from first look to expert.</p></div>
+      <div id="deep3d"></div>
+      <div class="lvls" id="learnList"></div>
+    </section>
     <section class="sect center" id="p-search" data-sec>
       <h2 class="h2">Search PubMed</h2>
       <form class="search" id="searchForm" role="search"><label class="sr" for="q">Search papers</label><input class="inp" id="q" type="search" placeholder="Try: Pap smear cytology"><button class="btn solid" type="submit">Search</button></form>
@@ -620,18 +699,18 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       <article class="proj t-cancer">
         <div style="display:grid;gap:12px">
           <h2 class="h2"><span class="pnum">1</span>Spot the tumor</h2>
-          <figure class="plate"><img id="projImg" alt="Small squares of lymph node tissue, some outlined in green"><figcaption class="cap"><b>Real slide patches from lymph nodes.</b> The ones boxed in green hold cancer cells that spread there. Look at how much darker and more crowded they are.</figcaption></figure>
+          <figure class="plate"><img id="projImg" alt="Small squares of lymph node tissue, some outlined in green"><figcaption class="cap"><b>Real slide patches from lymph nodes.</b> The ones boxed in green hold <b class="kt">cancer cells</b> that spread there. Look at how much darker and more crowded they are.</figcaption></figure>
           <span class="lbl2">What to look for</span>
           <ul class="look">
-            <li><i>1</i><span><b>Nuclei size.</b> Tumor nuclei are often bigger and darker purple.</span></li>
-            <li><i>2</i><span><b>Shape.</b> Normal nuclei look alike. Tumor nuclei come in odd, uneven shapes.</span></li>
-            <li><i>3</i><span><b>Crowding.</b> Tumor cells pile up and lose the neat pattern of the tissue.</span></li>
-            <li><i>4</i><span><b>Dividing cells.</b> More cells caught mid-division means fast growth.</span></li>
+            <li><i>1</i><span><b class="kt">Nuclei size.</b> Tumor nuclei are often bigger and darker purple.</span></li>
+            <li><i>2</i><span><b class="kt">Shape.</b> Normal nuclei look alike. Tumor nuclei come in odd, uneven shapes.</span></li>
+            <li><i>3</i><span><b class="kt">Crowding.</b> Tumor cells pile up and lose the neat pattern of the tissue.</span></li>
+            <li><i>4</i><span><b class="kt">Dividing cells.</b> More cells caught mid-division means fast growth.</span></li>
           </ul>
         </div>
         <div style="display:grid;gap:14px">
           <ul class="steps" data-proj="p1">
-            <li><label><input type="checkbox" data-step="a"><span>Open a normal tissue slide, like colon or breast, and zoom from low to high power.</span></label></li>
+            <li><label><input type="checkbox" data-step="a"><span>Open a normal tissue slide, like colon or breast, and zoom from <b class="kt">low to high power</b>.</span></label></li>
             <li><label><input type="checkbox" data-step="b"><span>Open a tumor slide from the same organ in the slide box.</span></label></li>
             <li><label><input type="checkbox" data-step="c"><span>Find the four clues and screenshot each one.</span></label></li>
             <li><label><input type="checkbox" data-step="d"><span>Write three sentences on how you could tell them apart.</span></label></li>
@@ -660,8 +739,8 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
         <ul class="steps" data-proj="p2">
           <li><label><input type="checkbox" data-step="a"><span>Gently scrape the inside of your cheek with a clean toothpick or cotton swab.</span></label></li>
           <li><label><input type="checkbox" data-step="b"><span>Smear it on a glass slide, add one drop of stain, and lay a cover slip or clear tape on top.</span></label></li>
-          <li><label><input type="checkbox" data-step="c"><span>Find a flat cell and its darker nucleus. Photograph it at two zoom levels.</span></label></li>
-          <li><label><input type="checkbox" data-step="d"><span>Try an onion skin next, so you can compare plant and animal cells.</span></label></li>
+          <li><label><input type="checkbox" data-step="c"><span>Find a flat cell and its <b class="kt">darker nucleus</b>. Photograph it at two zoom levels.</span></label></li>
+          <li><label><input type="checkbox" data-step="d"><span>Try an onion skin next, so you can compare <b class="kt">plant and animal cells</b>.</span></label></li>
           <li><label><input type="checkbox" data-step="e"><span>Keep a photo log: date, sample, stain, zoom and one sentence on what you saw.</span></label></li>
         </ul>
       </article>
@@ -703,8 +782,12 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       <h1 class="giant">More than grades</h1>
       <p class="lede">Grades and the MCAT get you screened in. These are what make you memorable, and most of them lead straight to pathology.</p>
     </section>
+    <section class="sect" id="s-shadow" data-sec>
+      <div class="center"><h2 class="h2">Shadow a pathologist</h2><p class="lede">The one thing that matters most for your goal. Go step by step and tick each one off.</p></div>
+      <ol class="guide" id="shadowGuide"></ol>
+    </section>
     <section class="sect" id="s-clinical" data-sec>
-      <div class="center"><h2 class="h2">Clinical</h2><p class="lede">Aim for 100 to 200 hours. Time near a pathologist counts the most.</p></div>
+      <div class="center"><h2 class="h2">Clinical</h2><p class="lede">Aim for <b class="kt">100 to 200 hours</b>. Time near a pathologist counts the most.</p></div>
       <ul class="ideas" id="clinList"></ul>
     </section>
     <section class="sect" id="s-research" data-sec>
@@ -735,6 +818,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     </section>
   </div>
 </section>
+<div class="col foottheme"><button class="btn sm" type="button" id="themeBtn2"></button></div>
 </main>
 
 <div id="bars"></div>
@@ -749,6 +833,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   function load(key, fallback) { try { var v = localStorage.getItem(key); return v === null ? fallback : JSON.parse(v); } catch (e) { return fallback; } }
   function loadRaw(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
   function store(key, val) { try { localStorage.setItem(key, typeof val === 'string' ? val : JSON.stringify(val)); } catch (e) {} }
+  function mk(s) { return esc(s).replace(/\*([^*]+)\*/g, '<b class="kt">$1</b>'); }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function $(id) { return document.getElementById(id); }
 
@@ -768,6 +853,8 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     book: '<svg viewBox="0 0 24 24"><path d="M4 5.5c2.5-1 5.5-1 8 .5 2.5-1.5 5.5-1.5 8-.5V19c-2.5-1-5.5-1-8 .5-2.5-1.5-5.5-1.5-8-.5zM12 6v13.5"/></svg>',
     ques: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.5a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.4M12 16.6v.4"/></svg>',
     search: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.6-4.6"/></svg>',
+    cube: '<svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg>',
+    play: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.2v5.6l4.8-2.8z"/></svg>',
     drop: '<svg viewBox="0 0 24 24"><path d="M12 3.5s6 6.6 6 10.5a6 6 0 0 1-12 0c0-3.9 6-10.5 6-10.5z"/></svg>',
     pen: '<svg viewBox="0 0 24 24"><path d="M5 19l1-4L16 5l3 3L9 18zM14 7l3 3"/></svg>',
     heart: '<svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>',
@@ -783,9 +870,10 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   var themeBtn = $('themeBtn');
   function sysDark() { return !!(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches); }
   function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : sysDark(); }
-  function paintTheme() { var d = isDark(); themeBtn.innerHTML = d ? I.sun : I.moon; themeBtn.setAttribute('aria-label', d ? 'Switch to light' : 'Switch to dark'); }
+  function paintTheme() { var d = isDark(); themeBtn.innerHTML = d ? I.sun : I.moon; themeBtn.setAttribute('aria-label', d ? 'Switch to light' : 'Switch to dark'); $('themeBtn2').textContent = d ? 'Switch to light mode' : 'Switch to dark mode'; }
   var savedTheme = loadRaw('susie-theme');
   if (savedTheme === 'dark' || savedTheme === 'light') root.setAttribute('data-theme', savedTheme);
+  $('themeBtn2').addEventListener('click', function () { themeBtn.click(); });
   themeBtn.addEventListener('click', function () { var n = isDark() ? 'light' : 'dark'; root.setAttribute('data-theme', n); store('susie-theme', n); paintTheme(); });
   try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', paintTheme); } catch (e) {}
   paintTheme();
@@ -827,11 +915,11 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   }
   var WHY = {
     tissue: 'Biology for majors is where you first learn to read tissue, the skill a pathologist uses every day.',
-    chem: 'Chemistry is how stains, blood tests and lab machines work.',
-    math: 'Math and physics show up on the MCAT and inside every lab instrument.',
-    dna: 'Gene tests are now part of many diagnoses.',
+    chem: 'Chemistry is how *stains*, *blood tests* and lab machines work.',
+    math: 'Math and physics show up on the *MCAT* and inside every lab instrument.',
+    dna: '*Gene tests* are now part of many diagnoses.',
     infect: 'Finding the germ behind an illness is part of a pathologist’s job.',
-    people: 'Clear writing is how a pathology report reaches the patient’s doctor.',
+    people: 'Clear writing is how a *pathology report* reaches the patient’s doctor.',
     cancer: 'This is pathology itself.'
   };
 
@@ -968,12 +1056,12 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   });
 
   /* ---------- Classes page ---------- */
-  var TITLES = { fcc: function () { return school === 'berkeley' ? 'Your path to UC Berkeley' : 'Your path to Fresno State'; }, transfer: function () { return school === 'berkeley' ? 'UC Berkeley classes' : 'Fresno State classes'; }, med: function () { return 'Med school, and then pathology'; } };
+  var TITLES = { fcc: function () { return 'Your path to graduation'; }, transfer: function () { return school === 'berkeley' ? 'UC Berkeley classes' : 'Fresno State classes'; }, med: function () { return 'Med school, and then pathology'; } };
   var NOTES = {
-    fcc: 'Your Fresno City classes. Check ASSIST.org so each one transfers.',
-    fresno: 'Biology to start, then switch to Biochemistry. Many of your Fresno City classes may count here.',
-    berkeley: 'Molecular and Cell Biology. MCB 132, Biology of Human Cancer, is pathology in a class.',
-    med: 'The first two years are classroom science. Pathology is one of them, then a rotation where you work beside pathologists.'
+    fcc: 'Your Fresno City classes. Check *ASSIST.org* so each one transfers.',
+    fresno: '*Biology* to start, then switch to *Biochemistry*. Many of your Fresno City classes may count here.',
+    berkeley: 'Molecular and Cell Biology. *MCB 132, Biology of Human Cancer*, is pathology in a class.',
+    med: 'The first two years are classroom science. Pathology is one of them, then a *rotation* where you work beside pathologists.'
   };
   function renderClsSide() {
     var list = listFor(grp);
@@ -986,12 +1074,13 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     }).join('');
   }
   function setGroup(g, fromBar) {
+    if (typeof dirty === "function") dirty();
     grp = g;
     ['fcc', 'transfer', 'med'].forEach(function (k) { $('clump-' + k).hidden = k !== g; });
     $('clsTitle').textContent = TITLES[g]();
     $('schoolSeg').hidden = g !== 'transfer';
     [].forEach.call($('schoolSeg').querySelectorAll('button'), function (b) { b.setAttribute('aria-pressed', b.dataset.school === school ? 'true' : 'false'); });
-    $('schoolNote').textContent = g === 'transfer' ? NOTES[school] : NOTES[g];
+    $('schoolNote').innerHTML = mk(g === 'transfer' ? NOTES[school] : NOTES[g]);
     $('picked-cls').textContent = 'Tap a cell to update it. Drag to move it.';
     if (pillsBar) pillsBar.set(document.querySelector('#grpPills [data-g="' + g + '"]'));
     var bb = BARS.classes; if (bb && !fromBar) { var t = bb.g.querySelector('[data-grp="' + g + '"]'); if (t) bb.set(t); }
@@ -1067,47 +1156,107 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 
   /* ================= PAPERS ================= */
   var AREAS = [
-    { id: 'cancer', name: 'Cancer', img: 'pcam', blurb: 'Biopsies, tumor tissue, blood cancers and Pap smears: the living-patient side of pathology.' },
-    { id: 'blood', name: 'Blood cells', img: 'blood2', blurb: 'Reading blood smears and the cancers that start in blood and bone marrow.' },
-    { id: 'tissue', name: 'Tissue basics', img: 'ihc', blurb: 'How slides are stained and how pathologists agree, or don’t, on what they see.' },
-    { id: 'dna', name: 'DNA testing', img: 'dna', blurb: 'Gene tests that now help name diseases, and who they work best for.' },
-    { id: 'infect', name: 'Infections', img: 'infect', blurb: 'Finding the germ behind an illness, including valley fever right here in the Central Valley.' },
-    { id: 'forensic', name: 'Forensic', img: 'forensic', opt: true, blurb: 'Optional. Medical examiner work, for when you are curious.' }
+    { id: 'cancer', name: 'Cancer', img: 'pcam', blurb: '*Biopsies*, *tumor tissue*, *blood cancers* and *Pap smears*: the living-patient side of pathology.' },
+    { id: 'blood', name: 'Blood cells', img: 'blood2', blurb: 'Reading *blood smears* and the cancers that start in blood and bone marrow.' },
+    { id: 'tissue', name: 'Tissue basics', img: 'ihc', blurb: 'How slides are *stained* and how pathologists agree, or don’t, on what they see.' },
+    { id: 'dna', name: 'DNA testing', img: 'dna', blurb: '*Gene tests* that now help name diseases, and who they work best for.' },
+    { id: 'infect', name: 'Infections', img: 'infect', blurb: 'Finding the germ behind an illness, including *valley fever* right here in the Central Valley.' },
+    { id: 'forensic', name: 'Forensic', img: 'forensic', opt: true, blurb: 'Optional. *Medical examiner* work, for when you are curious.' }
   ];
   function pm(id) { return 'https://pubmed.ncbi.nlm.nih.gov/' + id + '/'; }
   function pmc(id) { return 'https://pmc.ncbi.nlm.nih.gov/articles/' + id + '/'; }
   var PAPERS = [
     { a: 'cancer', t: 'Hallmarks of Cancer: The Next Generation', by: 'Hanahan and Weinberg', j: 'Cell', y: 2011, url: pm(21376230), tag: 'Start here',
-      s: 'The classic list of traits almost every cancer shares, like ignoring stop signals, dodging cell death and growing its own blood supply. It is the map most cancer research builds on.' },
+      s: 'The classic list of traits almost every cancer shares, like *ignoring stop signals*, *dodging cell death* and *growing its own blood supply*. It is the map most cancer research builds on.' },
     { a: 'cancer', t: 'Hallmarks of Cancer: New Dimensions', by: 'Hanahan', j: 'Cancer Discovery', y: 2022, url: pm(35022204), tag: 'Next read',
-      s: 'The 2022 update to the list. It adds newer ideas, like cells changing their identity and the role of the microbes living in our bodies.' },
+      s: 'The 2022 update to the list. It adds newer ideas, like *cells changing their identity* and the role of the *microbes* living in our bodies.' },
     { a: 'cancer', t: 'Efficacy of HPV-based screening for prevention of invasive cervical cancer', by: 'Ronco and others', j: 'The Lancet', y: 2014, url: pm(24192252), tag: 'Cytology',
-      s: 'Four large European trials compared the Pap smear with testing for the HPV virus. HPV testing protected women from invasive cervical cancer better than the Pap test alone.' },
+      s: 'Four large European trials compared the Pap smear with testing for the HPV virus. *HPV testing* protected women from invasive cervical cancer better than the Pap test alone.' },
     { a: 'cancer', t: 'Clinical-grade computational pathology using weakly supervised deep learning on whole slide images', by: 'Campanella and others', j: 'Nature Medicine', y: 2019, url: pm(31308507), tag: 'Biopsies + AI',
       s: 'A computer learned to spot cancer on tens of thousands of scanned biopsy slides. The goal is to let it set aside clearly normal slides so pathologists spend time on the hard ones.' },
     { a: 'cancer', t: 'Disparities in Cancer Stage of Diagnosis by Rurality in California, 2015 to 2019', by: 'California cancer study', j: '', y: 2024, url: pm(39141060), tag: 'Close to home',
-      s: 'Looks at whether people in rural California are diagnosed at a later cancer stage than people in cities. Stage at diagnosis is decided from the pathology report.' },
+      s: 'Looks at whether people in rural California are diagnosed at a *later cancer stage* than people in cities. *Stage at diagnosis* is decided from the *pathology report*.' },
     { a: 'blood', t: 'The 2016 revision to the World Health Organization classification of myeloid neoplasms and acute leukemia', by: 'Arber and others', j: 'Blood', y: 2016, url: pm(27069254), tag: 'Blood cancers',
-      s: 'The rulebook hematopathologists use to name leukemias. This update added gene changes to the diagnosis, next to what is seen under the microscope.' },
+      s: 'The rulebook hematopathologists use to name leukemias. This update added *gene changes* to the diagnosis, next to what is seen under the microscope.' },
     { a: 'blood', t: 'Mobile Phone Based Clinical Microscopy for Global Health Applications', by: 'Breslauer and others', j: 'PLoS ONE', y: 2009, url: pmc('PMC2709430'), tag: 'Blood smears',
       s: 'A Berkeley team turned a phone into a microscope and imaged blood smears with malaria and sickle cells. It shows how cheap tools can read blood where there is no lab.' },
     { a: 'infect', t: 'Coccidioidomycosis as a Common Cause of Community-acquired Pneumonia', by: 'Valdivia and others', j: 'Emerging Infectious Diseases', y: 2006, url: pmc('PMC3373055'), tag: 'Valley fever',
-      s: 'In an Arizona study, valley fever turned out to cause a large share of everyday pneumonia cases. Doctors often don’t test for it, so it gets missed.' },
+      s: 'In an Arizona study, *valley fever* turned out to cause a large share of everyday pneumonia cases. Doctors often don’t test for it, so it gets missed.' },
     { a: 'dna', t: 'Genomics is failing on diversity', by: 'Popejoy and Fullerton', j: 'Nature', y: 2016, url: pm(27734877), tag: 'Who is studied',
-      s: 'Most people in big genetic studies have European ancestry. That means gene test results can be less reliable for everyone else.' },
+      s: 'Most people in big genetic studies have *European ancestry*. That means gene test results can be less reliable for everyone else.' },
     { a: 'dna', t: 'Genetic Misdiagnoses and the Potential for Health Disparities', by: 'Manrai and others', j: 'New England Journal of Medicine', y: 2016, url: pmc('PMC5292722'), tag: 'Real mistakes',
       s: 'Some gene changes once labeled harmful for a heart disease were later found to be harmless. Black patients were more likely to get those wrong results.' },
     { a: 'tissue', t: 'Hematoxylin and eosin staining of tissue and cell sections', by: 'Fischer and others', j: 'Cold Spring Harbor Protocols', y: 2008, url: pm(21356829), tag: 'H&E',
-      s: 'The standard recipe for the pink and purple stain on almost every slide. Hematoxylin colors nuclei purple and eosin colors the rest pink.' },
+      s: 'The standard recipe for the pink and purple stain on almost every slide. *Hematoxylin* colors nuclei purple and *eosin* colors the rest pink.' },
     { a: 'tissue', t: 'Diagnostic Concordance Among Pathologists Interpreting Breast Biopsy Specimens', by: 'Elmore and others', j: 'JAMA', y: 2015, url: pm(25781441), tag: 'Agreement',
-      s: 'Over a hundred pathologists read the same breast biopsy slides. They agreed with experts most of the time, but much less on borderline cases called atypia.' },
+      s: 'Over a hundred pathologists read the same breast biopsy slides. They agreed with experts most of the time, but much less on borderline cases called *atypia*.' },
     { a: 'forensic', t: 'An assessment of the Henssge method for forensic death time estimation in the early post-mortem interval', by: 'Forensic study', j: 'International Journal of Legal Medicine', y: 2024, url: pmc('PMC11732859'), tag: 'Time of death',
-      s: 'Tests how well the most-used body temperature method estimates time of death in real cases. Other experts wrote back to disagree, which shows the question is still open.' }
+      s: 'Tests how well the most-used *body temperature method* estimates time of death in real cases. Other experts wrote back to disagree, which shows the question is still open.' },
+    { a: 'cancer', t: 'Cancer statistics, 2024', by: 'Siegel and others', j: 'CA: A Cancer Journal for Clinicians', y: 2024, url: pm(38230766), tag: 'Big picture',
+      s: 'The yearly American Cancer Society count of new cancer cases and deaths in the US. Good for knowing which cancers pathologists see most.' },
+    { a: 'cancer', t: 'Bethesda 2014: improving on a paradigm shift', by: 'Nayar and Wilbur', j: '', y: 2016, url: pm(26767599), tag: 'Pap smears',
+      s: 'Explains the 2014 update to the *Bethesda System*, the shared words labs use to report a Pap smear. Every cytology report you read will use these categories.' },
+    { a: 'cancer', t: 'Intratumor heterogeneity and branched evolution revealed by multiregion sequencing', by: 'Gerlinger and others', j: 'New England Journal of Medicine', y: 2012, url: pm(22397650), tag: 'Tumor biology',
+      s: 'Samples from different spots of the same kidney tumor had different gene changes. One biopsy may not show the whole tumor, which matters for *tumor heterogeneity*.' },
+    { a: 'cancer', t: 'The GLOBOCAN 2022 cancer estimates: Data sources, methods, and a snapshot of the cancer burden worldwide', by: 'GLOBOCAN team', j: '', y: 2024, url: pm(39688499), tag: 'Worldwide',
+      s: 'Describes how the world cancer estimates are built and where the numbers come from. A good pair with the US statistics paper above.' },
+    { a: 'cancer', t: 'Deep learning in cancer genomics and histopathology', by: 'Review', j: '', y: 2024, url: pm(38539231), tag: 'AI + slides',
+      s: 'A review of how computers learn from both cancer slides and cancer genes. Read it after the biopsy AI paper to see where the field went next.' },
+    { a: 'blood', t: 'Diagnosis from the blood smear', by: 'Bain', j: 'New England Journal of Medicine', y: 2005, url: pm(16079373), tag: 'Start here',
+      s: 'A classic guide to what a trained eye finds on a *blood smear*, with pictures of the cells. It is the best first read for this topic.' },
+    { a: 'blood', t: 'Iron-deficiency anemia', by: 'Camaschella', j: 'New England Journal of Medicine', y: 2015, url: pm(25946282), tag: 'Anemia',
+      s: 'The most common blood problem in the world, explained from cause to lab tests. Small, pale red cells on a smear are one of its clues.' },
+    { a: 'blood', t: 'Sickle Cell Disease', by: 'Piel, Steinberg and Rees', j: 'New England Journal of Medicine', y: 2017, url: pm(28723335), tag: 'Sickle cells',
+      s: 'A full review of sickle cell disease, from the one gene change to the bent red cells and how patients are treated today.' },
+    { a: 'blood', t: 'iwCLL guidelines for diagnosis, indications for treatment, response assessment, and supportive management of CLL', by: 'Hallek and others', j: 'Blood', y: 2018, url: pm(29540348), tag: 'Blood cancers',
+      s: 'The rules doctors use to diagnose *chronic lymphocytic leukemia*, a common adult blood cancer. It shows how blood counts, smears and *flow cytometry* work together.' },
+    { a: 'blood', t: 'ICC-2022 versus WHO-2022 classification systems for acute leukemias and myeloid neoplasms: The perspective from two classical morphologists', by: 'Two hematopathologists', j: '', y: 2023, url: pm(37212459), tag: 'Expert',
+      s: 'In 2022 two different rulebooks for naming leukemias came out. This piece is two microscope experts comparing them, a look at a live debate in the field.' },
+    { a: 'infect', t: 'Rapid molecular detection of tuberculosis and rifampin resistance', by: 'Boehme and others', j: 'New England Journal of Medicine', y: 2010, url: pm(20825313), tag: 'Fast tests',
+      s: 'A machine test found tuberculosis and a key drug resistance in about two hours instead of weeks of growing the germ. It changed TB testing worldwide.' },
+    { a: 'infect', t: 'A review of malaria diagnostic tools: microscopy and rapid diagnostic test (RDT)', by: 'Wongsrichanalai and others', j: 'American Journal of Tropical Medicine and Hygiene', y: 2007, url: pm(18165483), tag: 'Microscopy',
+      s: 'Compares finding malaria parasites on a stained blood slide with quick dipstick tests. A good look at where the microscope still wins.' },
+    { a: 'infect', t: 'Coccidioidomycosis-Associated Hospitalizations, United States, 2016-2021', by: 'US study', j: '', y: 2025, url: pm(41262357), tag: 'Valley fever',
+      s: 'Counts how many people across the US end up in the hospital with *valley fever*. It helps show how big the problem is beyond Arizona and California.' },
+    { a: 'infect', t: 'Revisiting the Utility of Histopathological Examination of Biopsy: A Necessity in Microbiology', by: 'Review', j: '', y: 2017, url: pm(28658759), tag: 'Biopsies',
+      s: 'Argues that looking at infected tissue under the microscope still matters, even with gene tests. Some germs are easiest to spot right in the *biopsy*.' },
+    { a: 'infect', t: 'COVID-19 related lung pathology: old patterns in new clothing?', by: 'Lung pathologists', j: '', y: 2020, url: pm(32881045), tag: 'Autopsy',
+      s: 'Asks whether the lung damage seen in COVID-19 was new or looked like damage pathologists already knew from other illnesses.' },
+    { a: 'dna', t: 'The Missing Diversity in Human Genetic Studies', by: 'Sirugo, Williams and Tishkoff', j: 'Cell', y: 2019, url: pm(30901543), tag: 'Who is studied',
+      s: 'A follow-up to the Popejoy paper. It shows the gap is still there and explains what it costs patients with non-European ancestry.' },
+    { a: 'dna', t: 'ClinVar: public archive of interpretations of clinically relevant variants', by: 'Landrum and others', j: 'Nucleic Acids Research', y: 2016, url: pm(26582918), tag: 'Tool paper',
+      s: 'Describes *ClinVar*, the free database where labs post whether a gene change is harmful. You can search it yourself in the Learn list below.' },
+    { a: 'dna', t: 'Clinical laboratories collaborate to resolve differences in variant interpretations submitted to ClinVar', by: 'Harrison and others', j: 'Genetics in Medicine', y: 2017, url: pm(28301460), tag: 'Real mistakes',
+      s: 'Different labs sometimes call the same gene change harmful or harmless. This shows labs talking it through and fixing many of those disagreements.' },
+    { a: 'dna', t: 'Circulating tumor DNA and liquid biopsy in oncology', by: 'Review', j: '', y: 2022, url: pm(35122035), tag: 'Liquid biopsy',
+      s: 'Tumors shed bits of DNA into the blood. This review covers testing that DNA, called a *liquid biopsy*, to find and follow cancer without cutting tissue.' },
+    { a: 'dna', t: 'An openly available online tool for implementing the ACMG/AMP standards and guidelines for the interpretation of sequence variants', by: 'Kleinberger and others', j: 'Genetics in Medicine', y: 2016, url: pm(26986878), tag: 'Expert',
+      s: 'A free web tool that walks through the official checklist for deciding if a gene change causes disease. Expert level, but it shows the steps clearly.' },
+    { a: 'tissue', t: 'Tissue processing and hematoxylin and eosin staining', by: 'Feldman and Wolfe', j: 'Methods in Molecular Biology', y: 2014, url: pm(25015141), tag: 'Start here',
+      s: 'Every step from a fresh piece of tissue to a finished pink and purple slide: *fixation*, wax, cutting and staining.' },
+    { a: 'tissue', t: 'When tissue antigens and antibodies get along: revisiting the technical aspects of immunohistochemistry, the red, brown, and blue technique', by: 'Ramos-Vara and Miller', j: 'Veterinary Pathology', y: 2014, url: pm(24129895), tag: 'IHC',
+      s: 'How *immunohistochemistry* uses antibodies to turn one protein brown on a slide, and the common ways it goes wrong.' },
+    { a: 'tissue', t: 'QuPath: Open source software for digital pathology image analysis', by: 'Bankhead and others', j: 'Scientific Reports', y: 2017, url: pm(29203879), tag: 'Tool paper',
+      s: 'The paper behind QuPath, the free slide software in your Stand out list. It shows what the program can measure on a scanned slide.' },
+    { a: 'tissue', t: 'Whole Slide Imaging Versus Microscopy for Primary Diagnosis in Surgical Pathology: A Multicenter Blinded Randomized Noninferiority Study of 1992 Cases', by: 'Mukhopadhyay and others', j: 'American Journal of Surgical Pathology', y: 2018, url: pm(28961557), tag: 'Digital slides',
+      s: 'Pathologists diagnosed almost 2,000 cases on a screen and again on a glass microscope. Screen reads were about as accurate, which helped digital pathology get approved.' },
+    { a: 'tissue', t: 'Commentary: Whole-slide Images - Good Enough for Primary Diagnosis?', by: 'Commentary', j: '', y: 2018, url: pm(29531848), tag: 'Debate',
+      s: 'A short reply to the study above that asks what screens might still miss. Read the two together to see both sides.' },
+    { a: 'forensic', t: 'The changing profile of autopsied deaths in the United States, 1972-2007', by: 'Hoyert', j: 'NCHS Data Brief', y: 2011, url: pm(22142988), tag: 'Big picture',
+      s: 'US government numbers showing far fewer *autopsies* than in the 1970s, and that more of them are now done for legal reasons.' },
+    { a: 'forensic', t: 'Forensic entomology: applications and limitations', by: 'Amendt and others', j: 'Forensic Science, Medicine and Pathology', y: 2011, url: pm(21213072), tag: 'Insects',
+      s: 'How the insects found on a body help estimate time of death, and where that method stops being reliable. A good pair with the body temperature paper.' },
+    { a: 'forensic', t: 'Forensic imaging for causal investigation of death', by: 'Review', j: '', y: 2014, url: pm(24644410), tag: 'Imaging',
+      s: 'How CT and MRI scans of a body are used alongside, or sometimes instead of, a traditional *autopsy*.' },
+    { a: 'forensic', t: 'Minimally invasive autopsies: a promise to revive the procedure', by: 'Review', j: '', y: 2017, url: pm(28573111), tag: 'New methods',
+      s: 'Looks at autopsies done with scans and small needle samples, which some families accept more easily than a full autopsy.' },
+    { a: 'forensic', t: 'Two decades of autopsy-detected diagnostic errors in Japan', by: 'Japanese study', j: '', y: 2025, url: pm(40211933), tag: 'Why autopsy',
+      s: 'Tracks how often an autopsy finds a diagnosis that was missed while the patient was alive, one of the strongest reasons autopsies still matter.' }
   ];
   var GAPS = [
-    { a: 'cancer', q: 'Why are some cancers found later in rural towns than in cities?', how: 'Compare stage at diagnosis for Fresno County with the rest of California using public California Cancer Registry numbers.', from: 39141060 },
+    { a: 'cancer', q: 'Why are some cancers found later in rural towns than in cities?', how: 'Compare *stage at diagnosis* for Fresno County with the rest of California using public California Cancer Registry numbers.', from: 39141060 },
     { a: 'cancer', q: 'Can a computer safely set aside normal biopsy slides?', how: 'Read the paper’s list of slides the computer got wrong and sort them by what made them hard.', from: 31308507 },
-    { a: 'cancer', q: 'How do we reach people who skip their Pap or HPV test?', how: 'Write a one-page review of at-home HPV swab studies and who they helped most.', from: 24192252 },
+    { a: 'cancer', q: 'How do we reach people who skip their Pap or HPV test?', how: 'Write a one-page review of *at-home HPV swab* studies and who they helped most.', from: 24192252 },
     { a: 'blood', q: 'Can a phone camera on a microscope read a blood smear as well as a lab?', how: 'In a lab class, photograph the same prepared smear with a phone and the lab scope, then compare what you can see.', from: 'PMC2709430' },
     { a: 'blood', q: 'Now that gene tests name leukemias, what does the blood smear still catch first?', how: 'List the leukemias that are still flagged first by a smear, using the 2016 rulebook.', from: 27069254 },
     { a: 'infect', q: 'Valley fever is common here but often missed. Which test catches it soonest?', how: 'Write a one-page review of the tests labs use today and how long each takes.', from: 'PMC3373055' },
@@ -1117,6 +1266,615 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     { a: 'tissue', q: 'Does stain quality change what a pathologist sees?', how: 'Collect pictures of the same tissue stained by different labs and note how the colors differ.', from: 21356829 },
     { a: 'forensic', q: 'How exact can a time of death estimate really be?', how: 'Read the paper and the reply, then sum up both sides in one page.', from: 'PMC11732859' }
   ];
+  var LEARN = [
+    {
+    "a": "cancer",
+    "lv": "b",
+    "ty": "Site",
+    "n": "NCI: What Is Cancer?",
+    "url": "https://www.cancer.gov/about-cancer/understanding/what-is-cancer",
+    "s": "How normal cells turn into cancer cells, the main tumor types, and the gene changes behind them."
+    },
+    {
+    "a": "cancer",
+    "lv": "b",
+    "ty": "Site",
+    "n": "SEER Training: Cancer as a Disease",
+    "url": "https://training.seer.cancer.gov/disease/cancer/",
+    "s": "*Benign* versus *malignant*, how tumors invade and spread, and why cancer is really over 100 diseases."
+    },
+    {
+    "a": "cancer",
+    "lv": "b",
+    "ty": "Video",
+    "n": "Amoeba Sisters: The Cell Cycle and cancer",
+    "url": "https://www.youtube.com/watch?v=QVCjdNxJreE",
+    "s": "A cartoon walk-through of cell cycle checkpoints and what breaks in cancer."
+    },
+    {
+    "a": "cancer",
+    "lv": "b",
+    "ty": "Site",
+    "n": "NCI Dictionary of Cancer Terms",
+    "url": "https://www.cancer.gov/publications/dictionaries/cancer-terms",
+    "s": "Plain definitions for any cancer word you run into in a paper."
+    },
+    {
+    "a": "cancer",
+    "lv": "i",
+    "ty": "Site",
+    "n": "WebPath, Internet Pathology Laboratory",
+    "url": "https://webpath.med.utah.edu",
+    "s": "Thousands of real pathology images, tutorials and over 1,300 self-test questions."
+    },
+    {
+    "a": "cancer",
+    "lv": "i",
+    "ty": "Site",
+    "n": "SEER Training Modules",
+    "url": "https://training.seer.cancer.gov/index.html",
+    "s": "Organ by organ lessons on breast, lung, colon and more: anatomy, staging and tests."
+    },
+    {
+    "a": "cancer",
+    "lv": "i",
+    "ty": "Video",
+    "n": "Jerad Gardner, MD",
+    "url": "https://www.youtube.com/@JMGardnerMD",
+    "s": "A practicing pathologist teaching real tumor cases on YouTube."
+    },
+    {
+    "a": "cancer",
+    "lv": "i",
+    "ty": "Site",
+    "n": "Human Protein Atlas: Pathology",
+    "url": "https://www.proteinatlas.org/humanproteome/pathology",
+    "s": "Real stained tumor images for 20 cancer types, showing which proteins each tumor makes."
+    },
+    {
+    "a": "cancer",
+    "lv": "i",
+    "ty": "3D",
+    "n": "Mol* Mesoscale Explorer",
+    "url": "https://molstar.org/me",
+    "s": "Zoom from a whole virus or cell part down to single molecules. Best on a computer."
+    },
+    {
+    "a": "cancer",
+    "lv": "e",
+    "ty": "Tool",
+    "n": "cBioPortal for Cancer Genomics",
+    "url": "https://www.cbioportal.org/",
+    "s": "Search gene changes across thousands of real tumors with interactive charts. No login needed."
+    },
+    {
+    "a": "cancer",
+    "lv": "e",
+    "ty": "Site",
+    "n": "NCI PDQ for Health Professionals",
+    "url": "https://cancer.gov/publications/pdq",
+    "s": "The doctor-level summaries on hundreds of cancer topics."
+    },
+    {
+    "a": "cancer",
+    "lv": "e",
+    "ty": "Tool",
+    "n": "COSMIC, Catalogue of Somatic Mutations in Cancer",
+    "url": "https://cancer.sanger.ac.uk/cosmic",
+    "s": "The reference list of cancer gene changes.",
+    "note": "Free academic account needed for downloads"
+    },
+    {
+    "a": "blood",
+    "lv": "b",
+    "ty": "Site",
+    "n": "ASH: Blood Basics",
+    "url": "https://www.hematology.org/education/patients/blood-basics",
+    "s": "Plasma, red cells, white cells and platelets, and what a *CBC* measures."
+    },
+    {
+    "a": "blood",
+    "lv": "b",
+    "ty": "Video",
+    "n": "Crash Course Anatomy: Blood, Part 1",
+    "url": "https://www.youtube.com/watch?v=HQWlcSp9Sls",
+    "s": "A fast, fun overview of what blood is made of."
+    },
+    {
+    "a": "blood",
+    "lv": "b",
+    "ty": "Video",
+    "n": "Khan Academy: What is inside of blood?",
+    "url": "https://www.khanacademy.org/science/health-and-medicine/human-anatomy-and-physiology/introduction-to-hematologic/v/what-s-inside-of-blood",
+    "s": "A short whiteboard lesson on blood parts, good before any smear practice."
+    },
+    {
+    "a": "blood",
+    "lv": "b",
+    "ty": "Site",
+    "n": "ASH Image Bank: Normal blood smear",
+    "url": "https://imagebank.hematology.org/imageset/668/normal-peripheral-blood-smear",
+    "s": "What a normal *blood smear* really looks like under the microscope."
+    },
+    {
+    "a": "blood",
+    "lv": "i",
+    "ty": "Site",
+    "n": "ARUP: Identifying Peripheral Blood Cells",
+    "url": "https://arup.utah.edu/mls/b2b_periph_bc",
+    "s": "Lab tips for telling look-alike blood cells apart on a stained smear."
+    },
+    {
+    "a": "blood",
+    "lv": "i",
+    "ty": "Video",
+    "n": "Ninja Nerd: Red Blood Cell Formation",
+    "url": "https://www.youtube.com/watch?v=kcnOXlr-9Ic",
+    "s": "A detailed lecture on how bone marrow builds red blood cells."
+    },
+    {
+    "a": "blood",
+    "lv": "i",
+    "ty": "Video",
+    "n": "Khan Academy: Leukemia classifications",
+    "url": "https://www.khanacademy.org/science/health-and-medicine/hematologic-system-diseases-2/leukemia/v/leukemia-classifications",
+    "s": "How leukemias are sorted: acute or chronic, myeloid or lymphoid."
+    },
+    {
+    "a": "blood",
+    "lv": "i",
+    "ty": "Site",
+    "n": "ASH Image Bank: Atlas",
+    "url": "https://imagebank.hematology.org/atlas-images",
+    "s": "Over 7,000 checked images of normal and diseased blood and marrow."
+    },
+    {
+    "a": "blood",
+    "lv": "i",
+    "ty": "3D",
+    "n": "RCSB PDB 3D Viewer",
+    "url": "https://www.rcsb.org/3D-view",
+    "s": "Spin a real *hemoglobin* molecule, the protein that fills every red cell."
+    },
+    {
+    "a": "blood",
+    "lv": "e",
+    "ty": "Site",
+    "n": "PathologyOutlines: Hematology",
+    "url": "https://www.pathologyoutlines.com/hematology.html",
+    "s": "The chapter pathology residents use for blood disorders."
+    },
+    {
+    "a": "blood",
+    "lv": "e",
+    "ty": "Site",
+    "n": "PathologyOutlines: Bone marrow tumors",
+    "url": "https://www.pathologyoutlines.com/bonemarrowneoplastic.html",
+    "s": "Resident-level pages on leukemias and other marrow cancers."
+    },
+    {
+    "a": "blood",
+    "lv": "e",
+    "ty": "Tool",
+    "n": "Duke Virtual Slide Collection",
+    "url": "https://histology.oit.duke.edu/SlideIndex.html",
+    "s": "Zoomable whole slides in the browser, including blood and bone marrow."
+    },
+    {
+    "a": "infect",
+    "lv": "b",
+    "ty": "Site",
+    "n": "CDC: About Valley Fever",
+    "url": "https://www.cdc.gov/valley-fever/about/",
+    "s": "The soil fungus behind *valley fever*, where it lives, and who gets sick."
+    },
+    {
+    "a": "infect",
+    "lv": "b",
+    "ty": "Site",
+    "n": "Kern Medical Valley Fever Institute",
+    "url": "https://www.kernmedical.com/programs/valley-fever-institute/education-awareness/",
+    "s": "A Central Valley program with English and Spanish flyers and community talks."
+    },
+    {
+    "a": "infect",
+    "lv": "b",
+    "ty": "Video",
+    "n": "Amoeba Sisters: Bacteria",
+    "url": "https://www.youtube.com/watch?v=ORB866QSGv8",
+    "s": "How bacteria are built, how they grow and why they matter in disease."
+    },
+    {
+    "a": "infect",
+    "lv": "b",
+    "ty": "Video",
+    "n": "Amoeba Sisters: Viruses",
+    "url": "https://www.youtube.com/watch?v=8FqlTslU22s",
+    "s": "Virus structure and how viruses get into cells."
+    },
+    {
+    "a": "infect",
+    "lv": "i",
+    "ty": "Site",
+    "n": "UC Davis Center for Valley Fever",
+    "url": "https://health.ucdavis.edu/valley-fever/",
+    "s": "Clinical info and research, and it lists a valley fever symposium in Fresno in April 2027."
+    },
+    {
+    "a": "infect",
+    "lv": "i",
+    "ty": "Site",
+    "n": "OpenStax Microbiology",
+    "url": "https://openstax.org/books/microbiology/pages/preface",
+    "s": "A full free college microbiology textbook, fungi and infections included."
+    },
+    {
+    "a": "infect",
+    "lv": "i",
+    "ty": "Video",
+    "n": "Mayo Clinic Labs: Coccidioidomycosis",
+    "url": "https://www.youtube.com/watch?v=C8vwxm5GJwU",
+    "s": "A lab expert explains the valley fever fungus and how labs grow it."
+    },
+    {
+    "a": "infect",
+    "lv": "i",
+    "ty": "Tool",
+    "n": "CDC Public Health Image Library",
+    "url": "https://wwwn.cdc.gov/PHIL/About.aspx",
+    "s": "The CDC library of germ and disease pictures to study from."
+    },
+    {
+    "a": "infect",
+    "lv": "i",
+    "ty": "3D",
+    "n": "PDB-101 Molecule of the Month",
+    "url": "https://pdb101.rcsb.org/",
+    "s": "Virus and bacteria parts shown molecule by molecule, with 3D views."
+    },
+    {
+    "a": "infect",
+    "lv": "e",
+    "ty": "Site",
+    "n": "University of Adelaide: Dimorphic fungi",
+    "url": "https://mycology.adelaide.edu.au/descriptions/dimorphic-pathogens",
+    "s": "How labs identify *Coccidioides*: *spherules* in tissue and what it looks like in culture."
+    },
+    {
+    "a": "infect",
+    "lv": "e",
+    "ty": "Site",
+    "n": "CDC DPDx",
+    "url": "https://www.cdc.gov/dpdx/index.html",
+    "s": "The CDC reference for spotting parasites in blood, stool and tissue."
+    },
+    {
+    "a": "infect",
+    "lv": "e",
+    "ty": "Video",
+    "n": "Updates in Coccidioidomycosis, Fariba Donovan, MD",
+    "url": "https://www.youtube.com/watch?v=EZkMZQnGly0",
+    "s": "A doctor lecture on current valley fever diagnosis and research."
+    },
+    {
+    "a": "infect",
+    "lv": "e",
+    "ty": "Tool",
+    "n": "NCBI BLAST",
+    "url": "https://blast.ncbi.nlm.nih.gov",
+    "s": "Match a DNA sequence to known organisms, the way labs name a germ."
+    },
+    {
+    "a": "dna",
+    "lv": "b",
+    "ty": "Site",
+    "n": "Learn.Genetics, University of Utah",
+    "url": "https://learn.genetics.utah.edu/",
+    "s": "Interactive genetics basics and virtual labs."
+    },
+    {
+    "a": "dna",
+    "lv": "b",
+    "ty": "Video",
+    "n": "Crash Course Biology: DNA Structure and Replication",
+    "url": "https://www.youtube.com/watch?v=8kK2zwjRV0M",
+    "s": "The double helix and how cells copy it."
+    },
+    {
+    "a": "dna",
+    "lv": "b",
+    "ty": "Video",
+    "n": "Amoeba Sisters: PCR",
+    "url": "https://www.youtube.com/watch?v=a5jmdh9AnS4",
+    "s": "How *PCR* copies DNA, the step behind most gene and infection tests."
+    },
+    {
+    "a": "dna",
+    "lv": "b",
+    "ty": "Site",
+    "n": "NHGRI Talking Glossary",
+    "url": "https://www.genome.gov/genetics-glossary",
+    "s": "About 250 genetics words explained by NIH scientists, also in Spanish."
+    },
+    {
+    "a": "dna",
+    "lv": "i",
+    "ty": "Site",
+    "n": "MedlinePlus: What is genetic testing?",
+    "url": "https://medlineplus.gov/genetics/understanding/testing",
+    "s": "Kinds of gene tests, how to read results, and tumor DNA testing."
+    },
+    {
+    "a": "dna",
+    "lv": "i",
+    "ty": "Video",
+    "n": "Illumina: Sequencing by Synthesis",
+    "url": "https://www.youtube.com/watch?v=fCd6B5HRaZ8",
+    "s": "An animation of how modern DNA sequencing machines work."
+    },
+    {
+    "a": "dna",
+    "lv": "i",
+    "ty": "Site",
+    "n": "HHMI BioInteractive",
+    "url": "https://www.biointeractive.org/",
+    "s": "Free animations, virtual labs and short films on genetics and cancer."
+    },
+    {
+    "a": "dna",
+    "lv": "i",
+    "ty": "3D",
+    "n": "RCSB PDB 3D Viewer",
+    "url": "https://www.rcsb.org/3D-view",
+    "s": "Turn a real DNA double helix and the proteins that read it in 3D."
+    },
+    {
+    "a": "dna",
+    "lv": "e",
+    "ty": "Tool",
+    "n": "ClinVar",
+    "url": "https://www.ncbi.nlm.nih.gov/clinvar/",
+    "s": "Look up whether a gene change is called harmless or disease-causing."
+    },
+    {
+    "a": "dna",
+    "lv": "e",
+    "ty": "Tool",
+    "n": "gnomAD Browser",
+    "url": "https://gnomad.broadinstitute.org/",
+    "s": "See how common a gene change is in healthy people, key to reading a result."
+    },
+    {
+    "a": "dna",
+    "lv": "e",
+    "ty": "Tool",
+    "n": "UCSC Genome Browser",
+    "url": "https://genome.ucsc.edu/",
+    "s": "Browse the whole human genome with its genes and variants."
+    },
+    {
+    "a": "tissue",
+    "lv": "b",
+    "ty": "Site",
+    "n": "Leeds Histology Guide",
+    "url": "https://histology.leeds.ac.uk/",
+    "s": "Tissue types with labeled slides, a virtual microscope and quizzes."
+    },
+    {
+    "a": "tissue",
+    "lv": "b",
+    "ty": "Video",
+    "n": "Crash Course Anatomy: Tissues, Part 1",
+    "url": "https://www.youtube.com/watch?v=i5tR3csCWYo",
+    "s": "The four basic tissue types and how histology shows them."
+    },
+    {
+    "a": "tissue",
+    "lv": "b",
+    "ty": "Video",
+    "n": "Shotgun Histology",
+    "url": "https://www.youtube.com/playlist?list=PLF2DAE8798FD4F249",
+    "s": "27 short narrated tours of real slides, organ by organ."
+    },
+    {
+    "a": "tissue",
+    "lv": "b",
+    "ty": "Site",
+    "n": "Leica: Routine and Special Staining",
+    "url": "https://www.leicabiosystems.com/knowledge-pathway/an-introduction-to-routine-and-special-staining/",
+    "s": "Why every slide gets *H&E*, and when special stains are added."
+    },
+    {
+    "a": "tissue",
+    "lv": "i",
+    "ty": "Tool",
+    "n": "Histology Guide, University of Minnesota",
+    "url": "https://histologyguide.com/",
+    "s": "A virtual slide box, image gallery and quizzes."
+    },
+    {
+    "a": "tissue",
+    "lv": "i",
+    "ty": "Site",
+    "n": "Michigan Histology",
+    "url": "https://histology.medicine.umich.edu/",
+    "s": "A free histology lab manual plus review apps."
+    },
+    {
+    "a": "tissue",
+    "lv": "i",
+    "ty": "Video",
+    "n": "How an H&E slide is stained",
+    "url": "https://www.youtube.com/watch?v=1tqA_gWUjkM",
+    "s": "A step by step demo of the pink and purple stain being done."
+    },
+    {
+    "a": "tissue",
+    "lv": "i",
+    "ty": "3D",
+    "n": "Histology Guide: Electron Microscopy Atlas",
+    "url": "https://histologyguide.com/EM-atlas/EM-atlas.html",
+    "s": "Electron microscope pictures of the organelles inside real tissue cells."
+    },
+    {
+    "a": "tissue",
+    "lv": "e",
+    "ty": "Tool",
+    "n": "Leeds Virtual Pathology",
+    "url": "https://elearning.virtualpathology.leeds.ac.uk/",
+    "s": "Whole-slide pathology collections by organ: breast, kidney, skin, cytology."
+    },
+    {
+    "a": "tissue",
+    "lv": "e",
+    "ty": "Site",
+    "n": "Libre Pathology: Basics",
+    "url": "https://librepathology.org/wiki/Basics",
+    "s": "How pathologists read H&E and spot the features of cancer."
+    },
+    {
+    "a": "tissue",
+    "lv": "e",
+    "ty": "Site",
+    "n": "PathologyOutlines: Stains",
+    "url": "https://www.pathologyoutlines.com/stains.html",
+    "s": "The reference page for every stain and antibody pathologists order."
+    },
+    {
+    "a": "tissue",
+    "lv": "e",
+    "ty": "Tool",
+    "n": "QuPath",
+    "url": "https://qupath.github.io/",
+    "s": "The free slide analysis software real labs use.",
+    "note": "Mac or Windows only, not iPad"
+    },
+    {
+    "a": "forensic",
+    "lv": "b",
+    "ty": "Site",
+    "n": "NIJ: Overview of Forensic Pathology",
+    "url": "https://nij.ojp.gov/topics/forensics/overview-forensic-pathology",
+    "s": "What forensic pathologists do: cause and manner of death, wounds and evidence."
+    },
+    {
+    "a": "forensic",
+    "lv": "b",
+    "ty": "Site",
+    "n": "AMA: Shadowing a forensic pathologist",
+    "url": "https://www.ama-assn.org/medical-students/preparing-residency/what-it-s-forensic-pathology-shadowing-dr-gill",
+    "s": "A medical examiner’s real day, the hard parts and career advice."
+    },
+    {
+    "a": "forensic",
+    "lv": "b",
+    "ty": "Site",
+    "n": "A Simplified Guide to Forensic Science",
+    "url": "https://forensicsciencesimplified.com/",
+    "s": "Plain guides to DNA, toxicology and other evidence."
+    },
+    {
+    "a": "forensic",
+    "lv": "i",
+    "ty": "Site",
+    "n": "National Association of Medical Examiners",
+    "url": "https://thename.org/",
+    "s": "Student pages, a case of the week and the guide to manner of death."
+    },
+    {
+    "a": "forensic",
+    "lv": "i",
+    "ty": "Site",
+    "n": "NAME Student Webinar Series",
+    "url": "https://www.thename.org/student-trainee-webinar-series",
+    "s": "Recorded forensic pathology talks made for students."
+    },
+    {
+    "a": "forensic",
+    "lv": "i",
+    "ty": "Video",
+    "n": "Knife After Death, Dr. Darin Wolfe",
+    "url": "https://www.youtube.com/@knifeafterdeath.drwolfe",
+    "s": "A forensic pathologist explains autopsy findings.",
+    "note": "Graphic autopsy images"
+    },
+    {
+    "a": "forensic",
+    "lv": "i",
+    "ty": "Video",
+    "n": "Forensic Pathology: Introduction to Autopsies",
+    "url": "https://www.youtube.com/watch?v=P3Qbv33f1Xg",
+    "s": "A full lecture on how and why forensic autopsies are done."
+    },
+    {
+    "a": "forensic",
+    "lv": "e",
+    "ty": "Site",
+    "n": "WebPath: Forensic Pathology",
+    "url": "https://webpath.med.utah.edu/FORHTML/FORIDX.html",
+    "s": "Image sets of injuries, drowning and poisoning.",
+    "note": "Very graphic"
+    },
+    {
+    "a": "forensic",
+    "lv": "e",
+    "ty": "Site",
+    "n": "PathologyOutlines: Autopsy and forensics",
+    "url": "https://www.pathologyoutlines.com/autopsy.html",
+    "s": "The resident-level chapter on autopsy technique and findings."
+    },
+    {
+    "a": "forensic",
+    "lv": "e",
+    "ty": "Site",
+    "n": "CDC: Death certification handbooks",
+    "url": "https://www.cdc.gov/nchs/nvss/handbooks-and-guides.htm",
+    "s": "The official guides on writing cause of death, a core forensic skill."
+    }
+    ];
+  var DEEP = [
+    {
+    "ty": "3D",
+    "n": "CZ CryoET Data Portal",
+    "url": "https://cryoetdataportal.czscience.com/",
+    "s": "Over 60,000 real 3D scans from inside cells, down to single protein machines.",
+    "note": "Expert, research data. Best on a computer"
+    },
+    {
+    "ty": "3D",
+    "n": "OpenOrganelle, HHMI Janelia",
+    "url": "https://openorganelle.janelia.org/",
+    "s": "Whole cells imaged by electron microscope with up to 35 kinds of organelles colored in. Peel through them layer by layer.",
+    "note": "Expert, large files. Best on a computer"
+    },
+    {
+    "ty": "3D",
+    "n": "Mol* Mesoscale Explorer",
+    "url": "https://molstar.org/me",
+    "s": "Whole viruses and bacteria built molecule by molecule. Zoom from the full cell to single atoms.",
+    "note": "Can be heavy on an iPad"
+    },
+    {
+    "ty": "3D",
+    "n": "Allen Cell Explorer: Visual Guide to Human Cells",
+    "url": "https://www.allencell.org/visual-guide-to-human-cells.html",
+    "s": "Rotate real 3D human cells and turn each organelle on or off, through every stage of cell division.",
+    "note": "Works on iPad. Hover labels need a mouse"
+    },
+    {
+    "ty": "3D",
+    "n": "Allen Integrated Mitotic Stem Cell",
+    "url": "https://imsc.allencell.org/",
+    "s": "A whole-cell 3D view of a human cell dividing, built from real microscope data."
+    },
+    {
+    "ty": "3D",
+    "n": "HudsonAlpha iCell",
+    "url": "https://icell.hudsonalpha.org/",
+    "s": "Tap any organelle inside a 3D animal, plant or bacterial cell to see what it does. The easiest place to start.",
+    "note": "Free iPad app too"
+    }
+    ];
   var QUICK = {
     cancer: ['Pap smear cytology', 'breast biopsy pathology', 'lymphoma diagnosis', 'rural cancer stage California'],
     blood: ['blood smear morphology', 'leukemia flow cytometry', 'sickle cell smear'],
@@ -1134,18 +1892,33 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
         (a.id === 'cancer' ? ' <span class="tiny">Main</span>' : a.opt ? ' <span class="tiny">Optional</span>' : '') + '</button>';
     }).join('');
     var A = AREAS.filter(function (a) { return a.id === area; })[0];
-    $('areaBlurb').textContent = A.blurb;
+    $('areaBlurb').innerHTML = mk(A.blurb);
     $('paperList').innerHTML = PAPERS.filter(function (p) { return p.a === area; }).map(function (p) {
-      return '<li class="card paper t-' + p.a + '"><span class="tag">' + esc(p.tag) + '</span><h3>' + esc(p.t) + '</h3><span class="meta">' + esc(p.by) + (p.j ? ' &middot; ' + esc(p.j) : '') + ' &middot; ' + p.y + '</span><p>' + esc(p.s) + '</p><a class="btn sm" href="' + p.url + '" target="_blank" rel="noopener">Read it</a></li>';
+      return '<li class="card paper t-' + p.a + '"><span class="tag">' + esc(p.tag) + '</span><h3>' + esc(p.t) + '</h3><span class="meta">' + esc(p.by) + (p.j ? ' &middot; ' + esc(p.j) : '') + (p.y ? ' &middot; ' + p.y : '') + '</span><p>' + mk(p.s) + '</p><a class="btn sm" href="' + p.url + '" target="_blank" rel="noopener">Read it</a></li>';
     }).join('');
     $('gapList').innerHTML = GAPS.filter(function (g) { return g.a === area; }).map(function (g) {
       var p = paperFor(g.from);
-      return '<li class="t-' + g.a + '"><span class="qmark">?</span><div><div class="q">' + esc(g.q) + '</div><div class="how">' + esc(g.how) + '</div>' +
+      return '<li class="t-' + g.a + '"><span class="qmark">?</span><div><div class="q">' + esc(g.q) + '</div><div class="how">' + mk(g.how) + '</div>' +
         (p ? '<div class="from">Start from: <a href="' + p.url + '" target="_blank" rel="noopener">' + esc(p.t) + '</a></div>' : '') + '</div></li>';
     }).join('');
+    renderLearn();
     $('quickQ').innerHTML = (QUICK[area] || []).map(function (q) { return '<button type="button" class="chip" data-q="' + esc(q) + '">' + esc(q) + '</button>'; }).join('');
   }
-  $('areaChips').addEventListener('click', function (e) { var c = e.target.closest('[data-area]'); if (!c) return; area = c.dataset.area; renderPapers(); });
+  /* Learn: resources sorted by level for the open topic, plus deep 3D cell models for every topic */
+  var LV = [['b', 'Beginner', 'Start here'], ['i', 'Intermediate', 'Once the basics click'], ['e', 'Expert', 'What pathologists use']];
+  var TYI = { Site: 'book', Video: 'play', Tool: 'scope', '3D': 'cube' };
+  function resLi(r) {
+    return '<li><span class="ty">' + I[TYI[r.ty] || 'book'] + esc(r.ty === '3D' ? '3D model' : r.ty) + '</span><a href="' + r.url + '" target="_blank" rel="noopener">' + esc(r.n) + '</a><p>' + mk(r.s) + '</p>' + (r.note ? '<span class="note">' + esc(r.note) + '</span>' : '') + '</li>';
+  }
+  function renderLearn() {
+    $('deep3d').innerHTML = DEEP.length ? '<div class="card deep t-' + area + '"><div class="row"><h3 class="h3">Look inside a cell</h3><span class="k">Deepest first</span></div><ul class="res">' + DEEP.map(resLi).join('') + '</ul></div>' : '';
+    $('learnList').innerHTML = LV.map(function (L) {
+      var rs = LEARN.filter(function (r) { return r.a === area && r.lv === L[0]; });
+      if (!rs.length) return '';
+      return '<div class="card lvl t-' + area + '"><h3>' + L[1] + ' <small>' + L[2] + '</small></h3><ul class="res">' + rs.map(resLi).join('') + '</ul></div>';
+    }).join('');
+  }
+  $('areaChips').addEventListener('click', function (e) { var c = e.target.closest('[data-area]'); if (!c) return; area = c.dataset.area; renderPapers(); setDye(); });
 
   /* PubMed search through NCBI E-utilities. Where the page can't reach it, it hands off to pubmed.gov. */
   var EU = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/';
@@ -1190,15 +1963,15 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   /* Slide of the day: a real slide and one quick question, a new one each day */
   var SLIDES = [
     { img: 'blood2', topic: 'blood', area: 'Blood cells', q: 'What white cell is this?', alt: 'A white blood cell with a nucleus in several lobes, among red blood cells',
-      opts: ['Lymphocyte', 'Neutrophil', 'Eosinophil'], ok: 1, a: 'Neutrophil. Its nucleus has 3 to 5 lobes, and it is the first white cell to reach an infection.' },
+      opts: ['Lymphocyte', 'Neutrophil', 'Eosinophil'], ok: 1, a: '*Neutrophil*. Its nucleus has 3 to 5 lobes, and it is the first white cell to reach an infection.' },
     { img: 'blood', topic: 'blood', area: 'Blood cells', q: 'Which cell has the bright red-orange grains?', alt: 'Blood smear with a white cell full of red-orange grains',
-      opts: ['Neutrophil', 'Eosinophil', 'Platelet'], ok: 1, a: 'Eosinophil. Its grains soak up the pink eosin stain, and it is the cell your body sends after parasites and allergies.' },
+      opts: ['Neutrophil', 'Eosinophil', 'Platelet'], ok: 1, a: '*Eosinophil*. Its grains soak up the pink *eosin* stain, and it is the cell your body sends after parasites and allergies.' },
     { img: 'skin_sq', topic: 'tissue', area: 'Tissue basics', q: 'What is the purple band along the top?', alt: 'Skin stained pink and purple with a darker purple band on top',
-      opts: ['Dermis', 'Epidermis', 'Fat'], ok: 1, a: 'Epidermis. Its cells are packed tight, so lots of purple nuclei show. The pink below is the dermis, mostly collagen.' },
+      opts: ['Dermis', 'Epidermis', 'Fat'], ok: 1, a: '*Epidermis*. Its cells are packed tight, so lots of purple nuclei show. The pink below is the *dermis*, mostly *collagen*.' },
     { img: 'ihc', topic: 'tissue', area: 'Tissue basics', q: 'What does the brown color show?', alt: 'Colon glands with brown and blue staining',
-      opts: ['One protein', 'Dead tissue', 'Blood'], ok: 0, a: 'One protein. This is immunohistochemistry: an antibody sticks to a single protein and turns it brown, and blue marks the nuclei.' },
+      opts: ['One protein', 'Dead tissue', 'Blood'], ok: 0, a: 'One protein. This is *immunohistochemistry*: an antibody sticks to a single protein and turns it brown, and blue marks the nuclei.' },
     { img: 'pcam', topic: 'cancer', area: 'Cancer', q: 'What do the green boxes mark?', alt: 'Small squares of lymph node tissue, some outlined in green',
-      opts: ['Healthy tissue', 'Tumor', 'Stain mistakes'], ok: 1, a: 'Tumor. Each boxed patch has cancer cells that spread to the lymph node. Notice how dark and crowded the nuclei are.' }
+      opts: ['Healthy tissue', 'Tumor', 'Stain mistakes'], ok: 1, a: '*Tumor*. Each boxed patch has *cancer cells* that spread to the lymph node. Notice how dark and crowded the nuclei are.' }
   ];
   var dayN = Math.floor((Date.now() - new Date().getTimezoneOffset() * 6e4) / 864e5);
   var sl = SLIDES[dayN % SLIDES.length];
@@ -1206,7 +1979,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   $('sotd').innerHTML = '<div class="k"><span class="dot"></span>Slide of the day &middot; ' + esc(sl.area) + '</div><p class="q">' + esc(sl.q) + '</p>' +
     '<div class="scope"><img alt="' + esc(sl.alt) + '" src="' + IMG[sl.img] + '"></div>' +
     '<div class="ans" id="ans">' + sl.opts.map(function (o, i) { return '<button type="button" data-i="' + i + '">' + esc(o) + '</button>'; }).join('') + '</div>' +
-    '<p class="reveal" id="reveal" hidden>' + esc(sl.a) + '</p>';
+    '<p class="reveal" id="reveal" hidden>' + mk(sl.a) + '</p>';
   $('ans').addEventListener('click', function (e) {
     var b = e.target.closest('button'); if (!b) return;
     [].forEach.call($('ans').querySelectorAll('button'), function (x) { var ok = +x.dataset.i === sl.ok; x.classList.toggle('right', ok); x.classList.toggle('wrong', !ok); });
@@ -1218,7 +1991,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     var pick = COURSES.fcc.filter(function (c) { return statusOf(c[0]) === 'now'; })[0] || list.filter(function (c) { return statusOf(c[0]) === 'now'; })[0] || COURSES.fcc.filter(function (c) { return statusOf(c[0]) === 'next'; })[0];
     if (pick) {
       var sj = subjOf(pick[1], pick[2]), st = statusOf(pick[0]);
-      $('nextStep').innerHTML = '<div class="next t-' + sj + '"><span class="code">' + esc(pick[1]) + '</span><div><b>' + esc(pick[2]) + '</b><small>Next step &middot; ' + esc(WHY[sj]) + '</small></div><span class="st">' + LABEL[st] + '</span></div>';
+      $('nextStep').innerHTML = '<div class="next t-' + sj + '"><span class="code">' + esc(pick[1]) + '</span><div><b>' + esc(pick[2]) + '</b><small>Next step &middot; ' + mk(WHY[sj]) + '</small></div><span class="st">' + LABEL[st] + '</span></div>';
     } else $('nextStep').innerHTML = '<div class="next"><span></span><div><b>Every Fresno City class is done.</b><small>Next step &middot; the Transfer list.</small></div><span></span></div>';
     $('nextMeter').innerHTML = '<i style="width:' + (t.done / n * 100) + '%;background:var(--good)"></i><i style="width:' + (t.now / n * 100) + '%;background:color-mix(in srgb,var(--acc) 55%,transparent)"></i>';
     $('nextLeft').textContent = t.done + ' done, ' + t.now + ' now, ' + t.next + ' coming up at Fresno City';
@@ -1236,7 +2009,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     var days = null;
     if (mcat.testDate) { var d = new Date(mcat.testDate + 'T12:00:00'), t = new Date(); t.setHours(12, 0, 0, 0); days = Math.round((d - t) / 864e5); }
     var hrs = +mcat.studyHours || 0, pct = Math.min(100, hrs / 400 * 100);
-    $('mcatCard').innerHTML = '<h3 class="h3">MCAT prep</h3><p class="sub">Target 511 or higher. That is about 128 on each of the four sections.</p>' +
+    $('mcatCard').innerHTML = '<h3 class="h3">MCAT prep</h3><p class="sub">Target <b class="kt">511 or higher</b>. That is about <b class="kt">128 on each</b> of the four sections.</p>' +
       '<div class="big">' + (days === null ? 'Set a date' : days >= 0 ? days + '<small>days until your test</small>' : 'Date passed<small>set a new one</small>') + '</div>' +
       '<div class="fields"><label>Test date<input class="inp" type="date" id="mDate" value="' + esc(mcat.testDate) + '"></label><label>Target score<input class="inp" id="mTarget" inputmode="numeric" value="' + esc(mcat.targetScore) + '"></label></div>' +
       '<div class="stepper"><button type="button" id="mMinus" aria-label="One less study hour">&minus;</button><b id="mHrs">' + hrs + '</b><button type="button" id="mPlus" aria-label="One more study hour">+</button><span>study hours of 400</span></div>' +
@@ -1286,19 +2059,19 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 
   /* ================= STAND OUT ================= */
   var CLIN = [
-    { t: 'Shadow a pathologist', s: 'Most pre-meds shadow surgeons. Shadowing a pathologist shows a clear goal. Email the pathology department chair at Community Regional Medical Center or UCSF Fresno and ask to shadow for a few weeks.' },
+    { t: 'Shadow a pathologist', s: 'Most pre-meds shadow surgeons. Shadowing a pathologist shows a clear goal. Follow the step-by-step guide above.' },
     { t: 'Hospital volunteer, 80 to 100 hours', s: 'Clovis Community and Saint Agnes run volunteer programs. Apply early, since lists fill up.' },
     { t: 'Clinical lab or phlebotomy work', s: 'Drawing blood and handling samples is the pathologist’s world. Even basic lab work counts.' },
     { t: 'Medical scribe', s: 'Optional but strong. Scribing for a doctor is deep clinical exposure, and many jobs are part time.' },
-    { t: 'Volunteer at a blood donation center', n: 1, s: 'Blood banking is run by pathologists. Helping at donor drives puts you right next to it.' },
-    { t: 'Ask for a lab tour', n: 1, s: 'Ask a pathologist you shadow to show you histology, where tissue becomes slides, and the lab where blood is tested.' },
+    { t: 'Volunteer at a blood donation center', n: 1, s: '*Blood banking* is run by pathologists. Helping at donor drives puts you right next to it.' },
+    { t: 'Ask for a lab tour', n: 1, s: 'Ask a pathologist you shadow to show you *histology*, where tissue becomes slides, and the lab where blood is tested.' },
     { t: 'Sit in on a tumor board', n: 1, s: 'If a pathologist invites you, watch the meeting where doctors plan cancer care around the slides.' }
   ];
   var RES = [
     { t: 'Join a research lab after you transfer', s: 'In your first month, email 5 to 10 professors in biology, biochemistry or pathology. Keep it short: who you are, why their work, and ask to meet.' },
-    { t: 'Apply to summer research programs', s: 'REU and SURF programs pay you to do research over the summer. Deadlines are usually in February.' },
-    { t: 'Aim for a poster', s: 'A poster at a campus research fair counts. A published paper is a bonus, not a must.' },
-    { t: 'Pick cancer or pathology labs', s: 'Tumor biology, histology, immunology and lab diagnostics all line up with your goal.' },
+    { t: 'Apply to summer research programs', s: '*REU* and *SURF* programs pay you to do research over the summer. Deadlines are usually in February.' },
+    { t: 'Aim for a poster', s: 'A *poster* at a campus research fair counts. A published paper is a bonus, not a must.' },
+    { t: 'Pick cancer or pathology labs', s: '*Tumor biology*, *histology*, *immunology* and *lab diagnostics* all line up with your goal.' },
     { t: 'Learn QuPath', n: 1, s: 'Free software researchers use to view and measure scanned slides. Knowing it is a skill a lab can put to work right away.' },
     { t: 'Look up every slide on Pathology Outlines', n: 1, s: 'A free reference site pathologists use every day. Read its page for each slide you study in Projects.' },
     { t: 'Turn an open question into a project', n: 1, s: 'Pick one from Papers and ask a professor if it could become a small study.', go: 'papers/p-gaps' }
@@ -1308,14 +2081,14 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       ['apa1', 'Join LMSA, the Latino Medical Student Association', 'Latina and Latino doctors and students, and a place to lead early.'],
       ['apa2', 'Shadow a pathologist, not just any doctor', 'It signals a focused, specific goal.'],
       ['apa3', 'Volunteer in Spanish-language health outreach', 'Free clinics and health fairs here need Spanish speakers. Real service and a strong story.'],
-      ['apa4', 'Look into UC Davis AvenueM', 'A UC Davis medical school pathway focused on the San Joaquin Valley. Check early whether it fits your path.'],
+      ['apa4', 'Look into SJV-MedBridge at UCSF Fresno', 'A program for Valley community college pre-meds with mentors and clinical exposure. Links are in the Shadow guide.'],
       ['apa10', 'Start a personal statement journal now', 'Write moments down as they happen, like the first time a slide clicked.'],
       ['apa11', 'Own your community college story', 'Mission-driven schools value students who did a lot with less.']
     ]],
     ['Strong', [
       ['apa5', 'Get a phlebotomy certificate', 'Hands-on blood and specimen work, often a one-semester program.'],
-      ['apa6', 'Follow CAP, the College of American Pathologists', 'Read CAP Today and look for student options and virtual events.'],
-      ['apa7', 'Present at an undergraduate research fair', 'Once you are in a lab, ask your mentor about a poster.'],
+      ['apa6', 'Follow CAP, the College of American Pathologists', 'Read *CAP Today* and look for student options and virtual events.'],
+      ['apa7', 'Present at an undergraduate research fair', 'Once you are in a lab, ask your mentor about a *poster*.'],
       ['sp_amsa', 'Join a pre-med club or AMSA chapter', 'Leadership roles, MCAT help and mentors.'],
       ['sp_ps', 'Write a specific personal statement', 'Why pathology, told through your own path and the moment it clicked.'],
       ['sp_slides', 'Keep a slide journal', 'One line for every slide you study: organ, stain, what you saw. It turns into interview stories.', 1]
@@ -1326,7 +2099,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       ['sp_svc', 'Community service, 40 to 80 hours', 'Health-related is best, like free clinics.'],
       ['sp_list', 'Know your California med school list', 'Mix target and reach schools, and apply broadly.'],
       ['sp_do', 'Apply to DO schools too', 'DO pathologists train and practice alongside MD pathologists. Applying to both widens your chances.'],
-      ['apa12', 'Use AAMC fee waivers if you qualify', 'Applications add up fast, and waivers can cover much of the cost.']
+      ['apa12', 'Use AAMC fee waivers if you qualify', 'Applications add up fast, and *waivers* can cover much of the cost.']
     ]]
   ];
   var apart = load('susie-apart', {}) || {};
@@ -1334,13 +2107,13 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   var exp = load('susie-exp', null) || {};
   HCAT.forEach(function (h) { if (!Array.isArray(exp[h[0]])) exp[h[0]] = []; });
   var TL = [
-    ['At Fresno City', 'Check ASSIST.org every term so each class transfers to Fresno State or Berkeley.'],
+    ['At Fresno City', 'Check *ASSIST.org* every term so each class transfers to Fresno State or Berkeley.'],
     ['Right after you transfer', 'Join a research lab and start hospital or lab volunteering.'],
-    ['About 6 months before the MCAT', 'Start focused prep with official AAMC practice material.'],
-    ['MCAT', 'Aim for 511 or higher, with room for a retake before applications open.'],
-    ['Early June of the year you apply', 'Submit the AMCAS primary application as early as you can.'],
+    ['About 6 months before the MCAT', 'Start focused prep with *official AAMC practice* material.'],
+    ['MCAT', 'Aim for *511 or higher*, with room for a retake before applications open.'],
+    ['Early June of the year you apply', 'Submit the *AMCAS primary application* as early as you can.'],
     ['Summer to fall', 'Answer each school’s secondary essays within about 2 weeks.'],
-    ['Fall to winter', 'Interviews. Many schools use the MMI format, so practice it.'],
+    ['Fall to winter', 'Interviews. Many schools use the *MMI format*, so practice it.'],
     ['Spring', 'Choose your medical school.']
   ];
   var LOR = [['l1', 'Science professor', 'Go to office hours every week so they know you.'], ['l2', 'Second science professor', 'Ask at least 3 months before you need it.'], ['l3', 'Pathologist you shadowed or your research mentor', 'Give them your resume and a statement draft.']];
@@ -1351,8 +2124,8 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     store('susie-path-lor', lor);
   }
 
-  function ideaHTML(x) { return '<li><b>' + esc(x.t) + (x.n ? '<span class="new">New</span>' : '') + '</b><p>' + esc(x.s) + (x.go ? ' <a href="#' + x.go + '">Open questions</a>' : '') + '</p></li>'; }
-  function tickHTML(id, t, s, on, isNew, key) { return '<li><label><input type="checkbox" data-' + key + '="' + id + '"' + (on ? ' checked' : '') + '><span><b>' + esc(t) + (isNew ? '<span class="new">New</span>' : '') + '</b><small>' + esc(s) + '</small></span></label></li>'; }
+  function ideaHTML(x) { return '<li><b>' + esc(x.t) + (x.n ? '<span class="new">New</span>' : '') + '</b><p>' + mk(x.s) + (x.go ? ' <a href="#' + x.go + '">Open questions</a>' : '') + '</p></li>'; }
+  function tickHTML(id, t, s, on, isNew, key) { return '<li><label><input type="checkbox" data-' + key + '="' + id + '"' + (on ? ' checked' : '') + '><span><b>' + esc(t) + (isNew ? '<span class="new">New</span>' : '') + '</b><small>' + mk(s) + '</small></span></label></li>'; }
   function hoursOf(k) { return exp[k].reduce(function (s, e) { return s + (parseFloat(e.hours) || 0); }, 0); }
   function hoursTiles() {
     return HCAT.map(function (h) {
@@ -1360,12 +2133,169 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       return '<div class="card"><b>' + (Math.round(v * 10) / 10) + '<small> of ' + h[2] + '+</small></b><span>' + esc(h[1]) + '</span><div class="meter"><i style="width:' + pct + '%;background:var(--acc)"></i></div></div>';
     }).join('');
   }
+  /* Shadowing guide: steps tick off and save on this device; places come from checked official pages */
+  var shadow = load('susie-shadow', {}) || {};
+  var SHADOW_PLACES = [
+    {
+    "n": "Start here: SJV-MedBridge, UCSF Fresno",
+    "url": "https://sjvmedbridge.ucsf.edu/",
+    "s": "Built for Valley community college pre-meds. Advising, mentors, workshops and hands-on clinical exposure. Watch for the next info session."
+    },
+    {
+    "n": "Community Health System: Observation Experiences",
+    "url": "https://ecommunity.com/careers/observation-student-opportunities",
+    "s": "Covers Community Regional and Clovis Community. Ages 16 and up, about 4-hour visits, apply online. Hospital visits pause in flu season, so plan for spring."
+    },
+    {
+    "n": "Community Medical Centers: Physician Shadowing packet",
+    "url": "https://fresno.ucsf.edu/sites/g/files/tkssra7616/f/wysiwyg/CMC%20Master%20Shadowing.Research%20Volunteer%20-032024.pdf",
+    "s": "The form to shadow a doctor there. A pathologist has to sign as your *sponsor*, and it asks for vaccine records, a *TB test* and a background check."
+    },
+    {
+    "n": "Community Health System: Volunteer",
+    "url": "https://communitymedical.org/about-us/volunteer-for-community",
+    "s": "Weekly 3 to 4 hour shifts toward 100 hours. Clinical hours, plus a way to meet hospital staff."
+    },
+    {
+    "n": "Community Health System: Special volunteer opportunities",
+    "url": "https://communitymedical.org/about-us/volunteer-for-community/special-opportunities",
+    "s": "Once you volunteer there, you can ask to shadow an employee for up to 16 hours. Ask for the lab."
+    },
+    {
+    "n": "Saint Agnes: Volunteer FAQs",
+    "url": "https://www.samc.com/careers/working-with-us/volunteers/faqs",
+    "s": "Physician shadowing happens only when a Saint Agnes doctor requests it, so meet a pathologist there first. Volunteering needs a flu shot and TB test."
+    },
+    {
+    "n": "Saint Agnes: Laboratory Services",
+    "url": "https://www.samc.com/services/laboratory-services",
+    "s": "Their lab, where the hospital pathologists work."
+    },
+    {
+    "n": "Valley Children’s: Job Shadow Program",
+    "url": "https://valleychildrens.org/medical-education/job-shadowing",
+    "s": "Observation only, up to 7 days a year, with a request packet. Ask to shadow in their pathology and lab department."
+    },
+    {
+    "n": "Valley Children’s: Pathology and Laboratory Medicine",
+    "url": "https://www.valleychildrens.org/services/pathology-laboratory-medicine",
+    "s": "Their children’s pathology department, worth naming in your request."
+    },
+    {
+    "n": "Kaiser Permanente Northern California: Volunteer",
+    "url": "https://volunteer-ncal.kaiserpermanente.org",
+    "s": "Volunteer hours at Kaiser. They don’t set up job shadowing, so use it for clinical hours."
+    },
+    {
+    "n": "Central California Blood Center: Volunteer",
+    "url": "https://donateblood.org/volunteer-with-us/",
+    "s": "*Blood banking* is run by pathologists. They weren’t taking new volunteers when checked in November, so check back."
+    },
+    {
+    "n": "LMSA PLUS, for pre-health students",
+    "url": "https://national.lmsa.net/about-lmsa-plus/",
+    "s": "Mentors and networking, and community college chapters count. A mentor can help you find a pathologist."
+    }
+    ];
+  var SHADOW_MORE = [
+    {
+    "n": "AAMC: Shadowing a Doctor",
+    "url": "https://students-residents.aamc.org/applying-medical-school/shadowing-doctor",
+    "s": "The official guide: how to ask, what to wear, patient privacy and thank-you notes."
+    },
+    {
+    "n": "AAMC: Virtual Shadowing Tips",
+    "url": "https://students-residents.aamc.org/getting-organized/virtual-shadowing-tips-current-medical-student-and-physician",
+    "s": "How to shadow online while you wait for a hospital spot."
+    },
+    {
+    "n": "MedSchoolCoach: Virtual pathology shadowing",
+    "url": "https://shadowing.medschoolcoach.com/about-pathology/",
+    "s": "A free recorded session with a pathologist, with a quiz and certificate. Run by a company, so count it as extra, not your main hours."
+    },
+    {
+    "n": "CAP: Pathology subspecialties",
+    "url": "https://www.cap.org/member-resources/pathology-careers/pathology-subspecialties",
+    "s": "What each kind of pathologist does day to day, from forensic to blood."
+    },
+    {
+    "n": "Pathology: A Career in Medicine",
+    "url": "https://pathologytraining.org/wp-content/uploads/2025/05/Pathology-A-Career-in-Medicine.pdf",
+    "s": "A short guide from the pathology societies on what the job is like."
+    },
+    {
+    "n": "Pathology societies: For Students",
+    "url": "https://pathologytraining.org/for-students/",
+    "s": "Includes a summer research program and a travel award for undergraduates."
+    },
+    {
+    "n": "AMCAS: Work and Activities",
+    "url": "https://students-residents.aamc.org/how-apply-medical-school-amcas/section-5-amcas-application-work-and-activities",
+    "s": "Where your shadowing goes on the med school application, so log it the way they ask."
+    },
+    {
+    "n": "AAMC survey on clinical experience",
+    "url": "https://www.aamc.org/media/23336/download",
+    "s": "Most med schools recommend shadowing, and they value what you learned over the number of hours."
+    }
+    ];
+  var MAIL = 'Subject: Pre-med student asking to shadow in pathology\n\nHi Dr. [Last name],\n\nMy name is [Your name], and I am a biochemistry pre-med student at Fresno City College. I want to become a pathologist, and I would be grateful for the chance to shadow you or your group for a day or two, whenever it works best for you.\n\nI am happy to complete any forms, vaccine records or training your hospital requires. I have attached my resume.\n\nThank you for your time,\n[Your name]\n[Phone] [Email]';
+  var GUIDE = [
+    { t: 'Get ready before you ask', s: 'Hospitals move faster when you already have these.', steps: [
+      ['g1', 'Make a one-page resume: classes, jobs, volunteering, languages'],
+      ['g2', 'Gather your vaccine records: *flu shot*, *TB test*, MMR, chickenpox, hepatitis B and whooping cough'],
+      ['g3', 'Read one Learn list on the Papers page so you can talk about what pathologists do'],
+      ['g4', 'Write down 3 things you want to see, like a *frozen section* or the blood bank']] },
+    { t: 'Find who to ask', s: 'Most Fresno hospitals need a pathologist to agree first, then you fill out their form. So the real goal is meeting one pathologist. Start with SJV-MedBridge and volunteering, where you meet people.', places: 1, wide: 1, steps: [
+      ['g5', 'Look into SJV-MedBridge and go to its next info session'],
+      ['g6', 'Pick 2 hospitals below and start volunteering at one'],
+      ['g7', 'Ask your FCC pre-health counselor, professors and volunteer coordinator if they know a pathologist'],
+      ['g23', 'Once a pathologist says yes, ask them to sign the hospital’s shadowing form']] },
+    { t: 'Send the email', s: 'Short and polite works best. Fill in the brackets, attach your resume, and send it to the person or office the hospital gave you.', mail: 1, wide: 1, steps: [
+      ['g8', 'Send the email to your first place'],
+      ['g9', 'Send it to your second and third place too, don’t wait on just one']] },
+    { t: 'Follow up', s: 'Busy doctors miss emails. No answer is normal, not a no.', steps: [
+      ['g10', 'If no reply in a week, send one short, kind follow-up'],
+      ['g11', 'Still nothing after two weeks? Move on to the next place on your list'],
+      ['g12', 'Once someone says yes, finish their paperwork right away']] },
+    { t: 'On the day', s: 'Pathologists spend most of the day at the microscope and in the lab, not with patients, so you will see a lot of slides.', steps: [
+      ['g13', 'Dress business casual with closed-toe shoes, arrive 10 minutes early'],
+      ['g14', 'Bring a small notebook, but never write patient names or details'],
+      ['g15', 'Watch *grossing*, where tissue is cut, and *sign-out*, where slides become a diagnosis'],
+      ['g16', 'Ask: what made you choose pathology, and what do you wish you knew as a pre-med?']] },
+    { t: 'Log it the same day', s: 'Medical schools ask for dates, hours and one person who can confirm them.', steps: [
+      ['g17', 'Add the hours under Hours on this page, with the place and date'],
+      ['g18', 'Write 3 sentences: what you saw and one moment you want to remember'],
+      ['g19', 'Save the pathologist’s name and email for your application later']], go: 's-hours' },
+    { t: 'Thank them and stay in touch', s: 'This is how a shadowing day turns into a mentor, and later a strong letter.', steps: [
+      ['g20', 'Send a thank-you email within 2 days'],
+      ['g21', 'Ask if you could come back, or shadow someone else in their group'],
+      ['g22', 'Email them an update each semester, like a new class or lab you joined']] }
+  ];
+  function placeHTML(x) { return '<li><a href="' + x.url + '" target="_blank" rel="noopener">' + esc(x.n) + '</a><p>' + mk(x.s) + '</p></li>'; }
+  function renderGuide() {
+    $('shadowGuide').innerHTML = GUIDE.map(function (g) {
+      return '<li class="card' + (g.wide ? ' wide' : '') + '"><div><h3>' + esc(g.t) + '</h3><p>' + mk(g.s) + '</p>' +
+        (g.places && SHADOW_PLACES.length ? '<ul class="places">' + SHADOW_PLACES.map(placeHTML).join('') + '</ul>' : '') +
+        (g.mail ? '<div class="mail" id="mailTxt">' + esc(MAIL) + '</div><button type="button" class="btn sm" id="copyMail">Copy the email</button>' : '') +
+        '<ul class="steps">' + g.steps.map(function (s) { return '<li><label><input type="checkbox" data-sh="' + s[0] + '"' + (shadow[s[0]] ? ' checked' : '') + '><span>' + mk(s[1]) + '</span></label></li>'; }).join('') + '</ul>' +
+        (g.go ? '<p style="margin-top:8px"><a href="#standout/' + g.go + '">Open Hours</a></p>' : '') +
+        '</div></li>';
+    }).join('') + (SHADOW_MORE.length ? '<li class="card wide"><div><h3>Learn more about pathology as a career</h3><ul class="places">' + SHADOW_MORE.map(placeHTML).join('') + '</ul></div></li>' : '');
+  }
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest || !e.target.closest('#copyMail')) return;
+    var b = e.target.closest('#copyMail');
+    function done() { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy the email'; }, 1600); }
+    if (navigator.clipboard) navigator.clipboard.writeText(MAIL).then(done, function () {}); 
+  });
   function renderStand() {
+    renderGuide();
     $('clinList').innerHTML = CLIN.map(ideaHTML).join('');
     $('resList').innerHTML = RES.map(ideaHTML).join('');
     $('apartList').innerHTML = APART.map(function (g) { return '<div class="grouph">' + g[0] + '</div><ul class="ticks">' + g[1].map(function (x) { return tickHTML(x[0], x[1], x[2], apart[x[0]], x[3], 'ap'); }).join('') + '</ul>'; }).join('');
     $('hCat').innerHTML = HCAT.map(function (h) { return '<option value="' + h[0] + '">' + esc(h[1]) + '</option>'; }).join('');
-    $('tlList').innerHTML = TL.map(function (x) { return '<li><span><b>' + esc(x[0]) + '</b><p>' + esc(x[1]) + '</p></span></li>'; }).join('');
+    $('tlList').innerHTML = TL.map(function (x) { return '<li><span><b>' + esc(x[0]) + '</b><p>' + mk(x[1]) + '</p></span></li>'; }).join('');
     $('lorList').innerHTML = LOR.map(function (x) { return tickHTML(x[0], x[1], (lor[x[0] + '_name'] ? 'Asked: ' + lor[x[0] + '_name'] + '. ' : '') + x[2], lor[x[0]], 0, 'lor'); }).join('');
     renderHours();
   }
@@ -1388,6 +2318,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     var t = e.target;
     if (t.dataset.ap) { apart[t.dataset.ap] = t.checked; store('susie-apart', apart); document.querySelectorAll('[data-ap="' + t.dataset.ap + '"]').forEach(function (x) { x.checked = t.checked; }); }
     if (t.dataset.lor) { lor[t.dataset.lor] = t.checked; store('susie-path-lor', lor); }
+    if (t.dataset.sh) { shadow[t.dataset.sh] = t.checked; store('susie-shadow', shadow); }
   });
   $('hForm').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -1483,11 +2414,11 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 
   /* ================= Bottom bars, one per page (five tabs at most) ================= */
   var TABS = {
-    home: [['h-areas', 'compass', 'Explore'], ['h-next', 'arrow', 'Next step'], ['h-cells', 'cells', 'Classes'], ['h-plan', 'cal', 'Plan'], ['h-stand', 'star', 'Stand out']],
-    classes: [['c-top', 'cells', 'Fresno City', 'fcc'], ['c-top', 'school', 'Transfer', 'transfer'], ['c-top', 'flag', 'Med school', 'med'], ['c-gpa', 'chart', 'GPA'], ['c-add', 'plus', 'Add']],
-    papers: [['p-top', 'compass', 'Topics'], ['p-picks', 'book', 'Picks'], ['p-gaps', 'ques', 'Open questions'], ['p-search', 'search', 'Search']],
+    home: [['h-areas', 'compass', 'Explore'], ['h-hero', 'scope', 'Slide'], ['h-next', 'arrow', 'Next step'], ['h-plan', 'cal', 'Plan']],
+    classes: [['c-top', 'cells', 'Cells'], ['c-list', 'book', 'List'], ['c-gpa', 'chart', 'GPA'], ['c-add', 'plus', 'Add']],
+    papers: [['p-top', 'compass', 'Topics'], ['p-picks', 'book', 'Picks'], ['p-gaps', 'ques', 'Questions'], ['p-learn', 'cube', 'Learn'], ['p-search', 'search', 'Search']],
     projects: [['j-1', 'scope', 'Slides'], ['j-2', 'drop', 'At home'], ['j-3', 'pen', 'Write']],
-    standout: [['s-clinical', 'heart', 'Clinical'], ['s-research', 'flask', 'Research'], ['s-apart', 'star', 'Set apart'], ['s-hours', 'clock', 'Hours'], ['s-time', 'path', 'Timeline']]
+    standout: [['s-shadow', 'scope', 'Shadow'], ['s-research', 'flask', 'Research'], ['s-apart', 'star', 'Set apart'], ['s-hours', 'clock', 'Hours'], ['s-time', 'path', 'Timeline']]
   };
   var BARS = {}, view = 'home', jumping = 0;
   function jumpTo(id) {
@@ -1510,40 +2441,51 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   var pillsBar = wireBar($('grpPills'), 'a', function (a) { setGroup(a.dataset.g); });
   var secBar = wireBar($('secnav'), '.sec', function (a) { var p = a.dataset.p; if (location.hash.slice(1) !== p) location.hash = p; else jumpTo(TABS[p][0][0]); });
 
-  /* Scroll spy: the bottom bar follows what is on screen */
-  function spy() {
+  /* Scroll spy: the bottom bar follows what is on screen.
+     Section positions are measured once and reused, so scrolling never forces a layout read. */
+  var marks = null, topH = 62, docH = 0;
+  function measure() {
+    var bar = BARS[view]; marks = []; if (!bar) return;
+    var sy = window.scrollY || 0;
+    topH = topEl.offsetHeight || 62; docH = document.documentElement.scrollHeight;
+    [].forEach.call(bar.g.querySelectorAll('a'), function (a) {
+      var el = $(a.dataset.go); if (!el || el.offsetParent === null) return;
+      marks.push({ a: a, y: el.getBoundingClientRect().top + sy });
+    });
+  }
+  function dirty() { marks = null; }
+  window.addEventListener('resize', dirty, { passive: true });
+  if (window.ResizeObserver) new ResizeObserver(dirty).observe(document.querySelector('main'));
+  function spy(y) {
     if (Date.now() - jumping < 900) return;
     var bar = BARS[view]; if (!bar) return;
-    var line = (topEl.offsetHeight || 62) + 90, best = null;
-    var atEnd = (window.innerHeight + (window.scrollY || 0)) >= document.documentElement.scrollHeight - 4;
-    [].forEach.call(bar.g.querySelectorAll('a'), function (a) {
-      if (a.dataset.grp && a.dataset.grp !== grp) return;
-      var el = $(a.dataset.go); if (!el) return;
-      if (el.getBoundingClientRect().top <= line) best = a;
-    });
-    if (atEnd) { var all = bar.g.querySelectorAll('a'); best = all[all.length - 1]; }
-    if (!best) best = bar.g.querySelector(grp && view === 'classes' ? 'a[data-grp="' + grp + '"]' : 'a');
+    if (!marks) measure();
+    var line = y + topH + 90, best = null;
+    for (var i = 0; i < marks.length; i++) if (marks[i].y <= line) best = marks[i].a;
+    if (window.innerHeight + y >= docH - 4 && marks.length) best = marks[marks.length - 1].a;
+    if (!best) best = bar.g.querySelector('a');
     if (best && best.getAttribute('aria-current') !== 'page') bar.set(best);
   }
 
-  /* Top bar: frosted once you scroll, hides while reading down, back on any scroll up */
-  var topEl = $('top'), lastY = 0, ticking = false, down = 0, up = 0;
+  /* Top bar: always in place, frosted once you scroll.
+     While the page moves, hover effects pause so the mouse wheel stays smooth. */
+  var topEl = $('top'), ticking = false, isScrolled = false, stillT = 0, root = document.documentElement;
   function onScroll() {
     ticking = false;
-    var y = Math.max(0, window.scrollY || 0), dy = y - lastY; lastY = y;
-    topEl.classList.toggle('scrolled', y > 6);
-    if (!RM.matches && Date.now() - jumping > 900) {
-      if (y < 60) { topEl.classList.remove('away'); down = up = 0; }
-      else if (dy > 0) { up = 0; down += dy; if (down > 60) topEl.classList.add('away'); }
-      else if (dy < 0) { down = 0; up -= dy; if (up > 30) topEl.classList.remove('away'); }
-    }
-    spy();
+    var y = Math.max(0, window.scrollY || 0);
+    if ((y > 6) !== isScrolled) { isScrolled = y > 6; topEl.classList.toggle('scrolled', isScrolled); }
+    spy(y);
   }
-  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
-  function showTop() { topEl.classList.remove('away'); down = up = 0; }
+  window.addEventListener('scroll', function () {
+    if (!root.classList.contains('scrolling')) root.classList.add('scrolling');
+    clearTimeout(stillT); stillT = setTimeout(function () { root.classList.remove('scrolling'); }, 140);
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  function showTop() {}
 
   /* ================= Router: #home, #classes, #papers, #projects, #standout (optional /section) ================= */
   var VIEWS = Object.keys(TABS);
+  function setDye() { var r = document.documentElement; if (view === 'papers') r.dataset.dye = area; else delete r.dataset.dye; }
   function route() {
     var h = (location.hash || '').slice(1).split('/'), v = h[0], sub = h[1];
     if (VIEWS.indexOf(v) < 0) v = 'home';
@@ -1553,9 +2495,10 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       if (on && s.hidden) { s.hidden = false; s.classList.remove('enter'); void s.offsetWidth; s.classList.add('enter'); }
       else if (!on) s.hidden = true;
     });
+    setDye();
     Object.keys(BARS).forEach(function (k) { BARS[k].g.hidden = k !== v; });
     secBar.set(document.querySelector('#secnav [data-p="' + v + '"]'));
-    showTop(); topEl.classList.remove('scrolled');
+    topEl.classList.remove('scrolled'); isScrolled = false; dirty();
     if (changed || !sub) window.scrollTo(0, 0);
     var bar = BARS[v]; bar.set(bar.g.querySelector('a')); bar.place('snap');
     if (v === 'classes') { pillsBar.place('snap'); setGroup(grp); }
