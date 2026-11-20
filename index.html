@@ -552,11 +552,10 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 .jpath { margin-top: 14px; }
 .pathh { font: 700 12px var(--text); letter-spacing: .06em; text-transform: uppercase; color: var(--dim); margin: 18px 0 8px; }
 .pathh:first-child { margin-top: 0; }
-.path { position: relative; display: grid; gap: 12px; padding-left: 32px; grid-template-columns: minmax(0, 1fr); }
+.path { position: relative; display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 900px) { .path { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.path::before { content: ""; position: absolute; left: 10px; top: 8px; bottom: 8px; width: 3px; border-radius: 3px; background: linear-gradient(var(--c), color-mix(in srgb, var(--c) 25%, transparent)); }
-.pj { position: relative; background: var(--card); border-radius: 18px; padding: 15px 16px; box-shadow: inset 0 0 0 .5px var(--rule); display: flex; flex-direction: column; gap: 7px; min-width: 0; }
-.pj::before { content: attr(data-n); position: absolute; left: -32px; top: 14px; width: 23px; height: 23px; border-radius: 50%; display: grid; place-items: center; background: var(--cd); color: #fff; font: 700 11.5px var(--text); }
+.pj { position: relative; background: var(--card); border-radius: 18px; padding: 15px 16px 15px 52px; box-shadow: inset 0 0 0 .5px var(--rule); display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.pj::before { content: attr(data-n); position: absolute; left: 16px; top: 14px; width: 23px; height: 23px; border-radius: 50%; display: grid; place-items: center; background: var(--cd); color: #fff; font: 700 11.5px var(--text); }
 .pj.done::before { content: "✓"; }
 .pjmeta { display: flex; gap: 6px; flex-wrap: wrap; }
 .pj .tag { font: 700 10.5px var(--text); letter-spacing: .05em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: color-mix(in srgb, var(--c) 16%, transparent); color: var(--hi); }
@@ -2018,7 +2017,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     L.sort(function (a, b) { return pf.sort === 'new' ? b.y - a.y : pf.sort === 'old' ? a.y - b.y : a.l - b.l || b.y - a.y; });
     $('pcount').textContent = 'Showing ' + L.length + ' of ' + all.length + ' papers';
     $('paperList').innerHTML = L.length ? L.map(function (p) {
-      return '<li class="card paper t-' + p.a + '"><div class="ptags"><span class="tag">' + esc(p.tag) + '</span><span class="lvtag">' + PLV[p.l] + '</span></div><h3>' + esc(p.t) + '</h3><span class="meta">' + esc(p.by) + (p.j ? ' &middot; ' + esc(p.j) : '') + (p.y ? ' &middot; ' + p.y : '') + '</span><p>' + mk(p.s) + '</p><a class="btn sm" href="' + p.url + '" target="_blank" rel="noopener">Read it</a></li>';
+      return '<li class="card paper t-' + p.a + '"><div class="ptags"><span class="tag">' + esc(p.tag) + '</span>' + (p.tag === PLV[p.l] ? '' : '<span class="lvtag">' + PLV[p.l] + '</span>') + '</div><h3>' + esc(p.t) + '</h3><span class="meta">' + esc(p.by) + (p.j ? ' &middot; ' + esc(p.j) : '') + (p.y ? ' &middot; ' + p.y : '') + '</span><p>' + mk(p.s) + '</p><a class="btn sm" href="' + p.url + '" target="_blank" rel="noopener">Read it</a></li>';
     }).join('') : '<li class="pempty">Nothing matches. Try another level or kind.</li>';
   }
   $('pfilters').addEventListener('click', function (e) {
@@ -2815,7 +2814,8 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       if (instant) { void pill.offsetWidth; pill.classList.add('snap'); }
       tone(g);
     }
-    function set(a) { if (!a) return; its.forEach(function (b) { if (b === a) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); }); place('stretch'); }
+    function real(a) { return a && mag.contains(a) ? its[[].indexOf.call(mag.children, a)] : a; }
+    function set(a) { a = real(a); if (!a) return; its.forEach(function (b) { if (b === a) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); }); place('stretch'); }
     var ptrAt = 0;
     function pick(a) { picked = Date.now(); set(a); if (onPick) onPick(a); }
     g.addEventListener('pointerdown', function (e) {
@@ -2848,7 +2848,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     g.addEventListener('pointercancel', function (e) { end(e, false); });
     g.addEventListener('lostpointercapture', function (e) { if (st && e.pointerId === st.id) end(e, false); });
     /* Taps were handled on pointerup, so clicks only pick for the keyboard and screen readers */
-    g.addEventListener('click', function (e) { var a = e.target.closest(sel); if (a && mag.contains(a)) a = its[[].indexOf.call(mag.children, a)]; if (!a || its.indexOf(a) < 0) return; e.preventDefault(); if (Date.now() - ptrAt < 600) { ptrAt = 0; return; } pick(a); });
+    g.addEventListener('click', function (e) { var a = real(e.target.closest(sel)); if (!a || its.indexOf(a) < 0) return; e.preventDefault(); if (Date.now() - ptrAt < 600) { ptrAt = 0; return; } pick(a); });
     g.addEventListener('keydown', function (e) { var a = e.target.closest(sel); if (a && its.indexOf(a) > -1 && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); pick(a); } });
     its.forEach(function (a) { a.tabIndex = 0; if (!a.getAttribute('href')) a.setAttribute('role', 'link'); });
     return { g: g, place: place, set: set, pick: pick };
