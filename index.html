@@ -122,9 +122,20 @@ main { padding-top: calc(env(safe-area-inset-top, 0px) + var(--topH) + 10px); pa
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
 [data-sec] { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + var(--topH) + 8px); }
 
-/* ---------- Glass, the same recipe as her study guide ---------- */
-.fglass, .abar { background: var(--glass-tint); -webkit-backdrop-filter: blur(5px) saturate(150%); backdrop-filter: blur(5px) saturate(150%);
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--spec) 45%, transparent), inset 0 -1px 0 color-mix(in srgb, var(--spec-lo) 35%, transparent), inset 0 0 0 .5px var(--rim), 0 10px 28px -16px color-mix(in srgb, var(--drop) 35%, transparent); }
+/* ---------- Liquid glass: clear, lightly blurred, bright rim, saturated like iOS 26 bars ---------- */
+.fglass, .abar { isolation: isolate; background: rgba(255,255,255,.16);
+  -webkit-backdrop-filter: blur(3px) saturate(190%) brightness(1.05); backdrop-filter: blur(3px) saturate(190%) brightness(1.05);
+  box-shadow: inset 1.5px 1.5px 0 -.5px rgba(255,255,255,.95), inset -1px -1px 0 -.5px rgba(255,255,255,.55), inset 0 0 0 .5px rgba(0,0,0,.07),
+    inset 0 0 18px rgba(255,255,255,.22), 0 10px 28px -12px rgba(0,0,0,.3);
+  transition: background-color .35s var(--ease), box-shadow .35s var(--ease); }
+.fglass::before, .abar::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: -1;
+  background: radial-gradient(120% 90% at 12% 0%, rgba(255,255,255,.38), transparent 45%), radial-gradient(90% 80% at 92% 110%, rgba(255,255,255,.18), transparent 50%); }
+.fglass.dk, .abar.dk { background: rgba(30,26,34,.18);
+  box-shadow: inset 1.5px 1.5px 0 -.5px rgba(255,255,255,.5), inset -1px -1px 0 -.5px rgba(255,255,255,.22), inset 0 0 0 .5px rgba(255,255,255,.12),
+    inset 0 0 18px rgba(255,255,255,.08), 0 10px 28px -12px rgba(0,0,0,.5); }
+.brand, .iconbtn { position: relative; }
+.brand > *, .iconbtn > * { position: relative; z-index: 1; }
+.fglass.dk.brand, .fglass.dk.iconbtn { color: #fff; }
 
 /* ---------- Top bar: same on every page, always in place ---------- */
 .top { position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; z-index: 30; }
@@ -135,8 +146,7 @@ main { padding-top: calc(env(safe-area-inset-top, 0px) + var(--topH) + 10px); pa
 .brand { justify-self: start; font: 700 14px var(--display); letter-spacing: -.02em; color: var(--hi); display: flex; align-items: center; gap: 8px; text-decoration: none; padding: 5px 13px 5px 5px; border-radius: 999px; }
 .brand i { width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--cancer) 0 22%, transparent 23%), radial-gradient(circle at 68% 62%, var(--tissue) 0 18%, transparent 19%), var(--fld); box-shadow: inset 0 0 0 1.5px var(--rule); }
 .secnav { grid-column: 2; position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: var(--tbw); height: var(--ttbh); padding: 4px; border-radius: 999px; }
-.secnav .sec { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; font: 600 var(--ttf) var(--display); letter-spacing: -.005em; color: var(--dim); padding: 0; border-radius: 999px; text-decoration: none; white-space: nowrap; transition: color .25s var(--ease); cursor: pointer; }
-.secnav .sec[aria-current="page"], .secnav .sec.near { color: var(--hi); }
+.secnav .sec { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; font: 600 var(--ttf) var(--display); letter-spacing: -.005em; padding: 0; border-radius: 999px; text-decoration: none; white-space: nowrap; transition: color .25s var(--ease); cursor: pointer; }
 .secnav .sec svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; display: none; }
 .iconbtn { justify-self: end; width: 40px; height: 40px; border-radius: 50%; border: 0; display: grid; place-items: center; color: var(--fg); cursor: pointer; padding: 0; }
 .iconbtn svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
@@ -155,28 +165,36 @@ main { padding-top: calc(env(safe-area-inset-top, 0px) + var(--topH) + 10px); pa
 .scrolling main { pointer-events: none; }
 .foottheme { display: none; }
 @media (max-width: 699px) { .foottheme { display: flex; justify-content: center; padding-top: 28px; } }
-.abar a { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 0; color: var(--dim); text-decoration: none; font: 600 var(--tbf)/1.1 var(--text); letter-spacing: -.005em; border-radius: 999px; white-space: nowrap; cursor: pointer; transition: color .25s var(--ease); }
+.abar a { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 0; text-decoration: none; font: 600 var(--tbf)/1.1 var(--text); letter-spacing: -.005em; border-radius: 999px; white-space: nowrap; cursor: pointer; transition: color .25s var(--ease); }
 .abar a svg { width: var(--tbi); height: var(--tbi); fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .pills a svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-.abar a[aria-current="page"], .abar a.near { color: var(--hi); }
-.abar a[aria-current="page"] svg { color: var(--pg); }
-.lens { position: absolute; left: 0; top: 0; z-index: 0; pointer-events: none; border-radius: 999px; opacity: 0; width: var(--lw, 0px); height: var(--lh, 0px);
-  transform: translate3d(var(--lx, 0px), var(--ly, 0px), 0) scale(var(--lsx, 1), var(--lsy, 1));
-  background: color-mix(in srgb, var(--pg) 24%, transparent);
-  box-shadow: inset 0 0 0 .5px color-mix(in srgb, var(--pg) 55%, transparent), inset 0 1px 0 color-mix(in srgb, var(--spec) 40%, transparent);
-  transition: transform .5s var(--spring), width .5s var(--spring), height .35s var(--ease), background-color .3s var(--ease), box-shadow .3s var(--ease), opacity .25s var(--ease); }
-.lens.on { opacity: 1; }
-.lens.go { transition-duration: .16s, .16s, .35s, .3s, .3s, .25s; transition-timing-function: cubic-bezier(.4, 0, .6, 1); }
-.lift > .lens { --lsx: 1.08; --lsy: 1.2; background: color-mix(in srgb, var(--pg) 30%, transparent); }
-.dragging > .lens { transition-duration: .14s, .22s, .35s, .3s, .3s, .25s; }
-.abar, .secnav, .pills { touch-action: pan-y; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+/* The selection pill. On press it lifts into a clear lens that magnifies the labels under it. */
+.glassbar { --itc: var(--dim); --its: var(--hi); --ipc: var(--pg); }
+.glassbar.dk { --itc: rgba(255,255,255,.86); --its: #fff; --ipc: #fff; }
+.glassbar > a, .glassbar .mag > a { color: var(--itc); }
+.glassbar > a[aria-current="page"], .glassbar > a.near, .glassbar .mag > a.near { color: var(--its); }
+.glassbar > a[aria-current="page"] svg { color: var(--ipc); }
+.glassbar .pill { position: absolute; left: 0; top: 0; z-index: 0; border-radius: 999px; pointer-events: none; overflow: hidden; will-change: transform, width; opacity: 0;
+  background: color-mix(in srgb, var(--pg) 16%, rgba(255,255,255,.35));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7), inset 0 0 0 .5px rgba(0,0,0,.06);
+  transition: background-color .25s var(--ease), box-shadow .25s var(--ease), opacity .2s var(--ease); }
+.glassbar .pill.on { opacity: 1; }
+.glassbar.dk .pill { background: rgba(255,255,255,.16); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 0 0 .5px rgba(255,255,255,.14); }
+.glassbar .pill.snap { transition: transform .5s var(--spring), width .5s var(--spring), background-color .25s var(--ease), box-shadow .25s var(--ease), opacity .2s var(--ease); }
+.glassbar .mag { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity .18s var(--ease); will-change: transform; pointer-events: none; }
+.glassbar .mag > a { pointer-events: none; }
+.glassbar.up .pill { background: rgba(255,255,255,.06); z-index: 3;
+  -webkit-backdrop-filter: blur(.5px) brightness(1.08); backdrop-filter: blur(.5px) brightness(1.08);
+  box-shadow: inset 2px 2px 1px -1px rgba(255,255,255,.95), inset -2px -2px 1px -1px rgba(255,255,255,.6), inset 0 0 10px rgba(255,255,255,.35),
+    inset 4px 0 6px -4px rgba(255,60,120,.35), inset -4px 0 6px -4px rgba(40,140,255,.38), 0 6px 18px -6px rgba(0,0,0,.28); }
+.glassbar.up .mag { opacity: 1; }
+.glassbar.up .mag > a { filter: drop-shadow(.6px 0 0 rgba(255,40,110,.45)) drop-shadow(-.6px 0 0 rgba(30,130,255,.45)); }
+.abar, .secnav, .pills { touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 
 /* School switch on Classes: the same glass and lens as the bottom bar, so the two match */
 .pills { position: relative; display: inline-flex; gap: 2px; padding: 3px 4px; border-radius: 999px; margin-top: 16px; max-width: 100%; }
-.pills a { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; color: var(--dim); font: 600 13.5px var(--display); letter-spacing: -.005em; white-space: nowrap; cursor: pointer; text-decoration: none; transition: color .25s var(--ease); }
+.pills a { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; font: 600 13.5px var(--display); letter-spacing: -.005em; white-space: nowrap; cursor: pointer; text-decoration: none; transition: color .25s var(--ease); }
 .pills a svg { width: 17px; height: 17px; }
-.pills a[aria-current="page"], .pills a.near { color: var(--hi); }
-.pills a[aria-current="page"] svg { color: var(--pg); }
 @media (max-width: 699px) { .pills a { padding: 7px 10px; font-size: 12.5px; gap: 5px; } .pills a svg { width: 15px; height: 15px; } }
 .seg2 { display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px; background: var(--bg2); box-shadow: inset 0 0 0 .5px var(--rule); margin-top: 10px; }
 .seg2[hidden] { display: none; }
@@ -505,12 +523,94 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 .credits p { margin: 8px 0 0; }
 .credits b { color: var(--fg); font-weight: 600; }
 
+
+/* ---------- Top bar pieces all share the page bar's height ---------- */
+.brand { height: var(--ttbh); padding: 0 16px 0 calc((var(--ttbh) - 30px) / 2); gap: 9px; font-size: 14.5px; }
+.brand i { width: 30px; height: 30px; }
+.iconbtn { width: var(--ttbh); height: var(--ttbh); }
+
+/* ---------- Views inside a page: one bottom-bar button, one view ---------- */
+[data-pane][hidden] { display: none !important; }
+.sect.enter { animation: rise .4s var(--ease); }
+.view .col > [data-pane]:not([data-pane="all"]):not([hidden]) ~ [data-pane]:not([hidden]) { border-top: 1px solid var(--rule); }
+
+/* ---------- Paper filters ---------- */
+.fbar { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; margin: 14px 0 10px; padding: 12px 14px; border-radius: 18px; background: var(--card); box-shadow: inset 0 0 0 .5px var(--rule); }
+.fgrp { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.flab { font: 700 11px var(--text); letter-spacing: .06em; text-transform: uppercase; color: var(--dim); margin-right: 2px; }
+.fchip { border: 0; cursor: pointer; font: 600 13px var(--display); padding: 6px 11px; border-radius: 999px; color: var(--fg); background: color-mix(in srgb, var(--dc, var(--acc)) 12%, transparent); }
+.fchip[aria-pressed="true"] { background: var(--acc); color: var(--on-acc); }
+.seg { display: inline-flex; padding: 3px; border-radius: 999px; background: color-mix(in srgb, var(--dc, var(--acc)) 12%, transparent); }
+.seg button { border: 0; background: none; border-radius: 999px; padding: 5px 11px; font: 600 12.5px var(--display); color: var(--dim); cursor: pointer; white-space: nowrap; }
+.seg button[aria-pressed="true"] { background: var(--card); color: var(--hi); box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+.pcount { color: var(--dim); font-size: 13px; margin: 0 0 12px; }
+.ptags { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.lvtag { font: 600 11px var(--display); color: var(--dim); padding: 2px 8px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--rule); }
+.pempty { color: var(--dim); padding: 18px 0; list-style: none; }
+
+/* ---------- Project paths, easiest first ---------- */
+.jpath { margin-top: 14px; }
+.pathh { font: 700 12px var(--text); letter-spacing: .06em; text-transform: uppercase; color: var(--dim); margin: 18px 0 8px; }
+.pathh:first-child { margin-top: 0; }
+.path { position: relative; display: grid; gap: 12px; padding-left: 32px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) { .path { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.path::before { content: ""; position: absolute; left: 10px; top: 8px; bottom: 8px; width: 3px; border-radius: 3px; background: linear-gradient(var(--c), color-mix(in srgb, var(--c) 25%, transparent)); }
+.pj { position: relative; background: var(--card); border-radius: 18px; padding: 15px 16px; box-shadow: inset 0 0 0 .5px var(--rule); display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.pj::before { content: attr(data-n); position: absolute; left: -32px; top: 14px; width: 23px; height: 23px; border-radius: 50%; display: grid; place-items: center; background: var(--cd); color: #fff; font: 700 11.5px var(--text); }
+.pj.done::before { content: "✓"; }
+.pjmeta { display: flex; gap: 6px; flex-wrap: wrap; }
+.pj .tag { font: 700 10.5px var(--text); letter-spacing: .05em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: color-mix(in srgb, var(--c) 16%, transparent); color: var(--hi); }
+.pj .tag.lv { background: none; box-shadow: inset 0 0 0 1px var(--rule); color: var(--dim); text-transform: none; letter-spacing: 0; font-weight: 600; }
+.pj h3 { margin: 0; font: 700 16.5px/1.25 var(--display); letter-spacing: -.015em; color: var(--hi); }
+.pj p { margin: 0; font-size: 14.5px; line-height: 1.45; }
+.pj .need { font-size: 13px; color: var(--dim); }
+.pj .need b { color: var(--fg); font-weight: 600; }
+.pj.done h3 { opacity: .7; }
+.pjdone { display: inline-flex; align-items: center; gap: 7px; font: 600 13px var(--display); color: var(--dim); cursor: pointer; align-self: flex-start; margin-top: 2px; }
+.pjdone input { width: 18px; height: 18px; accent-color: var(--cd); }
+.psteps { border-top: .5px solid var(--rule); padding-top: 8px; display: grid; gap: 10px; }
+.psteps summary { font: 600 13.5px var(--display); color: var(--acc); cursor: pointer; }
+.psteps summary span { color: var(--dim); font-weight: 500; margin-left: 4px; }
+.psteps[open] { gap: 10px; }
+.libs { margin-top: 18px; }
+.libs summary { font: 600 15px var(--display); color: var(--hi); cursor: pointer; }
+
+/* ---------- 3D view: dark stage like a CT viewer, controls on the side ---------- */
+.lab3d { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) { .lab3d { grid-template-columns: minmax(0, 1fr) 320px; } }
+.stage3 { position: relative; height: clamp(380px, 62vh, 680px); border-radius: 22px; overflow: hidden; color: #fff;
+  background: radial-gradient(120% 90% at 40% 35%, #1b1c22 0%, #08080a 60%, #000 100%); box-shadow: inset 0 0 0 .5px rgba(255,255,255,.12); }
+.stage3 canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; }
+.stage3 canvas:active { cursor: grabbing; }
+.s3head { position: absolute; left: 18px; top: 16px; z-index: 2; display: grid; gap: 2px; pointer-events: none; }
+.s3k { font: 700 11px var(--text); letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+.s3t { font: 700 19px/1.2 var(--display); letter-spacing: -.02em; color: #fff; }
+.s3msg { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; color: rgba(255,255,255,.75); font: 500 14px var(--text); text-align: center; padding: 20px; }
+.s3msg[hidden] { display: none; }
+.s3hint { position: absolute; left: 18px; bottom: 14px; margin: 0; z-index: 2; font: 500 12px var(--text); color: rgba(255,255,255,.55); pointer-events: none; }
+@media (max-width: 899px) { .s3hint { bottom: auto; top: 16px; left: auto; right: 18px; } }
+.s3side { display: grid; gap: 12px; align-content: start; }
+.seg3 { display: flex; flex-wrap: wrap; gap: 4px; padding: 3px; border-radius: 14px; background: color-mix(in srgb, var(--c) 12%, transparent); }
+.seg3[hidden] { display: none; }
+.seg3 button { flex: 1 1 auto; border: 0; background: none; border-radius: 11px; padding: 7px 10px; font: 600 13px var(--display); color: var(--dim); cursor: pointer; }
+.seg3 button[aria-pressed="true"] { background: var(--card); color: var(--hi); box-shadow: 0 1px 3px rgba(0,0,0,.14); }
+.parts3 { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.parts3 button { width: 100%; text-align: left; border: 0; background: none; border-radius: 10px; padding: 7px 8px; font: 500 14px var(--text); color: var(--fg); cursor: pointer; display: flex; gap: 9px; align-items: center; }
+.parts3 button i { width: 13px; height: 13px; border-radius: 50%; flex: none; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.25); }
+.parts3 button[aria-pressed="true"] { background: color-mix(in srgb, var(--c) 16%, transparent); color: var(--hi); font-weight: 650; }
+.s3about { margin: 0; font-size: 14px; line-height: 1.45; min-height: 3em; }
+.s3cut { display: grid; gap: 6px; font: 600 13px var(--display); color: var(--dim); }
+.s3cut input { width: 100%; accent-color: var(--cd); }
+.s3btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.s3btns [aria-pressed="false"] { opacity: .7; }
+.s3note { margin: 0; font-size: 12.5px; color: var(--dim); }
+
 @media (prefers-reduced-motion: reduce) {
-  .lens, .top, .top::before, .secnav .sec, .abar a, .pills a, .cellbtn, .cellbtn .nuc, .clump.moving .cellbtn, .tile img { transition: none !important; }
-  .lift > .lens { --lsx: 1; --lsy: 1; }
+  .sect.enter { animation: none; }
+  .glassbar .pill, .top, .top::before, .secnav .sec, .abar a, .pills a, .cellbtn, .cellbtn .nuc, .clump.moving .cellbtn, .tile img { transition: none !important; }
   .view.enter { animation: none; }
 }
-@media (prefers-reduced-transparency: reduce) { .fglass, .abar { background: var(--bg2) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; } }
+@media (prefers-reduced-transparency: reduce) { .fglass, .abar, .glassbar.up .pill { background: var(--bg2) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; } }
 </style>
 </head>
 <body>
@@ -533,12 +633,12 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 <!-- ======================= HOME ======================= -->
 <section class="view" data-view="home" id="v-home">
   <div class="col">
-    <section class="sect first" id="h-areas" data-sec>
+    <section class="sect first" id="h-areas" data-sec data-pane="h-areas">
       <div class="row"><h2 class="h2 sm">Areas to explore</h2><a class="more" href="#papers">All papers</a></div>
       <div class="tiles" id="tiles"></div>
     </section>
 
-    <section class="sect hero" id="h-hero" data-sec>
+    <section class="sect first hero" id="h-hero" data-sec data-pane="h-hero">
       <div class="center">
         <div class="k">Susie’s Pathology Lab</div>
         <h1 class="giant">Becoming a pathologist</h1>
@@ -550,13 +650,13 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       </div>
     </section>
 
-    <section class="sect" id="h-next" data-sec>
+    <section class="sect first" id="h-next" data-sec data-pane="h-next">
       <div id="nextStep"></div>
       <div class="meter nextmeter" id="nextMeter"></div>
       <div class="nextmeta"><span id="nextLeft"></span><a class="more" href="#classes">All classes</a></div>
     </section>
 
-    <section class="sect" id="h-cells" data-sec>
+    <section class="sect" id="h-cells" data-sec data-pane="h-next">
       <div class="cellsgrid">
         <div class="fieldcol">
           <div class="clump" id="clump-home" style="--cw:440px"></div>
@@ -572,7 +672,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       </div>
     </section>
 
-    <section class="sect" id="h-plan" data-sec>
+    <section class="sect first" id="h-plan" data-sec data-pane="h-plan">
       <div class="center" style="margin-bottom:18px"><h2 class="h2">The plan</h2><p class="lede">MCAT prep and the terms ahead. Everything saves on this device.</p></div>
       <div class="two">
         <div class="card" id="mcatCard"></div>
@@ -580,13 +680,13 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       </div>
     </section>
 
-    <section class="sect" id="h-stand" data-sec>
+    <section class="sect" id="h-stand" data-sec data-pane="h-plan">
       <div class="row"><h2 class="h2">Stand out</h2><a class="more" href="#standout">See everything</a></div>
       <div class="hours" id="homeHours"></div>
       <ul class="ticks" id="homeTicks" style="margin-top:16px"></ul>
     </section>
 
-    <section class="sect">
+    <section class="sect" data-pane="h-hero">
       <details class="credits">
         <summary>Where the slide pictures come from</summary>
         <p><b>Lymph node with cancer cells</b> (green boxes mark tumor). PatchCamelyon by Bas Veeling and colleagues, from the Camelyon16 slides. CC0, free to use.</p>
@@ -604,7 +704,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 <!-- ======================= CLASSES ======================= -->
 <section class="view" data-view="classes" id="v-classes" hidden>
   <div class="col">
-    <section class="sect first" id="c-top" data-sec>
+    <section class="sect first" id="c-top" data-sec data-pane="c-top">
       <div class="center">
         <div class="k">Classes</div>
         <h1 class="giant" id="clsTitle">Your path to graduation</h1>
@@ -631,7 +731,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       </div>
     </section>
 
-    <section class="sect" id="c-gpa" data-sec>
+    <section class="sect first" id="c-gpa" data-sec data-pane="c-gpa">
       <div class="center"><h2 class="h2">GPA</h2><p class="lede">Your goal is <b class="kt">3.7 or higher</b>. Add each term when grades post.</p></div>
       <div class="gpagrid">
         <div class="card gpabig" id="gpaBig"></div>
@@ -642,7 +742,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       </div>
     </section>
 
-    <section class="sect" id="c-add" data-sec>
+    <section class="sect first" id="c-add" data-sec data-pane="c-add">
       <div class="center"><h2 class="h2">Add a class</h2><p class="lede">For a Fresno City class that isn’t listed yet. It joins the cells above.</p></div>
       <form class="addcls" id="addForm" autocomplete="off">
         <label class="sr" for="addCode">Class code</label><input class="inp" id="addCode" placeholder="Code, like MATH 4B">
@@ -657,26 +757,46 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 <!-- ======================= PAPERS ======================= -->
 <section class="view" data-view="papers" id="v-papers" hidden>
   <div class="col">
-    <section class="sect first center" id="p-top" data-sec>
+    <section class="sect first center" id="p-top" data-sec data-pane="all">
       <div class="k">Papers</div>
       <h1 class="giant">Read like a pathologist</h1>
       <p class="lede" id="areaBlurb"></p>
       <div class="areachips" id="areaChips" role="tablist" aria-label="Topics"></div>
     </section>
-    <section class="sect" id="p-picks" data-sec>
+    <section class="sect" id="p-picks" data-sec data-pane="p-picks">
       <div class="row"><h2 class="h2">Hand-picked</h2><span class="k">Short summaries first</span></div>
+      <div id="pfilters"></div>
+      <p class="pcount" id="pcount"></p>
       <ul class="plist" id="paperList"></ul>
     </section>
-    <section class="sect" id="p-gaps" data-sec>
+    <section class="sect" id="p-gaps" data-sec data-pane="p-gaps">
       <div class="center"><h2 class="h2">Open questions</h2><p class="lede">Places where the answers aren’t in yet, and where you could add something.</p></div>
       <ul class="gaps" id="gapList" style="margin-top:16px"></ul>
     </section>
-    <section class="sect" id="p-learn" data-sec>
-      <div class="center"><h2 class="h2">Learn</h2><p class="lede">Sites, videos, tools and 3D models for this topic, from first look to expert.</p></div>
-      <div id="deep3d"></div>
+    <section class="sect" id="p-learn" data-sec data-pane="p-learn">
+      <div class="center"><h2 class="h2">Learn</h2><p class="lede">Sites, videos and tools for this topic, from first look to expert.</p></div>
       <div class="lvls" id="learnList"></div>
     </section>
-    <section class="sect center" id="p-search" data-sec>
+    <section class="sect" id="p-3d" data-sec data-pane="p-3d">
+      <div class="lab3d">
+        <div class="stage3" id="stage3" data-tone="dark">
+          <div class="s3head"><span class="s3k" id="s3k">3D model</span><span class="s3t" id="s3t"></span></div>
+          <p class="s3msg" id="s3msg">Loading the 3D model…</p>
+          <p class="s3hint">Drag to turn. Pinch or scroll to zoom.</p>
+        </div>
+        <aside class="card s3side t-cancer" id="s3side">
+          <div class="seg3" id="s3var" role="group" aria-label="Which model"></div>
+          <span class="lbl2">Parts</span>
+          <ul class="parts3" id="s3parts"></ul>
+          <p class="s3about" id="s3about"></p>
+          <label class="s3cut"><span id="s3cutL">Cut open</span><input type="range" id="s3cut" min="0" max="100" value="100"></label>
+          <div class="s3btns"><button type="button" class="btn sm" id="s3spin" aria-pressed="true">Spin</button><button type="button" class="btn sm" id="s3reset">Reset view</button></div>
+          <p class="s3note" id="s3note"></p>
+        </aside>
+      </div>
+      <div id="deep3d" style="margin-top:18px"></div>
+    </section>
+    <section class="sect center" id="p-search" data-sec data-pane="p-search">
       <h2 class="h2">Search PubMed</h2>
       <form class="search" id="searchForm" role="search"><label class="sr" for="q">Search papers</label><input class="inp" id="q" type="search" placeholder="Try: Pap smear cytology"><button class="btn solid" type="submit">Search</button></form>
       <div class="quick" id="quickQ"></div>
@@ -689,87 +809,32 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 <!-- ======================= PROJECTS ======================= -->
 <section class="view" data-view="projects" id="v-projects" hidden>
   <div class="col">
-    <section class="sect first center" data-sec id="j-top">
+    <section class="sect first center" data-sec id="j-top" data-pane="all">
       <div class="k">Projects</div>
       <h1 class="giant">Small projects, real skills</h1>
-      <p class="lede">Start with real slides, then your own microscope, then write about what you read. Tick steps as you go.</p>
+      <p class="lede" id="projBlurb">Pick a topic, then start at the top of the path. Each one is a little harder than the last.</p>
+      <div class="areachips" id="projChips" role="tablist" aria-label="Topics"></div>
     </section>
-
-    <section class="sect" id="j-1" data-sec>
-      <article class="proj t-cancer">
-        <div style="display:grid;gap:12px">
-          <h2 class="h2"><span class="pnum">1</span>Spot the tumor</h2>
-          <figure class="plate"><img id="projImg" alt="Small squares of lymph node tissue, some outlined in green"><figcaption class="cap"><b>Real slide patches from lymph nodes.</b> The ones boxed in green hold <b class="kt">cancer cells</b> that spread there. Look at how much darker and more crowded they are.</figcaption></figure>
-          <span class="lbl2">What to look for</span>
-          <ul class="look">
-            <li><i>1</i><span><b class="kt">Nuclei size.</b> Tumor nuclei are often bigger and darker purple.</span></li>
-            <li><i>2</i><span><b class="kt">Shape.</b> Normal nuclei look alike. Tumor nuclei come in odd, uneven shapes.</span></li>
-            <li><i>3</i><span><b class="kt">Crowding.</b> Tumor cells pile up and lose the neat pattern of the tissue.</span></li>
-            <li><i>4</i><span><b class="kt">Dividing cells.</b> More cells caught mid-division means fast growth.</span></li>
-          </ul>
-        </div>
-        <div style="display:grid;gap:14px">
-          <ul class="steps" data-proj="p1">
-            <li><label><input type="checkbox" data-step="a"><span>Open a normal tissue slide, like colon or breast, and zoom from <b class="kt">low to high power</b>.</span></label></li>
-            <li><label><input type="checkbox" data-step="b"><span>Open a tumor slide from the same organ in the slide box.</span></label></li>
-            <li><label><input type="checkbox" data-step="c"><span>Find the four clues and screenshot each one.</span></label></li>
-            <li><label><input type="checkbox" data-step="d"><span>Write three sentences on how you could tell them apart.</span></label></li>
-            <li><label><input type="checkbox" data-step="e"><span>Repeat with a blood cancer slide, like a lymph node.</span></label></li>
-          </ul>
-          <span class="lbl2">Free virtual slides</span>
-          <ul class="links">
-            <li><a href="https://www.pathology.med.umich.edu/slides/" target="_blank" rel="noopener">University of Michigan Virtual Slide Box</a>Disease slides you can zoom like a real microscope. Start here.</li>
-            <li><a href="https://histology.medicine.umich.edu/" target="_blank" rel="noopener">Michigan Histology</a>Normal tissue, so you know what healthy looks like first.</li>
-            <li><a href="https://vpathwebdev.virtualpathology.leeds.ac.uk/Slides/library" target="_blank" rel="noopener">Leeds Virtual Pathology Slide Library</a>A big library of scanned slides from a UK medical school.</li>
-            <li><a href="https://webpath.med.utah.edu" target="_blank" rel="noopener">WebPath, University of Utah</a>Labeled images by organ, good for quick checks.</li>
-            <li><a href="https://peir.path.uab.edu/library" target="_blank" rel="noopener">PEIR Digital Library</a>Thousands of teaching photos from UAB pathology.</li>
-          </ul>
-        </div>
-      </article>
-    </section>
-
-    <section class="sect" id="j-2" data-sec>
-      <article class="proj t-tissue">
-        <div style="display:grid;gap:12px">
-          <h2 class="h2"><span class="pnum">2</span>Cells at home</h2>
-          <div class="vis" data-slide="cheek"></div>
-          <span class="cap" style="margin:0">Drawn to show the idea: cheek cells with stained nuclei.</span>
-          <p class="cap" style="font-size:14.5px">A USB or phone clip-on microscope is enough. Use a stain you already have, like iodine or blue food coloring, and wash your hands after.</p>
-        </div>
-        <ul class="steps" data-proj="p2">
-          <li><label><input type="checkbox" data-step="a"><span>Gently scrape the inside of your cheek with a clean toothpick or cotton swab.</span></label></li>
-          <li><label><input type="checkbox" data-step="b"><span>Smear it on a glass slide, add one drop of stain, and lay a cover slip or clear tape on top.</span></label></li>
-          <li><label><input type="checkbox" data-step="c"><span>Find a flat cell and its <b class="kt">darker nucleus</b>. Photograph it at two zoom levels.</span></label></li>
-          <li><label><input type="checkbox" data-step="d"><span>Try an onion skin next, so you can compare <b class="kt">plant and animal cells</b>.</span></label></li>
-          <li><label><input type="checkbox" data-step="e"><span>Keep a photo log: date, sample, stain, zoom and one sentence on what you saw.</span></label></li>
+    <section class="sect" id="j-slides" data-sec data-pane="j-slides">
+      <div class="row"><h2 class="h2">Look at real slides</h2><span class="k">Free, the same ones medical students use</span></div>
+      <div class="jpath" data-kind="slides"></div>
+      <details class="card libs"><summary>Free virtual slide libraries</summary>
+        <ul class="links">
+          <li><a href="https://www.pathology.med.umich.edu/slides/" target="_blank" rel="noopener">University of Michigan Virtual Slide Box</a>Disease slides you can zoom like a real microscope. Start here.</li>
+          <li><a href="https://histology.medicine.umich.edu/" target="_blank" rel="noopener">Michigan Histology</a>Normal tissue, so you know what healthy looks like first.</li>
+          <li><a href="https://vpathwebdev.virtualpathology.leeds.ac.uk/Slides/library" target="_blank" rel="noopener">Leeds Virtual Pathology Slide Library</a>A big library of scanned slides from a UK medical school.</li>
+          <li><a href="https://webpath.med.utah.edu" target="_blank" rel="noopener">WebPath, University of Utah</a>Labeled images by organ, good for quick checks.</li>
+          <li><a href="https://peir.path.uab.edu/library" target="_blank" rel="noopener">PEIR Digital Library</a>Thousands of teaching photos from UAB pathology.</li>
         </ul>
-      </article>
+      </details>
     </section>
-
-    <section class="sect" id="j-3" data-sec>
-      <article class="proj t-people">
-        <div style="display:grid;gap:12px">
-          <h2 class="h2"><span class="pnum">3</span>Read and write</h2>
-          <p class="cap" style="font-size:14.5px;margin:0">Pick any paper from Papers and fill in these five lines. One page is enough. It is the same habit research labs look for.</p>
-          <div class="template">
-            <div><b>The question</b>What were they trying to find out?</div>
-            <div><b>What they did</b>Who or what did they study, and how?</div>
-            <div><b>What they found</b>The main result, in one or two sentences.</div>
-            <div><b>Why a pathologist cares</b>How does it change what happens to a patient’s sample?</div>
-            <div><b>What’s still open</b>One question the paper leaves for someone else.</div>
-          </div>
-        </div>
-        <div style="display:grid;gap:14px">
-          <ul class="steps" data-proj="p3">
-            <li><label><input type="checkbox" data-step="a"><span>Write a one-page summary of Hallmarks of Cancer using the five lines.</span></label></li>
-            <li><label><input type="checkbox" data-step="b"><span>Write one for a paper in a second area, like blood cells or DNA testing.</span></label></li>
-            <li><label><input type="checkbox" data-step="c"><span>Mini case study: pick one slide from Project 1 and write it up as if it came from a patient. Organ, what you see, and your best guess.</span></label></li>
-            <li><label><input type="checkbox" data-step="d"><span>Pick one open question from Papers and list three papers that touch it.</span></label></li>
-            <li><label><input type="checkbox" data-step="e"><span>Show one summary to a professor or a lab you’d like to join.</span></label></li>
-          </ul>
-          <a class="btn" href="#papers" style="justify-self:start">Pick a paper</a>
-        </div>
-      </article>
+    <section class="sect" id="j-home" data-sec data-pane="j-home">
+      <div class="row"><h2 class="h2">Hands-on at home</h2><span class="k">Kitchen-table safe</span></div>
+      <div class="jpath" data-kind="home"></div>
+    </section>
+    <section class="sect" id="j-write" data-sec data-pane="j-write">
+      <div class="row"><h2 class="h2">Read and write</h2><span class="k">Each one becomes an interview story</span></div>
+      <div class="jpath" data-kind="write"></div>
     </section>
   </div>
 </section>
@@ -777,28 +842,28 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 <!-- ======================= STAND OUT ======================= -->
 <section class="view" data-view="standout" id="v-standout" hidden>
   <div class="col">
-    <section class="sect first center" id="s-top" data-sec>
+    <section class="sect first center" id="s-top" data-sec data-pane="all">
       <div class="k">Stand out</div>
       <h1 class="giant">More than grades</h1>
       <p class="lede">Grades and the MCAT get you screened in. These are what make you memorable, and most of them lead straight to pathology.</p>
     </section>
-    <section class="sect" id="s-shadow" data-sec>
+    <section class="sect" id="s-shadow" data-sec data-pane="s-shadow">
       <div class="center"><h2 class="h2">Shadow a pathologist</h2><p class="lede">The one thing that matters most for your goal. Go step by step and tick each one off.</p></div>
       <ol class="guide" id="shadowGuide"></ol>
     </section>
-    <section class="sect" id="s-clinical" data-sec>
+    <section class="sect" id="s-clinical" data-sec data-pane="s-research">
       <div class="center"><h2 class="h2">Clinical</h2><p class="lede">Aim for <b class="kt">100 to 200 hours</b>. Time near a pathologist counts the most.</p></div>
       <ul class="ideas" id="clinList"></ul>
     </section>
-    <section class="sect" id="s-research" data-sec>
+    <section class="sect" id="s-research" data-sec data-pane="s-research">
       <div class="center"><h2 class="h2">Research</h2><p class="lede">You don’t need a paper. One or two steady semesters in a lab is enough.</p></div>
       <ul class="ideas" id="resList"></ul>
     </section>
-    <section class="sect" id="s-apart" data-sec>
+    <section class="sect" id="s-apart" data-sec data-pane="s-apart">
       <div class="center"><h2 class="h2">Set yourself apart</h2><p class="lede">Tick each one as you do it. Your mix of community college, two languages and a pathology goal is already rare.</p></div>
       <div id="apartList"></div>
     </section>
-    <section class="sect" id="s-hours" data-sec>
+    <section class="sect" id="s-hours" data-sec data-pane="s-hours">
       <div class="center"><h2 class="h2">Hours</h2><p class="lede">Applications ask for exact hours. Log them the same week.</p></div>
       <div class="hours" id="hoursTiles"></div>
       <form class="hform" id="hForm" autocomplete="off">
@@ -810,7 +875,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       </form>
       <ul class="hlog" id="hLog"></ul>
     </section>
-    <section class="sect" id="s-time" data-sec>
+    <section class="sect" id="s-time" data-sec data-pane="s-time">
       <div class="center"><h2 class="h2">Timeline</h2><p class="lede">What comes when, from here to a med school yes.</p></div>
       <ol class="tl" id="tlList"></ol>
       <div class="grouph">Letters of recommendation</div>
@@ -822,6 +887,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 </main>
 
 <div id="bars"></div>
+<svg id="fxdefs" width="0" height="0" style="position:absolute;width:0;height:0" aria-hidden="true" focusable="false"></svg>
 
 <script>
 (function () {
@@ -874,7 +940,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   var savedTheme = loadRaw('susie-theme');
   if (savedTheme === 'dark' || savedTheme === 'light') root.setAttribute('data-theme', savedTheme);
   $('themeBtn2').addEventListener('click', function () { themeBtn.click(); });
-  themeBtn.addEventListener('click', function () { var n = isDark() ? 'light' : 'dark'; root.setAttribute('data-theme', n); store('susie-theme', n); paintTheme(); });
+  themeBtn.addEventListener('click', function () { var n = isDark() ? 'light' : 'dark'; root.setAttribute('data-theme', n); store('susie-theme', n); paintTheme(); setTimeout(function () { if (typeof toneAll === 'function') toneAll(); }, 80); });
   try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', paintTheme); } catch (e) {}
   paintTheme();
 
@@ -1886,16 +1952,87 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   function paperFor(from) { return PAPERS.filter(function (p) { return p.url.indexOf('/' + from + '/') > -1; })[0]; }
   function nOf(arr, a) { return arr.filter(function (x) { return x.a === a; }).length; }
   var area = 'cancer';
-  function renderPapers() {
-    $('areaChips').innerHTML = AREAS.map(function (a) {
+  /* Paper filters: what kind of paper it is, and how deep (1 start here, 2 building, 3 deep) */
+  var META = {
+    'Hallmarks of Cancer: The Next Generation': ['How cancer works', 1],
+    'Hallmarks of Cancer: New Dimensions': ['How cancer works', 2],
+    'Intratumor heterogeneity and branched evolution revealed by multiregion sequencing': ['How cancer works', 3],
+    'Efficacy of HPV-based screening for prevention of invasive cervical cancer': ['Screening', 2],
+    'Bethesda 2014: improving on a paradigm shift': ['Screening', 2],
+    'Clinical-grade computational pathology using weakly supervised deep learning on whole slide images': ['AI and slides', 3],
+    'Deep learning in cancer genomics and histopathology': ['AI and slides', 3],
+    'Disparities in Cancer Stage of Diagnosis by Rurality in California, 2015 to 2019': ['Numbers', 1],
+    'Cancer statistics, 2024': ['Numbers', 1],
+    'The GLOBOCAN 2022 cancer estimates: Data sources, methods, and a snapshot of the cancer burden worldwide': ['Numbers', 2],
+    'Diagnosis from the blood smear': ['Smears', 1],
+    'Mobile Phone Based Clinical Microscopy for Global Health Applications': ['Smears', 2],
+    'Iron-deficiency anemia': ['Diseases', 1],
+    'Sickle Cell Disease': ['Diseases', 1],
+    'The 2016 revision to the World Health Organization classification of myeloid neoplasms and acute leukemia': ['Blood cancers', 3],
+    'iwCLL guidelines for diagnosis, indications for treatment, response assessment, and supportive management of CLL': ['Blood cancers', 3],
+    'ICC-2022 versus WHO-2022 classification systems for acute leukemias and myeloid neoplasms: The perspective from two classical morphologists': ['Blood cancers', 3],
+    'Coccidioidomycosis as a Common Cause of Community-acquired Pneumonia': ['Valley fever', 2],
+    'Coccidioidomycosis-Associated Hospitalizations, United States, 2016-2021': ['Valley fever', 1],
+    'Rapid molecular detection of tuberculosis and rifampin resistance': ['Lab tests', 3],
+    'A review of malaria diagnostic tools: microscopy and rapid diagnostic test (RDT)': ['Lab tests', 1],
+    'Revisiting the Utility of Histopathological Examination of Biopsy: A Necessity in Microbiology': ['Biopsy and autopsy', 2],
+    'COVID-19 related lung pathology: old patterns in new clothing?': ['Biopsy and autopsy', 3],
+    'Genomics is failing on diversity': ['Who is studied', 1],
+    'The Missing Diversity in Human Genetic Studies': ['Who is studied', 1],
+    'Genetic Misdiagnoses and the Potential for Health Disparities': ['Getting it right', 2],
+    'ClinVar: public archive of interpretations of clinically relevant variants': ['Getting it right', 2],
+    'Clinical laboratories collaborate to resolve differences in variant interpretations submitted to ClinVar': ['Getting it right', 3],
+    'An openly available online tool for implementing the ACMG/AMP standards and guidelines for the interpretation of sequence variants': ['Getting it right', 3],
+    'Circulating tumor DNA and liquid biopsy in oncology': ['Cancer DNA', 2],
+    'Hematoxylin and eosin staining of tissue and cell sections': ['Staining', 1],
+    'Tissue processing and hematoxylin and eosin staining': ['Staining', 1],
+    'When tissue antigens and antibodies get along: revisiting the technical aspects of immunohistochemistry, the red, brown, and blue technique': ['Staining', 2],
+    'Diagnostic Concordance Among Pathologists Interpreting Breast Biopsy Specimens': ['Agreement', 2],
+    'QuPath: Open source software for digital pathology image analysis': ['Digital slides', 3],
+    'Whole Slide Imaging Versus Microscopy for Primary Diagnosis in Surgical Pathology: A Multicenter Blinded Randomized Noninferiority Study of 1992 Cases': ['Digital slides', 3],
+    'Commentary: Whole-slide Images - Good Enough for Primary Diagnosis?': ['Digital slides', 2],
+    'An assessment of the Henssge method for forensic death time estimation in the early post-mortem interval': ['Time of death', 3],
+    'Forensic entomology: applications and limitations': ['Time of death', 1],
+    'The changing profile of autopsied deaths in the United States, 1972-2007': ['Autopsy', 1],
+    'Minimally invasive autopsies: a promise to revive the procedure': ['Autopsy', 2],
+    'Two decades of autopsy-detected diagnostic errors in Japan': ['Autopsy', 2],
+    'Forensic imaging for causal investigation of death': ['Imaging', 2]
+  };
+  PAPERS.forEach(function (p) { var m = META[p.t] || ['Other', 2]; p.k = m[0]; p.l = m[1]; });
+  var PLV = ['Any', 'Start here', 'Building', 'Deep'], pf = { kind: 'All', lvl: 0, sort: 'easy' };
+  function chipsHTML() {
+    return AREAS.map(function (a) {
       return '<button type="button" role="tab" class="chip t-' + a.id + (a.id === area ? ' on' : '') + '" data-area="' + a.id + '" aria-selected="' + (a.id === area) + '"><span class="dot"></span>' + esc(a.name) +
         (a.id === 'cancer' ? ' <span class="tiny">Main</span>' : a.opt ? ' <span class="tiny">Optional</span>' : '') + '</button>';
     }).join('');
+  }
+  function renderPaperList() {
+    var all = PAPERS.filter(function (p) { return p.a === area; }), kinds = [];
+    all.forEach(function (p) { if (kinds.indexOf(p.k) < 0) kinds.push(p.k); });
+    if (pf.kind !== 'All' && kinds.indexOf(pf.kind) < 0) pf.kind = 'All';
+    $('pfilters').innerHTML = '<div class="fbar"><div class="fgrp" role="group" aria-label="Kind"><span class="flab">Kind</span>' +
+      ['All'].concat(kinds).map(function (k) { return '<button type="button" class="fchip" data-kind="' + esc(k) + '" aria-pressed="' + (pf.kind === k) + '">' + esc(k) + '</button>'; }).join('') + '</div>' +
+      '<div class="fgrp" role="group" aria-label="Level"><span class="flab">Level</span><div class="seg">' + [0, 1, 2, 3].map(function (l) { return '<button type="button" data-lvl="' + l + '" aria-pressed="' + (pf.lvl === l) + '">' + PLV[l] + '</button>'; }).join('') + '</div></div>' +
+      '<div class="fgrp" role="group" aria-label="Sort"><span class="flab">Sort</span><div class="seg">' + [['easy', 'Easiest first'], ['new', 'Newest'], ['old', 'Oldest']].map(function (s) { return '<button type="button" data-sort="' + s[0] + '" aria-pressed="' + (pf.sort === s[0]) + '">' + s[1] + '</button>'; }).join('') + '</div></div></div>';
+    var L = all.filter(function (p) { return (pf.kind === 'All' || p.k === pf.kind) && (!pf.lvl || p.l === pf.lvl); });
+    L.sort(function (a, b) { return pf.sort === 'new' ? b.y - a.y : pf.sort === 'old' ? a.y - b.y : a.l - b.l || b.y - a.y; });
+    $('pcount').textContent = 'Showing ' + L.length + ' of ' + all.length + ' papers';
+    $('paperList').innerHTML = L.length ? L.map(function (p) {
+      return '<li class="card paper t-' + p.a + '"><div class="ptags"><span class="tag">' + esc(p.tag) + '</span><span class="lvtag">' + PLV[p.l] + '</span></div><h3>' + esc(p.t) + '</h3><span class="meta">' + esc(p.by) + (p.j ? ' &middot; ' + esc(p.j) : '') + (p.y ? ' &middot; ' + p.y : '') + '</span><p>' + mk(p.s) + '</p><a class="btn sm" href="' + p.url + '" target="_blank" rel="noopener">Read it</a></li>';
+    }).join('') : '<li class="pempty">Nothing matches. Try another level or kind.</li>';
+  }
+  $('pfilters').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.kind) pf.kind = b.dataset.kind;
+    if (b.dataset.lvl != null) pf.lvl = +b.dataset.lvl;
+    if (b.dataset.sort) pf.sort = b.dataset.sort;
+    renderPaperList();
+  });
+  function renderPapers() {
+    $('areaChips').innerHTML = chipsHTML();
     var A = AREAS.filter(function (a) { return a.id === area; })[0];
     $('areaBlurb').innerHTML = mk(A.blurb);
-    $('paperList').innerHTML = PAPERS.filter(function (p) { return p.a === area; }).map(function (p) {
-      return '<li class="card paper t-' + p.a + '"><span class="tag">' + esc(p.tag) + '</span><h3>' + esc(p.t) + '</h3><span class="meta">' + esc(p.by) + (p.j ? ' &middot; ' + esc(p.j) : '') + (p.y ? ' &middot; ' + p.y : '') + '</span><p>' + mk(p.s) + '</p><a class="btn sm" href="' + p.url + '" target="_blank" rel="noopener">Read it</a></li>';
-    }).join('');
+    renderPaperList();
     $('gapList').innerHTML = GAPS.filter(function (g) { return g.a === area; }).map(function (g) {
       var p = paperFor(g.from);
       return '<li class="t-' + g.a + '"><span class="qmark">?</span><div><div class="q">' + esc(g.q) + '</div><div class="how">' + mk(g.how) + '</div>' +
@@ -1911,14 +2048,14 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     return '<li><span class="ty">' + I[TYI[r.ty] || 'book'] + esc(r.ty === '3D' ? '3D model' : r.ty) + '</span><a href="' + r.url + '" target="_blank" rel="noopener">' + esc(r.n) + '</a><p>' + mk(r.s) + '</p>' + (r.note ? '<span class="note">' + esc(r.note) + '</span>' : '') + '</li>';
   }
   function renderLearn() {
-    $('deep3d').innerHTML = DEEP.length ? '<div class="card deep t-' + area + '"><div class="row"><h3 class="h3">Look inside a cell</h3><span class="k">Deepest first</span></div><ul class="res">' + DEEP.map(resLi).join('') + '</ul></div>' : '';
+    $('deep3d').innerHTML = DEEP.length ? '<div class="card deep t-' + area + '"><div class="row"><h3 class="h3">More 3D models online</h3><span class="k">Real scans, deepest first</span></div><ul class="res">' + DEEP.map(resLi).join('') + '</ul></div>' : '';
     $('learnList').innerHTML = LV.map(function (L) {
       var rs = LEARN.filter(function (r) { return r.a === area && r.lv === L[0]; });
       if (!rs.length) return '';
       return '<div class="card lvl t-' + area + '"><h3>' + L[1] + ' <small>' + L[2] + '</small></h3><ul class="res">' + rs.map(resLi).join('') + '</ul></div>';
     }).join('');
   }
-  $('areaChips').addEventListener('click', function (e) { var c = e.target.closest('[data-area]'); if (!c) return; area = c.dataset.area; renderPapers(); setDye(); });
+  $('areaChips').addEventListener('click', function (e) { var c = e.target.closest('[data-area]'); if (!c) return; area = c.dataset.area; renderPapers(); renderProj(); setDye(); if (pane.papers === 'p-3d') open3D(); });
 
   /* PubMed search through NCBI E-utilities. Where the page can't reach it, it hands off to pubmed.gov. */
   var EU = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/';
@@ -1958,7 +2095,6 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   }).join('');
   $('tiles').addEventListener('click', function (e) { var t = e.target.closest('[data-area]'); if (!t) return; area = t.dataset.area; renderPapers(); location.hash = 'papers'; });
   $('plateImg').src = IMG.skin_wide;
-  $('projImg').src = IMG.pcam;
 
   /* Slide of the day: a real slide and one quick question, a new one each day */
   var SLIDES = [
@@ -2328,168 +2464,454 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   });
   $('hLog').addEventListener('click', function (e) { var b = e.target.closest('[data-hk]'); if (!b) return; exp[b.dataset.hk].splice(+b.dataset.hi, 1); store('susie-exp', exp); renderHours(); renderHomeStand(); });
 
-  /* ================= Projects ================= */
-  var proj = load('susie-path-projects', {}) || {};
-  document.querySelectorAll('[data-proj]').forEach(function (ul) {
-    var p = ul.dataset.proj;
-    ul.querySelectorAll('input').forEach(function (inp) {
-      inp.checked = !!(proj[p] && proj[p][inp.dataset.step]);
-      inp.addEventListener('change', function () { proj[p] = proj[p] || {}; proj[p][inp.dataset.step] = inp.checked; store('susie-path-projects', proj); });
-    });
-  });
-  /* Drawn cheek cells (no open photo of these was available) */
-  (function () {
+  /* ================= Projects: a path per topic and kind, easiest first ================= */
+  /* Each project: t title, d what you do, l level 1 to 3, tm time, nd what you need. Old projects keep their step lists (key) so ticks carry over. */
+  var PJ = {
+    cancer: {
+      slides: [
+        { t: 'Spot the tumor', d: 'Put normal tissue next to a tumor from the same organ and find the four clues: *big nuclei*, *odd shapes*, *crowding* and *dividing cells*.', l: 1, tm: '30 min', nd: 'The free slide libraries below', key: 'p1', img: 'pcam',
+          steps: ['Open a normal tissue slide, like colon or breast, and zoom from *low to high power*.', 'Open a tumor slide from the same organ in the slide box.', 'Find the four clues and screenshot each one.', 'Write three sentences on how you could tell them apart.', 'Repeat with a blood cancer slide, like a lymph node.'] },
+        { t: 'Count dividing cells', d: 'Open a breast tumor at high power and count *mitoses*, cells caught mid-division, in ten fields. More of them means a faster-growing tumor.', l: 1, tm: '20 min', nd: 'One breast cancer slide' },
+        { t: 'Benign or malignant?', d: 'Put a harmless mole next to a *melanoma* and list three differences: the overall shape, how the cells spread and what the nuclei look like.', l: 2, tm: '30 min', nd: 'Two skin slides' },
+        { t: 'Grade a breast cancer', d: 'Score *tubules*, *nuclear size* and *mitoses* from 1 to 3 each, add them up, and you have the *Nottingham grade* pathologists put in the report.', l: 3, tm: '45 min', nd: 'One breast cancer slide and the grading rules' }
+      ],
+      home: [
+        { t: 'Grow a tumor with dice', d: 'Roll a die for each bean: some divide, some die. Then let one bean ignore the stop rule and watch it take over the table, the way a cancer clone does.', l: 1, tm: '30 min', nd: 'Dice and a bag of dry beans' },
+        { t: 'Clay cells, normal and cancer', d: 'Shape ten normal cells and ten cancer cells from clay. Give the cancer cells *bigger, darker, uneven nuclei*, then photograph the two groups side by side.', l: 1, tm: '40 min', nd: 'Two colors of clay' },
+        { t: 'Sunscreen and UV beads', d: 'UV beads change color in sunlight. Put them in bags under different sunscreens and see which blocks the most, since *UV light* damages skin DNA.', l: 2, tm: '20 min on a sunny day', nd: 'UV color-changing beads, sunscreen, clear bags' },
+        { t: 'Build a biopsy core', d: 'Set layers of colored gelatin in a cup, then push a straw straight down to pull a core. See how much one *needle biopsy* catches, and what it misses.', l: 2, tm: '1 hr plus setting time', nd: 'Gelatin, food coloring, a wide straw' }
+      ],
+      write: [
+        { t: 'Five-line paper summary', d: 'Pick any paper from Papers and fill in five lines: the question, what they did, what they found, why a pathologist cares and what is still open.', l: 1, tm: '1 hr', nd: 'One paper from Papers', key: 'p3', tpl: true,
+          steps: ['Write a one-page summary of Hallmarks of Cancer using the five lines.', 'Write one for a paper in a second area, like blood cells or DNA testing.', 'Mini case study: pick one slide from Spot the tumor and write it up as if it came from a patient. Organ, what you see, and your best guess.', 'Pick one open question from Papers and list three papers that touch it.', 'Show one summary to a professor or a lab you’d like to join.'] },
+        { t: 'A pathology report in plain words', d: 'Take a sample breast biopsy report and rewrite each line so the patient would understand it, from *diagnosis* to *margins*.', l: 2, tm: '45 min', nd: 'One sample pathology report' },
+        { t: 'One test, biopsy to treatment', d: 'Read how *HER2* testing works and write one page on how a single result changes the treatment plan.', l: 3, tm: '1 hr', nd: 'One review paper on HER2 testing' }
+      ]
+    },
+    blood: {
+      slides: [
+        { t: 'Name the five white cells', d: 'Sort smear pictures into *neutrophils*, *lymphocytes*, *monocytes*, *eosinophils* and *basophils*, using the nucleus as your main clue.', l: 1, tm: '20 min', nd: 'Smear pictures from WebPath or the slide box' },
+        { t: 'Do a 100-cell count', d: 'Count 100 white cells on one smear and work out the percent of each kind, the same *differential* a lab reports.', l: 2, tm: '40 min', nd: 'One virtual blood smear' },
+        { t: 'Spot the anemia', d: 'Compare normal red cells with small pale ones from *iron deficiency* and the bent ones from *sickle cell disease*.', l: 2, tm: '30 min', nd: 'Three smear pictures' },
+        { t: 'Find the leukemia', d: 'On a smear from *acute leukemia*, find the *blasts*: big cells with fine chromatin and only a thin rim of cytoplasm.', l: 3, tm: '45 min', nd: 'One leukemia smear' }
+      ],
+      home: [
+        { t: 'Blood in a jar', d: 'Mix corn syrup with red candies, a few white beads and sprinkles in the right amounts to show what blood is made of: mostly *plasma* and *red cells*.', l: 1, tm: '30 min', nd: 'Corn syrup, red candies, white beads, sprinkles' },
+        { t: 'Layers like a spun tube', d: 'Shake oil, water and colored sand in a jar and let it settle. A spun blood tube splits the same way into *plasma*, the *buffy coat* and *red cells*.', l: 1, tm: '20 min', nd: 'A clear jar, oil, water, colored sand' },
+        { t: 'Sickle cells in a tube', d: 'Shape round and sickled cells from clay and push them through a narrow tube to see why sickled cells *get stuck* and block blood flow.', l: 2, tm: '45 min', nd: 'Clay and a clear tube' }
+      ],
+      write: [
+        { t: 'Read a blood count', d: 'Take a sample *complete blood count* and write what each line means: red cells, white cells, platelets and hemoglobin.', l: 1, tm: '30 min', nd: 'One sample blood count' },
+        { t: 'Write an anemia case', d: 'Write a one-page case of a patient with *iron-deficiency anemia*: the symptoms, what the smear shows and the fix.', l: 2, tm: '1 hr', nd: 'The anemia paper in Papers' },
+        { t: 'A smear field guide', d: 'Make a one-page guide with a drawing of each white cell and the one clue that names it.', l: 3, tm: '1.5 hr', nd: 'Paper and colored pencils' }
+      ]
+    },
+    tissue: {
+      slides: [
+        { t: 'Name the four tissue types', d: 'Find *epithelium*, *connective tissue*, *muscle* and *nerve* on normal slides and label each one.', l: 1, tm: '25 min', nd: 'Michigan Histology' },
+        { t: 'Walk the skin layers', d: 'Find the *epidermis*, *dermis* and fat on a skin slide, then compare thick skin from the palm with thin skin from the arm.', l: 1, tm: '20 min', nd: 'Two skin slides' },
+        { t: 'Stain detective', d: 'Look at the same tissue in *H&E* and in a special stain, and write what each one makes stand out.', l: 2, tm: '30 min', nd: 'Two stains of one organ' },
+        { t: 'Spot the artifact', d: 'Find folds, tears and bubbles on slides and learn to tell a *processing artifact* from real disease.', l: 3, tm: '30 min', nd: 'A few slides from the slide box' }
+      ],
+      home: [
+        { t: 'Stain an onion', d: 'Peel the thin skin from inside an onion, add a drop of iodine and find neat rows of *plant cells* with a phone microscope.', l: 1, tm: '30 min', nd: 'An onion, iodine, a phone clip-on microscope' },
+        { t: 'Slice a gelatin tissue block', d: 'Set fruit in gelatin, then slice it thin. One cut shows only part of a 3D object, which is exactly what a *slide* is.', l: 1, tm: '1 hr plus setting time', nd: 'Gelatin, fruit, a sharp knife with an adult nearby' },
+        { t: 'Cells at home', d: 'Scrape a few of your own *cheek cells*, stain them and photograph the darker nucleus at two zoom levels.', l: 2, tm: '45 min', nd: 'A phone clip-on microscope, iodine or blue food coloring', key: 'p2', vis: 'cheek',
+          steps: ['Gently scrape the inside of your cheek with a clean toothpick or cotton swab.', 'Smear it on a glass slide, add one drop of stain, and lay a cover slip or clear tape on top.', 'Find a flat cell and its *darker nucleus*. Photograph it at two zoom levels.', 'Try an onion skin next, so you can compare *plant and animal cells*.', 'Keep a photo log: date, sample, stain, zoom and one sentence on what you saw.'] }
+      ],
+      write: [
+        { t: 'Draw and label the skin', d: 'Draw the layers of skin from a real slide and write one line on what each layer does.', l: 1, tm: '40 min', nd: 'Paper and colored pencils' },
+        { t: 'Trace a sample through the lab', d: 'Write the trip a biopsy takes: *fixing* in formalin, *processing*, wax, cutting, staining and then the pathologist.', l: 2, tm: '45 min', nd: 'The tissue processing paper in Papers' },
+        { t: 'Why pathologists disagree', d: 'Read the breast biopsy agreement paper and write one page on why two experts can call the same slide differently.', l: 3, tm: '1 hr', nd: 'That paper, in Papers' }
+      ]
+    },
+    dna: {
+      slides: [
+        { t: 'Find the extra chromosome', d: 'Read a *karyotype* picture, pair the chromosomes and spot the extra one that causes Down syndrome.', l: 1, tm: '20 min', nd: 'A karyotype picture' },
+        { t: 'Read a DNA gel', d: 'Match the bands on a *DNA gel* picture to the people they came from, the way family and forensic tests work.', l: 2, tm: '25 min', nd: 'A gel picture' },
+        { t: 'Count FISH dots', d: 'Count the glowing dots in *FISH* pictures to see when a gene like *HER2* has too many copies.', l: 3, tm: '30 min', nd: 'FISH pictures' }
+      ],
+      home: [
+        { t: 'Pull DNA out of strawberries', d: 'Mash strawberries with dish soap and salt, then pour cold rubbing alcohol on top and watch white strands of *DNA* rise.', l: 1, tm: '30 min', nd: 'Strawberries, soap, salt, cold rubbing alcohol' },
+        { t: 'Candy DNA', d: 'Build a twisted ladder from licorice and gumdrops, with one color for each letter so *A pairs with T* and *G pairs with C*.', l: 1, tm: '40 min', nd: 'Licorice, four colors of gumdrops, toothpicks' },
+        { t: 'Paper karyotype', d: 'Cut out a printed set of chromosomes, pair them by size and band pattern, and find what is missing or extra.', l: 2, tm: '45 min', nd: 'A printed karyotype sheet, scissors' }
+      ],
+      write: [
+        { t: 'Who is in the data?', d: 'Read the diversity paper and write why gene tests can be less sure for people whose ancestors are rarely studied.', l: 2, tm: '45 min', nd: 'That paper, in Papers' },
+        { t: 'Explain a liquid biopsy', d: 'Write one page on how a blood draw can find *tumor DNA*, and what it can’t do yet.', l: 2, tm: '1 hr', nd: 'The liquid biopsy paper in Papers' },
+        { t: 'A BRCA letter to a family', d: 'Write a short, kind letter explaining what a positive *BRCA* result means and what comes next.', l: 3, tm: '1 hr', nd: 'One review paper on BRCA' }
+      ]
+    },
+    infect: {
+      slides: [
+        { t: 'Read a Gram stain', d: 'Tell purple *Gram-positive* from pink *Gram-negative* bacteria on stained slides, and say if each is round or a rod.', l: 1, tm: '20 min', nd: 'Gram stain pictures' },
+        { t: 'Find malaria in blood', d: 'Look at thin smear pictures for the small ring shapes of *Plasmodium* sitting inside red cells.', l: 2, tm: '30 min', nd: 'Malaria smear pictures' },
+        { t: 'Valley fever in a lung', d: 'Find the big round *spherules* of *Coccidioides*, the fungus behind valley fever, in a lung biopsy picture.', l: 3, tm: '30 min', nd: 'A lung biopsy picture' }
+      ],
+      home: [
+        { t: 'Glow germ hand wash', d: 'Rub on a glow lotion, wash your hands, then check under a black light to see the spots washing missed.', l: 1, tm: '20 min', nd: 'Glow germ lotion and a small UV flashlight' },
+        { t: 'What lives on your phone?', d: 'Swab your phone onto homemade agar, tape the lid shut and watch colonies grow. Never open it, and throw it away sealed.', l: 2, tm: '15 min plus a few days', nd: 'Gelatin, broth, a dish with a lid, tape' },
+        { t: 'Yogurt bacteria', d: 'Smear a dab of plain yogurt, add blue food coloring and look for the rod-shaped *Lactobacillus*.', l: 2, tm: '30 min', nd: 'Plain yogurt, a microscope at 400x or more' }
+      ],
+      write: [
+        { t: 'Trace an outbreak', d: 'Pick a news story about an outbreak and map how the lab found the cause.', l: 1, tm: '1 hr', nd: 'One news story' },
+        { t: 'Valley fever here at home', d: 'Use the hospitalization paper to write who gets valley fever and how labs confirm it.', l: 2, tm: '1 hr', nd: 'That paper, in Papers' },
+        { t: 'A germ ID flowchart', d: 'Make a flowchart a lab could follow: Gram stain, shape, then the test that names the germ.', l: 3, tm: '1 hr', nd: 'Paper, or any drawing app' }
+      ]
+    },
+    forensic: {
+      slides: [
+        { t: 'Bone or cartilage?', d: 'Compare the two under the microscope and list how to tell them apart.', l: 1, tm: '20 min', nd: 'Michigan Histology' },
+        { t: 'Count the osteons', d: 'Find *osteons*, the ring-shaped units of compact bone, and count their rings. Counting them is one way experts estimate age from bone.', l: 2, tm: '25 min', nd: 'A compact bone slide' },
+        { t: 'A smoker’s lung', d: 'Find the black *carbon* specks in a smoker’s lung next to a healthy one, a clue examiners read at autopsy.', l: 2, tm: '25 min', nd: 'Two lung slides' }
+      ],
+      home: [
+        { t: 'Lift a fingerprint', d: 'Dust a glass with cocoa powder, lift the print with clear tape and sort it into *loop*, *whorl* or *arch*.', l: 1, tm: '30 min', nd: 'Cocoa powder, a soft brush, clear tape' },
+        { t: 'Drop angles with paint', d: 'Drop red paint from different heights and angles onto paper and measure how the drop shapes stretch.', l: 2, tm: '45 min', nd: 'Washable red paint, paper, a ruler' },
+        { t: 'Insects tell time', d: 'Leave a piece of fruit in a covered jar outside and log what arrives each day, the idea behind *forensic entomology*.', l: 2, tm: '10 min a day for a week', nd: 'Fruit and a jar with a mesh lid' }
+      ],
+      write: [
+        { t: 'What autopsies catch', d: 'Read the Japan autopsy paper and write about one kind of mistake an autopsy found.', l: 2, tm: '45 min', nd: 'That paper, in Papers' },
+        { t: 'Time of death in plain words', d: 'Explain the *Henssge* body cooling method and why it gets less sure as time passes.', l: 3, tm: '1 hr', nd: 'The Henssge paper in Papers' },
+        { t: 'A mock autopsy summary', d: 'Read a short practice case and write the *cause* and *manner of death* the way a report would.', l: 3, tm: '1 hr', nd: 'A short practice case' }
+      ]
+    }
+  };
+  var LVJ = ['', 'Easy', 'Medium', 'Hard'];
+  var proj = load('susie-path-projects', {}) || {}; proj.done = proj.done || {};
+  function slug(s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+  function cheekSVG() {
     var R = rng(23), w = 320, h = 180, out = '<rect width="' + w + '" height="' + h + '" fill="#EEF3FA"/>';
     for (var k = 0; k < 7; k++) {
       var px = 30 + R() * (w - 60), py = 25 + R() * (h - 50), a = 26 + R() * 14;
       out += '<path d="M' + (px - a) + ' ' + py + ' Q' + (px - a * .4) + ' ' + (py - a * 1.1) + ' ' + (px + a) + ' ' + (py - a * .3) + ' Q' + (px + a * 1.1) + ' ' + (py + a * .7) + ' ' + px + ' ' + (py + a * .9) + ' Q' + (px - a * 1.1) + ' ' + (py + a * .7) + ' ' + (px - a) + ' ' + py + 'Z" fill="#D4E1F2" fill-opacity=".85" stroke="#9BB3D6" stroke-width="1"/>';
       out += '<ellipse cx="' + (px + (R() - .5) * 8) + '" cy="' + (py + (R() - .5) * 8) + '" rx="6" ry="4.5" fill="#2F4F8F"/>';
     }
-    document.querySelectorAll('[data-slide="cheek"]').forEach(function (el) { el.innerHTML = '<svg viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Drawing of cheek cells">' + out + '</svg>'; });
-  })();
+    return '<svg viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Drawing of cheek cells">' + out + '</svg>';
+  }
+  function pjCard(p, n, kind) {
+    var id = area + '-' + kind + '-' + slug(p.t), done = !!proj.done[id], extra = '';
+    if (p.steps) {
+      var st = proj[p.key] || {}, nd = 0; p.steps.forEach(function (x, i) { if (st['abcde'[i]]) nd++; });
+      extra = '<details class="psteps"><summary>Steps <span>' + nd + ' of ' + p.steps.length + '</span></summary>' +
+        (p.img ? '<figure class="plate"><img src="' + IMG[p.img] + '" alt="Small squares of lymph node tissue, some outlined in green"><figcaption class="cap"><b>Real slide patches from lymph nodes.</b> The ones boxed in green hold <b class="kt">cancer cells</b> that spread there.</figcaption></figure>' : '') +
+        (p.vis === 'cheek' ? '<div class="vis">' + cheekSVG() + '</div><span class="cap">Drawn to show the idea: cheek cells with stained nuclei.</span>' : '') +
+        (p.tpl ? '<div class="template"><div><b>The question</b>What were they trying to find out?</div><div><b>What they did</b>Who or what did they study, and how?</div><div><b>What they found</b>The main result, in one or two sentences.</div><div><b>Why a pathologist cares</b>How does it change what happens to a patient’s sample?</div><div><b>What’s still open</b>One question the paper leaves for someone else.</div></div>' : '') +
+        '<ul class="steps" data-proj="' + p.key + '">' + p.steps.map(function (x, i) { var k = 'abcde'[i]; return '<li><label><input type="checkbox" data-step="' + k + '"' + (st[k] ? ' checked' : '') + '><span>' + mk(x) + '</span></label></li>'; }).join('') + '</ul></details>';
+    }
+    return '<article class="pj' + (done ? ' done' : '') + '" data-n="' + n + '"><div class="pjmeta"><span class="tag">' + LVJ[p.l] + '</span><span class="tag lv">' + esc(p.tm) + '</span></div>' +
+      '<h3>' + esc(p.t) + '</h3><p>' + mk(p.d) + '</p><div class="need"><b>You need:</b> ' + esc(p.nd) + '</div>' + extra +
+      '<label class="pjdone"><input type="checkbox" data-pj="' + id + '"' + (done ? ' checked' : '') + '><span>Done</span></label></article>';
+  }
+  function renderProj() {
+    $('projChips').innerHTML = chipsHTML();
+    var A = AREAS.filter(function (a) { return a.id === area; })[0];
+    $('projBlurb').innerHTML = 'Projects for <b class="kt">' + esc(A.name) + '</b>. Start at the top of the path. Each one is a little harder than the last.';
+    document.querySelectorAll('.jpath').forEach(function (box) {
+      var kind = box.dataset.kind, L = (PJ[area][kind] || []).slice().sort(function (a, b) { return a.l - b.l; }), n = 0;
+      box.innerHTML = [[1, 'Start here'], [2, 'Next'], [3, 'Stretch']].map(function (g) {
+        var G = L.filter(function (p) { return p.l === g[0]; });
+        return G.length ? '<div class="pathh">' + g[1] + '</div><div class="path t-' + area + '">' + G.map(function (p) { return pjCard(p, ++n, kind); }).join('') + '</div>' : '';
+      }).join('');
+    });
+  }
+  $('projChips').addEventListener('click', function (e) { var c = e.target.closest('[data-area]'); if (!c) return; area = c.dataset.area; renderPapers(); renderProj(); setDye(); });
+  $('v-projects').addEventListener('change', function (e) {
+    var t = e.target;
+    if (t.dataset.pj) { if (t.checked) proj.done[t.dataset.pj] = true; else delete proj.done[t.dataset.pj]; store('susie-path-projects', proj); t.closest('.pj').classList.toggle('done', t.checked); }
+    if (t.dataset.step) { var p = t.closest('[data-proj]').dataset.proj; proj[p] = proj[p] || {}; proj[p][t.dataset.step] = t.checked; store('susie-path-projects', proj);
+      var ul = t.closest('[data-proj]'), c = ul.querySelectorAll('input:checked').length, sm = ul.closest('details').querySelector('summary span'); if (sm) sm.textContent = c + ' of ' + ul.querySelectorAll('input').length; }
+  });
 
-  /* ================= Liquid lens, ported from her study guide ================= */
+  /* ================= 3D models, one per topic. three.js loads only when this view opens. ================= */
+  var MODEL3D = {
+    cancer: { t: 'A normal cell and a cancer cell', v: [['normal', 'Normal cell'], ['cancer', 'Cancer cell']], cut: 'Cut open',
+      about: 'Switch between the two and watch the *nucleus*. In cancer it grows, darkens and fills more of the cell, the first thing a pathologist notices.',
+      parts: [['membrane', 'Cell membrane', '#F4A6C6', 'The outer skin of the cell. A cancer cell’s gets lumpy *blebs*.'],
+        ['nucleus', 'Nucleus', '#4B2C8C', 'Holds the DNA. Cancer nuclei are *bigger* and *darker*, so the nucleus takes up more of the cell.'],
+        ['nucleoli', 'Nucleoli', '#3A1C6B', 'Dots that build ribosomes. Cancer cells often show *several big nucleoli*.'],
+        ['chromatin', 'Chromatin', '#2B1450', 'DNA packed into clumps. Fine and even in a normal cell, *coarse* in cancer.'],
+        ['mito', 'Mitochondria', '#C2185B', 'Make the cell’s energy.'],
+        ['er', 'Rough ER', '#E86FA4', 'Folded sheets that build proteins.'],
+        ['golgi', 'Golgi', '#F0B429', 'Packs proteins and ships them out.']] },
+    blood: { t: 'A drop of blood', v: [['normal', 'Normal'], ['sickle', 'Sickle cell']], cut: 'Open the white cells',
+      about: 'The red cells use the real red cell shape, from the *Evans and Fung* equation: a disc thinner in the middle, which is why the center looks pale on a smear.',
+      parts: [['rbc', 'Red cells', '#C62828', 'Carry oxygen. About 7.8 micrometers across, with no nucleus.'],
+        ['sickle', 'Sickled cells', '#B71C1C', 'Bent stiff by sickle hemoglobin, so they jam in small vessels.', 'sickle'],
+        ['neutrophil', 'Neutrophil', '#5E35B1', 'The most common white cell: a nucleus in *3 to 5 lobes* and pink granules.'],
+        ['lymph', 'Lymphocyte', '#311B92', 'A big round nucleus with a thin rim of blue cytoplasm.'],
+        ['plt', 'Platelets', '#B39DDB', 'Tiny pieces of cells that start a clot.']] },
+    tissue: { t: 'A block of skin', v: [['skin', 'Skin']], cut: 'Slice it',
+      about: 'Slide the cut to slice the block, the way a lab cuts tissue before it becomes a slide. What you see on the cut face is what you see under the microscope.',
+      parts: [['corneum', 'Dead top layer', '#F8BBD0', 'Flat, dead cells that protect you. Called the *stratum corneum*.'],
+        ['granular', 'Granular layer', '#CE93D8', 'Cells flattening out and filling with grains as they die.'],
+        ['spinous', 'Spiny layer', '#F48FB1', 'Many-sided cells held together tightly.'],
+        ['basal', 'Basal layer', '#EC407A', 'One row of tall cells that divide to make new skin. Many skin cancers start here.'],
+        ['bmem', 'Basement membrane', '#FFE082', 'The thin line under the basal cells. A cancer that crosses it is called *invasive*.'],
+        ['dermis', 'Dermis', '#F8D7E3', 'The tough layer under the epidermis.'],
+        ['collagen', 'Collagen', '#F06292', 'The pink fibers that make the dermis strong.'],
+        ['capillary', 'Capillaries', '#D32F2F', 'Tiny vessels looping up to feed the skin.']] },
+    dna: { t: 'Two turns of DNA', v: [['healthy', 'Healthy'], ['mutation', 'With a mutation']], cut: 'Cut away',
+      about: 'Built with real B-DNA spacing: one base pair every *0.34 nanometers* and *10.5 pairs per turn*. Switch on the mutation to see one wrong letter.',
+      parts: [['backbone', 'Backbone', '#E0E6F0', 'Sugar and phosphate, the sides of the ladder. The orange balls are the phosphates.'],
+        ['at', 'A and T pairs', '#29B6F6', 'A always pairs with T, held by two bonds.'],
+        ['gc', 'G and C pairs', '#7E57C2', 'G always pairs with C, held by three bonds.'],
+        ['mutation', 'Mutation', '#FF1744', 'A G sitting across from a T. One wrong letter like this is a *variant*, what gene tests look for.', 'mutation']] },
+    infect: { t: 'Germs up close', v: [['virus', 'Flu virus'], ['grampos', 'Gram positive'], ['gramneg', 'Gram negative']], cut: 'Cut open',
+      about: 'Cut the two bacteria open and compare the walls. The thick wall of a *Gram-positive* germ holds the purple dye, the thin one of a *Gram-negative* germ lets it wash out.',
+      parts: [['envelope', 'Envelope', '#FFCCBC', 'A fatty skin the virus steals from the last cell it left.', 'virus'],
+        ['matrix', 'Matrix layer', '#FFAB91', 'A protein shell just under the envelope.', 'virus'],
+        ['ha', 'HA spikes', '#26A69A', 'Grab onto your cells to get in. The H in flu names like H1N1.', 'virus'],
+        ['na', 'NA spikes', '#FFA726', 'Cut new viruses free. The N in H1N1.', 'virus'],
+        ['rna', 'RNA genome', '#5C6BC0', 'Eight separate pieces, which is why flu mixes and changes so fast.', 'virus'],
+        ['outer', 'Outer membrane', '#F48FB1', 'An extra layer only Gram-negative germs have.', 'gramneg'],
+        ['wall', 'Cell wall', '#7E57C2', 'Peptidoglycan. Thick in Gram positive, thin in Gram negative.', 'grampos gramneg'],
+        ['inner', 'Inner membrane', '#90CAF9', 'The cell’s own skin, under the wall.', 'grampos gramneg'],
+        ['ribo', 'Ribosomes', '#4DB6AC', 'Build proteins. Many antibiotics jam them.', 'grampos gramneg'],
+        ['nucleoid', 'DNA', '#1565C0', 'One tangled loop of DNA with no nucleus around it.', 'grampos gramneg'],
+        ['flagella', 'Flagella and pili', '#BDBDBD', 'Tails to swim with and hairs to stick to things.', 'grampos gramneg']] },
+    forensic: { t: 'Compact bone', v: [['bone', 'Compact bone']], cut: 'Cut open',
+      about: 'Bone lasts long after everything else, so examiners read it closely. Counting *osteons* is one way experts estimate age from bone.',
+      parts: [['lamellae', 'Lamellae', '#F3E5D0', 'Rings of bone laid down one at a time, a bit like tree rings.'],
+        ['canal', 'Haversian canal', '#D84343', 'The center tunnel, with an artery, a vein and a nerve.'],
+        ['osteocyte', 'Osteocytes', '#6D4C41', 'Bone cells living in tiny pockets, linked by thin canals.'],
+        ['cement', 'Cement line', '#C8B79A', 'The border around each osteon.'],
+        ['volkmann', 'Volkmann canal', '#D84343', 'A side tunnel joining the center canals.']] }
+  };
+  var lab = null, labLoading = false, s3 = { v: {}, focus: null, spin: !RM.matches, cut: 100 };
+  function m3() { return MODEL3D[area]; }
+  function varOf() { return s3.v[area] || m3().v[0][0]; }
+  function lab3dSide() {
+    var M = m3(), v = varOf();
+    $('s3side').className = 'card s3side t-' + area;
+    $('s3k').textContent = AREAS.filter(function (a) { return a.id === area; })[0].name;
+    $('s3t').textContent = M.t;
+    $('s3var').innerHTML = M.v.length > 1 ? M.v.map(function (x) { return '<button type="button" data-v3="' + x[0] + '" aria-pressed="' + (x[0] === v) + '">' + esc(x[1]) + '</button>'; }).join('') : '';
+    $('s3var').hidden = M.v.length < 2;
+    var parts = M.parts.filter(function (p) { return !p[4] || p[4].split(' ').indexOf(v) > -1; });
+    if (s3.focus && !parts.some(function (p) { return p[0] === s3.focus; })) s3.focus = null;
+    $('s3parts').innerHTML = parts.map(function (p) { return '<li><button type="button" data-part="' + p[0] + '" aria-pressed="' + (p[0] === s3.focus) + '"><i style="background:' + p[2] + '"></i>' + esc(p[1]) + '</button></li>'; }).join('');
+    var f = parts.filter(function (p) { return p[0] === s3.focus; })[0];
+    $('s3about').innerHTML = mk(f ? f[3] : M.about);
+    $('s3cutL').textContent = M.cut;
+    $('s3note').innerHTML = 'Colors follow <b class="kt">H&amp;E</b>, the pink and purple stain on real slides. Built with three.js.';
+    if (lab && lab.topic !== area + v) { lab.api.show(area, v); lab.topic = area + v; lab.api.focus(s3.focus); }
+  }
+  function open3D() {
+    lab3dSide();
+    if (lab) { lab.api.spin(s3.spin); lab.api.resize(); return; }
+    if (labLoading) return; labLoading = true;
+    var msg = $('s3msg'); msg.hidden = false; msg.textContent = 'Loading the 3D model…';
+    var ok = false; try { var c = document.createElement('canvas'); ok = !!(window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl'))); } catch (e) {}
+    if (!ok) { msg.textContent = 'This browser can’t show 3D here. Try Safari or Chrome.'; labLoading = false; return; }
+    import(new URL('lab3d/lab3d.js', document.baseURI).href).then(function (mod) {
+      lab = { api: mod.mount($('stage3')), topic: '' };
+      msg.hidden = true; labLoading = false;
+      lab.api.cut(s3.cut / 100); lab.api.spin(s3.spin); lab3dSide();
+    }).catch(function () { msg.textContent = 'The 3D model couldn’t load. Check your connection and open this view again.'; labLoading = false; });
+  }
+  function pause3D() { if (lab) lab.api.spin(false); }
+  $('s3var').addEventListener('click', function (e) { var b = e.target.closest('[data-v3]'); if (!b) return; s3.v[area] = b.dataset.v3; lab3dSide(); });
+  $('s3parts').addEventListener('click', function (e) { var b = e.target.closest('[data-part]'); if (!b) return; s3.focus = s3.focus === b.dataset.part ? null : b.dataset.part; lab3dSide(); if (lab) lab.api.focus(s3.focus); });
+  $('s3cut').addEventListener('input', function () { s3.cut = +this.value; if (lab) lab.api.cut(s3.cut / 100); });
+  $('s3spin').addEventListener('click', function () { s3.spin = !s3.spin; this.setAttribute('aria-pressed', s3.spin); if (lab) lab.api.spin(s3.spin); });
+  $('s3reset').addEventListener('click', function () { if (lab) lab.api.reset(); });
+  $('s3spin').setAttribute('aria-pressed', s3.spin);
+
+  /* ================= Liquid glass bars =================
+     The pill follows the finger every frame from measurements taken once on press, so nothing re-reads layout while dragging.
+     On press it lifts into a clear lens that magnifies the labels under it. Over dark backgrounds the labels turn white. */
+  var UA = navigator.userAgent, CHROMIUM = !!window.chrome && /Chrome\//.test(UA) && !/CriOS|EdgiOS|FxiOS/.test(UA), fxN = 0, glassEls = [];
+  function refractMap(w, h) {
+    /* Edge-bending map: pixels near the rim push inward, like light through the curved edge of glass */
+    var c = document.createElement('canvas'); c.width = w; c.height = h;
+    var x = c.getContext('2d'); if (!x) return null;
+    var img = x.createImageData(w, h), d = img.data, r = h / 2, band = Math.min(16, r);
+    for (var j = 0; j < h; j++) for (var i = 0; i < w; i++) {
+      var cx = Math.min(Math.max(i, r), w - r), dx = i - cx, dy = j - r, dist = Math.hypot(dx, dy), edge = r - dist, k = 0, nx = 0, ny = 0;
+      if (dist > 0 && edge < band) { k = Math.pow(1 - Math.max(edge, 0) / band, 2); nx = -dx / dist; ny = -dy / dist; }
+      var o = (j * w + i) * 4; d[o] = 128 + nx * k * 127; d[o + 1] = 128 + ny * k * 127; d[o + 2] = 128; d[o + 3] = 255;
+    }
+    x.putImageData(img, 0, 0); return c.toDataURL();
+  }
+  function refract(el) {
+    /* Real bending of what is behind the glass, only where the browser supports it (Chrome). Safari keeps the blur and edge light. */
+    if (!CHROMIUM) return;
+    var W = el.offsetWidth, H = el.offsetHeight; if (!W || !H || (el._fxW === W && el._fxH === H)) return;
+    var url = refractMap(W, H); if (!url) return;
+    var NS = 'http://www.w3.org/2000/svg', id = el._fxId || ('lgfx' + (++fxN)), old = document.getElementById(id); if (old) old.remove();
+    var f = document.createElementNS(NS, 'filter'); f.setAttribute('id', id); f.setAttribute('filterUnits', 'userSpaceOnUse'); f.setAttribute('primitiveUnits', 'userSpaceOnUse');
+    f.setAttribute('x', 0); f.setAttribute('y', 0); f.setAttribute('width', W); f.setAttribute('height', H); f.setAttribute('color-interpolation-filters', 'sRGB');
+    var im = document.createElementNS(NS, 'feImage'); im.setAttribute('href', url); im.setAttribute('x', 0); im.setAttribute('y', 0); im.setAttribute('width', W); im.setAttribute('height', H); im.setAttribute('result', 'map'); im.setAttribute('preserveAspectRatio', 'none');
+    var dm = document.createElementNS(NS, 'feDisplacementMap'); dm.setAttribute('in', 'SourceGraphic'); dm.setAttribute('in2', 'map'); dm.setAttribute('scale', 24); dm.setAttribute('xChannelSelector', 'R'); dm.setAttribute('yChannelSelector', 'G');
+    f.appendChild(im); f.appendChild(dm); $('fxdefs').appendChild(f);
+    var bf = 'url(#' + id + ') blur(1.5px) saturate(190%) brightness(1.05)';
+    el.style.webkitBackdropFilter = bf; el.style.backdropFilter = bf; el._fxId = id; el._fxW = W; el._fxH = H;
+  }
+
+  /* Labels turn white when the glass sits over something dark */
+  function parseColor(s) {
+    var m = String(s).match(/[\d.]+/g); if (!m || m.length < 3) return null;
+    var n = m.map(Number), fn = /^color\(/.test(s), r = n[0], g = n[1], b = n[2], a = n.length > 3 ? n[3] : 1;
+    if (fn) { r *= 255; g *= 255; b *= 255; }
+    return { r: r, g: g, b: b, a: a };
+  }
+  function lum(c) { function f(v) { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); } return .2126 * f(c.r) + .7152 * f(c.g) + .0722 * f(c.b); }
+  function sample(el) {
+    for (; el && el !== document.documentElement; el = el.parentElement) {
+      if (el.dataset && el.dataset.tone) return el.dataset.tone === 'dark' ? 0 : 1;
+      var c = parseColor(getComputedStyle(el).backgroundColor);
+      if (c && c.a > .5) return lum(c);
+    }
+    var b = parseColor(getComputedStyle(document.body).backgroundColor);
+    return b && b.a > .5 ? lum(b) : (isDark() ? 0 : 1);
+  }
+  function tone(el) {
+    if (!el || el._t || !document.elementsFromPoint) return;
+    el._t = requestAnimationFrame(function () {
+      el._t = 0;
+      var r = el.getBoundingClientRect(); if (!r.width) return;
+      var y = r.top + r.height / 2, dark = 0, n = 0;
+      [.15, .5, .85].forEach(function (f) {
+        var list = document.elementsFromPoint(r.left + r.width * f, y), hit = null;
+        for (var i = 0; i < list.length; i++) if (!el.contains(list[i]) && !list[i].closest('.fglass, .abar, .top')) { hit = list[i]; break; }
+        if (hit) { n++; if (sample(hit) < .18) dark++; }
+      });
+      el.classList.toggle('dk', n > 0 && dark / n >= .5);
+    });
+  }
+  function toneAll() { glassEls.forEach(function (el) { if (el.offsetParent !== null || getComputedStyle(el).position === 'fixed') tone(el); }); }
+
   function wireBar(g, sel, onPick) {
-    var l = document.createElement('span'); l.className = 'lens'; l.setAttribute('aria-hidden', 'true'); g.insertBefore(l, g.firstChild);
-    var R = null, T = 0, picked = 0;
-    function links() { return [].slice.call(g.querySelectorAll(sel)); }
-    function cur() { return g.querySelector(sel + '[aria-current="page"]'); }
-    function geo(a) { return { x: a.offsetLeft, y: a.offsetTop, w: a.offsetWidth, h: a.offsetHeight }; }
-    function write(r, snap) {
-      if (snap) l.style.transition = 'none';
-      l.style.setProperty('--lx', r.x + 'px'); l.style.setProperty('--ly', r.y + 'px'); l.style.setProperty('--lw', r.w + 'px'); l.style.setProperty('--lh', r.h + 'px');
-      if (snap) { void l.offsetWidth; l.style.transition = ''; }
-      R = r;
+    g.classList.add('glassbar'); glassEls.push(g);
+    var its = [].filter.call(g.children, function (c) { return c.matches(sel); });
+    var pill = document.createElement('span'); pill.className = 'pill'; pill.setAttribute('aria-hidden', 'true');
+    var mag = document.createElement('span'); mag.className = 'mag';
+    its.forEach(function (a) { var c = a.cloneNode(true); c.removeAttribute('href'); c.removeAttribute('aria-current'); c.removeAttribute('id'); c.tabIndex = -1; mag.appendChild(c); });
+    pill.appendChild(mag); g.insertBefore(pill, g.firstChild);
+    var geo = [], x = 0, y = 0, w = 0, h = 0, tx = 0, tw = 0, raf = 0, st = null, picked = 0;
+    function measure() {
+      geo = its.map(function (a) { return { l: a.offsetLeft, t: a.offsetTop, w: a.offsetWidth, h: a.offsetHeight }; });
+      var cs = getComputedStyle(g);
+      ['display', 'gridAutoFlow', 'gridAutoColumns', 'columnGap', 'rowGap', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'alignItems', 'justifyContent'].forEach(function (k) { mag.style[k] = cs[k]; });
+      mag.style.boxSizing = 'border-box'; mag.style.width = g.clientWidth + 'px'; mag.style.height = g.clientHeight + 'px';
     }
+    function draw(lift) {
+      pill.style.width = w + 'px'; pill.style.height = h + 'px';
+      pill.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)' + (lift ? ' scale(1.16,1.22)' : '');
+      mag.style.transform = 'translate3d(' + (-x) + 'px,' + (-y) + 'px,0)';
+    }
+    function frame() { raf = 0; x += (tx - x) * .55; w += (tw - w) * .55; if (Math.abs(tx - x) < .3 && Math.abs(tw - w) < .3) { x = tx; w = tw; } else raf = requestAnimationFrame(frame); draw(true); }
+    function nearest(px) { var b = 0, bd = 1e9; geo.forEach(function (q, i) { var dd = Math.abs(q.l + q.w / 2 - px); if (dd < bd) { bd = dd; b = i; } }); return b; }
+    function clampX(v) { var lo = geo[0].l, last = geo[geo.length - 1]; return Math.min(Math.max(v, lo), last.l + last.w - tw); }
+    function near(i) { its.forEach(function (a, j) { a.classList.toggle('near', j === i); }); [].forEach.call(mag.children, function (c, j) { c.classList.toggle('near', j === i); }); }
+    function cur() { return its.filter(function (a) { return a.getAttribute('aria-current') === 'page'; })[0]; }
     function place(mode) {
-      var a = cur(); if (!a || !a.offsetWidth) { l.classList.remove('on'); R = null; return; }
-      var r = geo(a), was = R;
-      if (!was || mode !== 'stretch' || RM.matches) write(r, true);
-      else if (Math.abs(r.x - was.x) > 1) {
-        var x0 = Math.min(was.x, r.x), x1 = Math.max(was.x + was.w, r.x + r.w);
-        l.classList.add('go'); write({ x: x0, y: r.y, w: x1 - x0, h: r.h });
-        clearTimeout(T); T = setTimeout(function () { l.classList.remove('go'); var b = cur(); if (b) write(geo(b)); }, 150);
-      } else write(r);
-      l.classList.add('on');
+      var a = cur(); if (!a || !g.offsetWidth) { pill.classList.remove('on'); return; }
+      measure(); refract(g);
+      var r = geo[its.indexOf(a)], instant = mode === 'snap' || RM.matches;
+      pill.classList.toggle('snap', !instant);
+      x = tx = r.l; y = r.t; w = tw = r.w; h = r.h; draw(false); pill.classList.add('on'); near(-1);
+      if (instant) { void pill.offsetWidth; pill.classList.add('snap'); }
+      tone(g);
     }
-    function set(a) { if (!a || a === cur()) { place('snap'); return; } links().forEach(function (x) { if (x === a) x.setAttribute('aria-current', 'page'); else x.removeAttribute('aria-current'); }); place('stretch'); }
+    function set(a) { if (!a) return; its.forEach(function (b) { if (b === a) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); }); place('stretch'); }
+    var ptrAt = 0;
     function pick(a) { picked = Date.now(); set(a); if (onPick) onPick(a); }
-    var d = null;
-    function nearest(x) { var best = null, bd = 1e9; links().forEach(function (a) { var dd = Math.abs(a.offsetLeft + a.offsetWidth / 2 - x); if (dd < bd) { bd = dd; best = a; } }); return best; }
     g.addEventListener('pointerdown', function (e) {
       if (e.pointerType === 'mouse' && e.button !== 0) return;
-      d = { id: e.pointerId, x0: e.clientX, y0: e.clientY, moved: false, near: e.target.closest(sel) };
-      if (!RM.matches) g.classList.add('lift');
+      measure(); if (!geo.length) return;
+      var r = g.getBoundingClientRect(), hit = e.target.closest(sel), px = e.clientX - r.left;
+      st = { id: e.pointerId, x0: e.clientX, left: r.left, moved: false, start: its.indexOf(hit) > -1 ? its.indexOf(hit) : nearest(px) };
+      try { g.setPointerCapture(e.pointerId); } catch (err) {}
+      pill.classList.remove('snap');
+      var c = cur(); if (c) { var q = geo[its.indexOf(c)]; x = q.l; y = q.t; w = q.w; h = q.h; } else { var q2 = geo[st.start]; x = q2.l; y = q2.t; w = q2.w; h = q2.h; }
+      if (!RM.matches) { g.classList.add('up'); pill.classList.add('on'); tw = geo[st.start].w; tx = clampX(px - tw / 2); near(st.start); if (!raf) raf = requestAnimationFrame(frame); }
+      e.preventDefault();
     });
     g.addEventListener('pointermove', function (e) {
-      if (!d || e.pointerId !== d.id) return;
-      var dx = e.clientX - d.x0;
-      if (!d.moved) {
-        if (Math.abs(dx) < 6) return;
-        if (Math.abs(e.clientY - d.y0) > Math.abs(dx)) { end(false); return; }
-        d.moved = true; g.classList.add('dragging'); try { g.setPointerCapture(e.pointerId); } catch (x) {}
-      }
-      var rc = g.getBoundingClientRect(), x = e.clientX - rc.left, n = nearest(x); if (!n) return;
-      var ls = links(), lo = ls[0].offsetLeft, hi = ls[ls.length - 1].offsetLeft + ls[ls.length - 1].offsetWidth;
-      var w = n.offsetWidth, lx = Math.min(Math.max(x - w / 2, lo), hi - w);
-      write({ x: lx, y: n.offsetTop, w: w, h: n.offsetHeight });
-      if (n !== d.near) { if (d.near) d.near.classList.remove('near'); d.near = n; }
-      n.classList.add('near');
+      if (!st || e.pointerId !== st.id) return;
+      if (!st.moved && Math.abs(e.clientX - st.x0) < 4) return;
+      st.moved = true;
+      var px = e.clientX - st.left, n = nearest(px);
+      tw = geo[n].w; tx = clampX(px - tw / 2); near(n);
+      if (!raf) raf = requestAnimationFrame(frame);
     });
-    function end(ok) {
-      var dd = d; d = null; g.classList.remove('dragging');
-      links().forEach(function (a) { a.classList.remove('near'); });
-      setTimeout(function () { g.classList.remove('lift'); }, dd && dd.moved ? 0 : 170);
-      if (!dd) return;
-      if (ok && dd.near) pick(dd.near); else place('stretch');
+    function end(e, ok) {
+      if (!st || (e && e.pointerId !== st.id)) return;
+      var s = st; st = null; cancelAnimationFrame(raf); raf = 0;
+      g.classList.remove('up'); near(-1);
+      var i = s.moved ? nearest(tx + tw / 2) : s.start;
+      if (ok && its[i]) { ptrAt = Date.now(); pick(its[i]); } else place('stretch');
     }
-    g.addEventListener('pointerup', function (e) { if (d && e.pointerId === d.id) end(true); });
-    g.addEventListener('pointercancel', function () { if (d) end(false); });
-    /* Clicks: a tap was already handled on pointerup, so only keyboard and assistive clicks pick here */
-    g.addEventListener('click', function (e) { var a = e.target.closest(sel); if (!a) return; e.preventDefault(); if (Date.now() - picked < 600) return; pick(a); });
-    g.addEventListener('keydown', function (e) { var a = e.target.closest(sel); if (a && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); pick(a); } });
-    links().forEach(function (a) { a.tabIndex = 0; if (!a.getAttribute('href')) a.setAttribute('role', 'link'); });
+    g.addEventListener('pointerup', function (e) { end(e, true); });
+    g.addEventListener('pointercancel', function (e) { end(e, false); });
+    g.addEventListener('lostpointercapture', function (e) { if (st && e.pointerId === st.id) end(e, false); });
+    /* Taps were handled on pointerup, so clicks only pick for the keyboard and screen readers */
+    g.addEventListener('click', function (e) { var a = e.target.closest(sel); if (a && mag.contains(a)) a = its[[].indexOf.call(mag.children, a)]; if (!a || its.indexOf(a) < 0) return; e.preventDefault(); if (Date.now() - ptrAt < 600) { ptrAt = 0; return; } pick(a); });
+    g.addEventListener('keydown', function (e) { var a = e.target.closest(sel); if (a && its.indexOf(a) > -1 && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); pick(a); } });
+    its.forEach(function (a) { a.tabIndex = 0; if (!a.getAttribute('href')) a.setAttribute('role', 'link'); });
     return { g: g, place: place, set: set, pick: pick };
   }
 
-  /* ================= Bottom bars, one per page (five tabs at most) ================= */
+  /* ================= Bottom bars, one per page. Each button opens its own view of the page. ================= */
   var TABS = {
     home: [['h-areas', 'compass', 'Explore'], ['h-hero', 'scope', 'Slide'], ['h-next', 'arrow', 'Next step'], ['h-plan', 'cal', 'Plan']],
-    classes: [['c-top', 'cells', 'Cells'], ['c-list', 'book', 'List'], ['c-gpa', 'chart', 'GPA'], ['c-add', 'plus', 'Add']],
-    papers: [['p-top', 'compass', 'Topics'], ['p-picks', 'book', 'Picks'], ['p-gaps', 'ques', 'Questions'], ['p-learn', 'cube', 'Learn'], ['p-search', 'search', 'Search']],
-    projects: [['j-1', 'scope', 'Slides'], ['j-2', 'drop', 'At home'], ['j-3', 'pen', 'Write']],
-    standout: [['s-shadow', 'scope', 'Shadow'], ['s-research', 'flask', 'Research'], ['s-apart', 'star', 'Set apart'], ['s-hours', 'clock', 'Hours'], ['s-time', 'path', 'Timeline']]
+    classes: [['c-top', 'cells', 'Cells'], ['c-gpa', 'chart', 'GPA'], ['c-add', 'plus', 'Add']],
+    papers: [['p-picks', 'book', 'Papers'], ['p-gaps', 'ques', 'Questions'], ['p-learn', 'compass', 'Learn'], ['p-3d', 'cube', '3D'], ['p-search', 'search', 'Search']],
+    projects: [['j-slides', 'scope', 'Slides'], ['j-home', 'drop', 'At home'], ['j-write', 'pen', 'Write']],
+    standout: [['s-shadow', 'scope', 'Shadow'], ['s-research', 'flask', 'Experience'], ['s-apart', 'star', 'Set apart'], ['s-hours', 'clock', 'Hours'], ['s-time', 'path', 'Timeline']]
   };
-  var BARS = {}, view = 'home', jumping = 0;
-  function jumpTo(id) {
-    var el = $(id); if (!el) return;
-    jumping = Date.now();
-    var topH = topEl.offsetHeight || 62, y = el.getBoundingClientRect().top + (window.scrollY || 0) - topH - 8;
-    if (id === TABS[view][0][0]) y = 0;
-    showTop();
-    window.scrollTo({ top: Math.max(0, y), behavior: RM.matches ? 'auto' : 'smooth' });
+  var BARS = {}, view = 'home', pane = {};
+  function paneOf(v, id) {
+    if (TABS[v].some(function (t) { return t[0] === id; })) return id;
+    var el = $(id), box = el && el.closest('[data-pane]'); return box && box.dataset.pane !== 'all' ? box.dataset.pane : TABS[v][0][0];
+  }
+  function showPane(v, id, keep) {
+    pane[v] = id;
+    document.querySelectorAll('#v-' + v + ' [data-pane]').forEach(function (s) {
+      var on = s.dataset.pane === 'all' || s.dataset.pane === id;
+      if (on && s.hidden) { s.hidden = false; if (!RM.matches) { s.classList.remove('enter'); void s.offsetWidth; s.classList.add('enter'); } }
+      else if (!on) s.hidden = true;
+    });
+    if (!keep) window.scrollTo(0, 0);
+    if (v === 'classes' && id === 'c-top') placeAll();
+    if (v === 'papers') { if (id === 'p-3d') open3D(); else pause3D(); }
+    toneAll();
   }
   Object.keys(TABS).forEach(function (v) {
     var nav = document.createElement('nav'); nav.className = 'abar'; nav.hidden = v !== 'home'; nav.setAttribute('aria-label', 'Sections');
-    nav.innerHTML = TABS[v].map(function (t, i) { return '<a data-go="' + t[0] + '"' + (t[3] ? ' data-grp="' + t[3] + '"' : '') + (i === 0 ? ' aria-current="page"' : '') + '>' + I[t[1]] + '<span>' + t[2] + '</span></a>'; }).join('');
+    nav.innerHTML = TABS[v].map(function (t, i) { return '<a data-go="' + t[0] + '"' + (i === 0 ? ' aria-current="page"' : '') + '>' + I[t[1]] + '<span>' + t[2] + '</span></a>'; }).join('');
     $('bars').appendChild(nav);
-    BARS[v] = wireBar(nav, 'a', function (a) {
-      if (a.dataset.grp) setGroup(a.dataset.grp, true);
-      jumpTo(a.dataset.go);
-    });
+    BARS[v] = wireBar(nav, 'a', function (a) { showPane(v, a.dataset.go); });
   });
   var pillsBar = wireBar($('grpPills'), 'a', function (a) { setGroup(a.dataset.g); });
-  var secBar = wireBar($('secnav'), '.sec', function (a) { var p = a.dataset.p; if (location.hash.slice(1) !== p) location.hash = p; else jumpTo(TABS[p][0][0]); });
+  var secBar = wireBar($('secnav'), '.sec', function (a) { var p = a.dataset.p; if (location.hash.slice(1) !== p) location.hash = p; else window.scrollTo({ top: 0, behavior: RM.matches ? 'auto' : 'smooth' }); });
+  glassEls.push(document.querySelector('.brand'), themeBtn);
+  function dirty() {}
 
-  /* Scroll spy: the bottom bar follows what is on screen.
-     Section positions are measured once and reused, so scrolling never forces a layout read. */
-  var marks = null, topH = 62, docH = 0;
-  function measure() {
-    var bar = BARS[view]; marks = []; if (!bar) return;
-    var sy = window.scrollY || 0;
-    topH = topEl.offsetHeight || 62; docH = document.documentElement.scrollHeight;
-    [].forEach.call(bar.g.querySelectorAll('a'), function (a) {
-      var el = $(a.dataset.go); if (!el || el.offsetParent === null) return;
-      marks.push({ a: a, y: el.getBoundingClientRect().top + sy });
-    });
-  }
-  function dirty() { marks = null; }
-  window.addEventListener('resize', dirty, { passive: true });
-  if (window.ResizeObserver) new ResizeObserver(dirty).observe(document.querySelector('main'));
-  function spy(y) {
-    if (Date.now() - jumping < 900) return;
-    var bar = BARS[view]; if (!bar) return;
-    if (!marks) measure();
-    var line = y + topH + 90, best = null;
-    for (var i = 0; i < marks.length; i++) if (marks[i].y <= line) best = marks[i].a;
-    if (window.innerHeight + y >= docH - 4 && marks.length) best = marks[marks.length - 1].a;
-    if (!best) best = bar.g.querySelector('a');
-    if (best && best.getAttribute('aria-current') !== 'page') bar.set(best);
-  }
-
-  /* Top bar: always in place, frosted once you scroll.
-     While the page moves, hover effects pause so the mouse wheel stays smooth. */
+  /* Top bar stays put. While the page moves, hover effects pause so the mouse wheel stays smooth, and the glass rechecks what is behind it. */
   var topEl = $('top'), ticking = false, isScrolled = false, stillT = 0, root = document.documentElement;
   function onScroll() {
     ticking = false;
     var y = Math.max(0, window.scrollY || 0);
     if ((y > 6) !== isScrolled) { isScrolled = y > 6; topEl.classList.toggle('scrolled', isScrolled); }
-    spy(y);
+    toneAll();
   }
   window.addEventListener('scroll', function () {
     if (!root.classList.contains('scrolling')) root.classList.add('scrolling');
-    clearTimeout(stillT); stillT = setTimeout(function () { root.classList.remove('scrolling'); }, 140);
+    clearTimeout(stillT); stillT = setTimeout(function () { root.classList.remove('scrolling'); toneAll(); }, 140);
     if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
   }, { passive: true });
   function showTop() {}
 
-  /* ================= Router: #home, #classes, #papers, #projects, #standout (optional /section) ================= */
+  /* ================= Router: #home, #classes, #papers, #projects, #standout, with an optional /view ================= */
   var VIEWS = Object.keys(TABS);
-  function setDye() { var r = document.documentElement; if (view === 'papers') r.dataset.dye = area; else delete r.dataset.dye; }
+  function setDye() { var r = document.documentElement; if (view === 'papers' || view === 'projects') r.dataset.dye = area; else delete r.dataset.dye; if (lab) lab3dSide(); setTimeout(toneAll, 60); }
   function route() {
     var h = (location.hash || '').slice(1).split('/'), v = h[0], sub = h[1];
     if (VIEWS.indexOf(v) < 0) v = 'home';
-    var changed = v !== view; view = v;
+    view = v;
     document.querySelectorAll('.view').forEach(function (s) {
       var on = s.dataset.view === v;
       if (on && s.hidden) { s.hidden = false; s.classList.remove('enter'); void s.offsetWidth; s.classList.add('enter'); }
@@ -2498,23 +2920,25 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     setDye();
     Object.keys(BARS).forEach(function (k) { BARS[k].g.hidden = k !== v; });
     secBar.set(document.querySelector('#secnav [data-p="' + v + '"]'));
-    topEl.classList.remove('scrolled'); isScrolled = false; dirty();
-    if (changed || !sub) window.scrollTo(0, 0);
-    var bar = BARS[v]; bar.set(bar.g.querySelector('a')); bar.place('snap');
+    topEl.classList.remove('scrolled'); isScrolled = false;
+    var bar = BARS[v], id = sub ? paneOf(v, sub) : (pane[v] || TABS[v][0][0]);
+    bar.set(bar.g.querySelector('[data-go="' + id + '"]')); bar.place('snap');
+    showPane(v, id);
     if (v === 'classes') { pillsBar.place('snap'); setGroup(grp); }
+    if (v !== 'papers') pause3D();
     placeAll();
-    if (sub) setTimeout(function () { var t = bar.g.querySelector('[data-go="' + sub + '"]'); if (t) bar.set(t); jumpTo(sub); }, 60);
+    if (sub && sub !== id) setTimeout(function () { var el = $(sub); if (el) window.scrollTo({ top: Math.max(0, el.getBoundingClientRect().top + window.scrollY - (topEl.offsetHeight || 62) - 8), behavior: RM.matches ? 'auto' : 'smooth' }); }, 60);
   }
   window.addEventListener('hashchange', route);
+  function refreshBars() { [secBar, pillsBar].concat(Object.keys(BARS).map(function (k) { return BARS[k]; })).forEach(function (b) { b.place('snap'); }); toneAll(); }
   var rz = 0;
-  window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(function () { placeAll(); [secBar, pillsBar].concat(Object.keys(BARS).map(function (k) { return BARS[k]; })).forEach(function (b) { b.place('snap'); }); }, 120); });
-  function refreshBars() { [secBar, pillsBar].concat(Object.keys(BARS).map(function (k) { return BARS[k]; })).forEach(function (b) { b.place('snap'); }); }
+  window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(function () { placeAll(); refreshBars(); }, 120); });
   window.addEventListener('load', refreshBars);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(refreshBars);
 
   /* ---------- First paint ---------- */
   ['home', 'fcc', 'transfer', 'med'].forEach(buildClump);
-  renderCustom(); renderGpa(); renderPapers(); renderMcat(); renderPlan(); renderStand(); renderHome();
+  renderCustom(); renderGpa(); renderPapers(); renderProj(); renderMcat(); renderPlan(); renderStand(); renderHome();
   pillsBar.set($('grpPills').querySelector('[data-g="fcc"]'));
   route();
 })();
