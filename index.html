@@ -408,6 +408,15 @@ main { padding-top: calc(env(safe-area-inset-top, 0px) + var(--topH) + 10px); pa
 .paper .meta { font-size: 13px; color: var(--dim); }
 .paper p { margin: 0; font-size: 14.5px; line-height: 1.45; }
 .paper a.btn { justify-self: start; margin-top: 4px; }
+.pfoot { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
+.pfoot a.btn { margin-top: 0; }
+.paper.done h3 { opacity: .7; }
+/* Progress for the open topic: papers read and projects done */
+.xprog { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 22px; margin: 14px auto 0; }
+.xprog .pg { display: inline-flex; align-items: center; gap: 9px; font: 500 13px var(--text); color: var(--dim); }
+.xprog .pg b { color: var(--hi); font-weight: 700; }
+.xprog .bar { width: 64px; height: 5px; border-radius: 999px; background: color-mix(in srgb, var(--c) 22%, transparent); overflow: hidden; }
+.xprog .bar i { display: block; height: 100%; border-radius: inherit; background: var(--cd); transition: width .3s var(--ease); }
 .lvls { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); margin-top: 18px; }
 @media (min-width: 1000px) { .lvls { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .lvl { border-top: 3px solid var(--c); }
@@ -773,6 +782,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
       <h1 class="giant">Read, make, wonder</h1>
       <p class="lede" id="areaBlurb"></p>
       <div class="areachips" id="areaChips" role="tablist" aria-label="Topics"></div>
+      <div class="xprog" id="xProg" aria-live="polite"></div>
       <p class="xhint" id="xHint" aria-live="polite"></p>
     </section>
 <section class="sect" id="p-picks" data-sec data-pane="x-papers">
@@ -1260,65 +1270,65 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     { a: 'forensic', t: 'An assessment of the Henssge method for forensic death time estimation in the early post-mortem interval', by: 'Forensic study', j: 'International Journal of Legal Medicine', y: 2024, url: pmc('PMC11732859'), tag: 'Time of death',
       s: 'Tests how well the most-used *body temperature method* estimates time of death in real cases. Other experts wrote back to disagree, which shows the question is still open.' },
     { a: 'cancer', t: 'Cancer statistics, 2024', by: 'Siegel and others', j: 'CA: A Cancer Journal for Clinicians', y: 2024, url: pm(38230766), tag: 'Big picture',
-      s: 'The yearly American Cancer Society count of new cancer cases and deaths in the US. Good for knowing which cancers pathologists see most.' },
-    { a: 'cancer', t: 'Bethesda 2014: improving on a paradigm shift', by: 'Nayar and Wilbur', j: '', y: 2016, url: pm(26767599), tag: 'Pap smears',
-      s: 'Explains the 2014 update to the *Bethesda System*, the shared words labs use to report a Pap smear. Every cytology report you read will use these categories.' },
+      s: 'The American Cancer Society expects about 2 million new cancer cases in the US in 2024. Deaths keep falling, but 6 of the 10 most common cancers are rising, colon cancer in adults under 55 among them.' },
+    { a: 'cancer', t: 'Bethesda 2014: improving on a paradigm shift', by: 'Wilbur and Nayar', j: 'Cytopathology', y: 2015, url: pm(26767599), tag: 'Pap smears',
+      s: 'Explains the third edition of the *Bethesda System*, the shared words labs use to report a Pap smear. It adds more pictures and a new chapter on matching each result to a patient\'s risk.' },
     { a: 'cancer', t: 'Intratumor heterogeneity and branched evolution revealed by multiregion sequencing', by: 'Gerlinger and others', j: 'New England Journal of Medicine', y: 2012, url: pm(22397650), tag: 'Tumor biology',
-      s: 'Samples from different spots of the same kidney tumor had different gene changes. One biopsy may not show the whole tumor, which matters for *tumor heterogeneity*.' },
-    { a: 'cancer', t: 'The GLOBOCAN 2022 cancer estimates: Data sources, methods, and a snapshot of the cancer burden worldwide', by: 'GLOBOCAN team', j: '', y: 2024, url: pm(39688499), tag: 'Worldwide',
-      s: 'Describes how the world cancer estimates are built and where the numbers come from. A good pair with the US statistics paper above.' },
-    { a: 'cancer', t: 'Deep learning in cancer genomics and histopathology', by: 'Review', j: '', y: 2024, url: pm(38539231), tag: 'AI + slides',
-      s: 'A review of how computers learn from both cancer slides and cancer genes. Read it after the biopsy AI paper to see where the field went next.' },
+      s: 'Researchers sequenced several spots of the same kidney tumors, and about two thirds of the gene changes were missing from at least one spot. One biopsy can miss part of the story, which is called *tumor heterogeneity*.' },
+    { a: 'cancer', t: 'The GLOBOCAN 2022 cancer estimates: Data sources, methods, and a snapshot of the cancer burden worldwide', by: 'Filho and others', j: 'International Journal of Cancer', y: 2025, url: pm(39688499), tag: 'Worldwide',
+      s: 'Explains where the world cancer numbers for 185 countries come from. Breast cancer was the most common cancer in women in 2022, and lung cancer the most common in men.' },
+    { a: 'cancer', t: 'Deep learning in cancer genomics and histopathology', by: 'Unger and Kather', j: 'Genome Medicine', y: 2024, url: pm(38539231), tag: 'AI + slides',
+      s: 'A review of how *deep learning* reads both cancer slides and cancer genes, from basic diagnosis to predicting how a patient will do. It also covers the biases these models can carry and how to catch them.' },
     { a: 'blood', t: 'Diagnosis from the blood smear', by: 'Bain', j: 'New England Journal of Medicine', y: 2005, url: pm(16079373), tag: 'Start here',
       s: 'A classic guide to what a trained eye finds on a *blood smear*, with pictures of the cells. It is the best first read for this topic.' },
     { a: 'blood', t: 'Iron-deficiency anemia', by: 'Camaschella', j: 'New England Journal of Medicine', y: 2015, url: pm(25946282), tag: 'Anemia',
       s: 'The most common blood problem in the world, explained from cause to lab tests. Small, pale red cells on a smear are one of its clues.' },
-    { a: 'blood', t: 'Sickle Cell Disease', by: 'Piel, Steinberg and Rees', j: 'New England Journal of Medicine', y: 2017, url: pm(28723335), tag: 'Sickle cells',
-      s: 'A full review of sickle cell disease, from the one gene change to the bent red cells and how patients are treated today.' },
+    { a: 'blood', t: 'Sickle Cell Disease', by: 'Piel, Steinberg and Rees', j: 'New England Journal of Medicine', y: 2017, url: pm(28423290), tag: 'Sickle cells',
+      s: 'A full review of sickle cell disease: the gene change, why the red cells bend, where in the world it is common, and how patients are cared for.' },
     { a: 'blood', t: 'iwCLL guidelines for diagnosis, indications for treatment, response assessment, and supportive management of CLL', by: 'Hallek and others', j: 'Blood', y: 2018, url: pm(29540348), tag: 'Blood cancers',
-      s: 'The rules doctors use to diagnose *chronic lymphocytic leukemia*, a common adult blood cancer. It shows how blood counts, smears and *flow cytometry* work together.' },
-    { a: 'blood', t: 'ICC-2022 versus WHO-2022 classification systems for acute leukemias and myeloid neoplasms: The perspective from two classical morphologists', by: 'Two hematopathologists', j: '', y: 2023, url: pm(37212459), tag: 'Expert',
+      s: 'The updated international rules for *chronic lymphocytic leukemia*, a common adult blood cancer. They cover diagnosis, when to start treatment, and how to measure *minimal residual disease*, the few cancer cells left after treatment.' },
+    { a: 'blood', t: 'ICC-2022 versus WHO-2022 classification systems for acute leukemias and myeloid neoplasms: The perspective from two classical morphologists', by: 'Zini and Bennett', j: 'American Journal of Hematology', y: 2023, url: pm(37212459), tag: 'Expert',
       s: 'In 2022 two different rulebooks for naming leukemias came out. This piece is two microscope experts comparing them, a look at a live debate in the field.' },
     { a: 'infect', t: 'Rapid molecular detection of tuberculosis and rifampin resistance', by: 'Boehme and others', j: 'New England Journal of Medicine', y: 2010, url: pm(20825313), tag: 'Fast tests',
-      s: 'A machine test found tuberculosis and a key drug resistance in about two hours instead of weeks of growing the germ. It changed TB testing worldwide.' },
+      s: 'A machine test called Xpert found tuberculosis and resistance to the drug rifampin in under two hours, straight from a spit sample. In 1,730 patients across four countries it caught 98% of the cases that a smear could see.' },
     { a: 'infect', t: 'A review of malaria diagnostic tools: microscopy and rapid diagnostic test (RDT)', by: 'Wongsrichanalai and others', j: 'American Journal of Tropical Medicine and Hygiene', y: 2007, url: pm(18165483), tag: 'Microscopy',
-      s: 'Compares finding malaria parasites on a stained blood slide with quick dipstick tests. A good look at where the microscope still wins.' },
-    { a: 'infect', t: 'Coccidioidomycosis-Associated Hospitalizations, United States, 2016-2021', by: 'US study', j: '', y: 2025, url: pm(41262357), tag: 'Valley fever',
-      s: 'Counts how many people across the US end up in the hospital with *valley fever*. It helps show how big the problem is beyond Arizona and California.' },
-    { a: 'infect', t: 'Revisiting the Utility of Histopathological Examination of Biopsy: A Necessity in Microbiology', by: 'Review', j: '', y: 2017, url: pm(28658759), tag: 'Biopsies',
-      s: 'Argues that looking at infected tissue under the microscope still matters, even with gene tests. Some germs are easiest to spot right in the *biopsy*.' },
-    { a: 'infect', t: 'COVID-19 related lung pathology: old patterns in new clothing?', by: 'Lung pathologists', j: '', y: 2020, url: pm(32881045), tag: 'Autopsy',
-      s: 'Asks whether the lung damage seen in COVID-19 was new or looked like damage pathologists already knew from other illnesses.' },
+      s: 'Compares finding malaria parasites on a *Giemsa*-stained blood slide with quick dipstick tests. Each has strengths and weak spots, and the authors argue the two work best together.' },
+    { a: 'infect', t: 'Coccidioidomycosis-Associated Hospitalizations, United States, 2016-2021', by: 'Williams and others', j: 'Open Forum Infectious Diseases', y: 2025, url: pm(41262357), tag: 'Valley fever',
+      s: 'A CDC team counted about 55,000 US hospital stays linked to *valley fever* from 2016 to 2021. The hospital rate went up over those six years, so doctors need to keep it in mind.' },
+    { a: 'infect', t: 'Revisiting the Utility of Histopathological Examination of Biopsy: A Necessity in Microbiology', by: 'Roy and others', j: 'Journal of Clinical and Diagnostic Research', y: 2017, url: pm(28658759), tag: 'Biopsies',
+      s: 'Nine years of fungal infection samples were checked three ways: growing the fungus, a quick *KOH* prep, and the tissue under a microscope. Some fungi showed up only in the *biopsy*, so the authors say to use all three together.' },
+    { a: 'infect', t: 'COVID-19 related lung pathology: old patterns in new clothing?', by: 'Nicholson and others', j: 'Histopathology', y: 2020, url: pm(32881045), tag: 'Autopsy',
+      s: 'An editorial arguing that COVID-19 lungs mostly show patterns pathologists already knew, like *diffuse alveolar damage*, caught at different stages. It ends by saying autopsies were key to understanding the disease.' },
     { a: 'dna', t: 'The Missing Diversity in Human Genetic Studies', by: 'Sirugo, Williams and Tishkoff', j: 'Cell', y: 2019, url: pm(30901543), tag: 'Who is studied',
-      s: 'A follow-up to the Popejoy paper. It shows the gap is still there and explains what it costs patients with non-European ancestry.' },
+      s: 'A follow-up to the Popejoy paper. Most studies linking genes to disease still use people of European ancestry, so risk predictions work less well for everyone else.' },
     { a: 'dna', t: 'ClinVar: public archive of interpretations of clinically relevant variants', by: 'Landrum and others', j: 'Nucleic Acids Research', y: 2016, url: pm(26582918), tag: 'Tool paper',
-      s: 'Describes *ClinVar*, the free database where labs post whether a gene change is harmful. You can search it yourself in the Learn list below.' },
+      s: 'Describes *ClinVar*, the free government database where labs post whether a gene change is harmful. When labs disagree about a change, the record shows it.' },
     { a: 'dna', t: 'Clinical laboratories collaborate to resolve differences in variant interpretations submitted to ClinVar', by: 'Harrison and others', j: 'Genetics in Medicine', y: 2017, url: pm(28301460), tag: 'Real mistakes',
-      s: 'Different labs sometimes call the same gene change harmful or harmless. This shows labs talking it through and fixing many of those disagreements.' },
-    { a: 'dna', t: 'Circulating tumor DNA and liquid biopsy in oncology', by: 'Review', j: '', y: 2022, url: pm(35122035), tag: 'Liquid biopsy',
-      s: 'Tumors shed bits of DNA into the blood. This review covers testing that DNA, called a *liquid biopsy*, to find and follow cancer without cutting tissue.' },
+      s: 'Four labs compared how they labeled the same gene changes in ClinVar. After sharing data and rechecking, they settled 87% of the disagreements they looked at.' },
+    { a: 'dna', t: 'Circulating tumor DNA and liquid biopsy in oncology', by: 'Cescon and others', j: 'Nature Cancer', y: 2020, url: pm(35122035), tag: 'Liquid biopsy',
+      s: 'Tumors shed bits of DNA into the blood. This review covers testing that DNA, called a *liquid biopsy*, to find, describe and follow cancer without cutting tissue.' },
     { a: 'dna', t: 'An openly available online tool for implementing the ACMG/AMP standards and guidelines for the interpretation of sequence variants', by: 'Kleinberger and others', j: 'Genetics in Medicine', y: 2016, url: pm(26986878), tag: 'Expert',
       s: 'A free web tool that walks through the official checklist for deciding if a gene change causes disease. Expert level, but it shows the steps clearly.' },
     { a: 'tissue', t: 'Tissue processing and hematoxylin and eosin staining', by: 'Feldman and Wolfe', j: 'Methods in Molecular Biology', y: 2014, url: pm(25015141), tag: 'Start here',
-      s: 'Every step from a fresh piece of tissue to a finished pink and purple slide: *fixation*, wax, cutting and staining.' },
+      s: 'The steps that turn fresh tissue into a pink and purple slide: *fixation*, drying, clearing, wax and *H&E* staining. It shows why a bad slide often starts with bad processing.' },
     { a: 'tissue', t: 'When tissue antigens and antibodies get along: revisiting the technical aspects of immunohistochemistry, the red, brown, and blue technique', by: 'Ramos-Vara and Miller', j: 'Veterinary Pathology', y: 2014, url: pm(24129895), tag: 'IHC',
-      s: 'How *immunohistochemistry* uses antibodies to turn one protein brown on a slide, and the common ways it goes wrong.' },
+      s: 'How *immunohistochemistry* uses antibodies to color one protein brown or red on a slide. It walks through each step and the controls labs use so their results match.' },
     { a: 'tissue', t: 'QuPath: Open source software for digital pathology image analysis', by: 'Bankhead and others', j: 'Scientific Reports', y: 2017, url: pm(29203879), tag: 'Tool paper',
-      s: 'The paper behind QuPath, the free slide software in your Stand out list. It shows what the program can measure on a scanned slide.' },
+      s: 'The paper behind QuPath, the free slide software in your Stand out list. It finds tumor areas, counts stained cells and lets users write their own tools.' },
     { a: 'tissue', t: 'Whole Slide Imaging Versus Microscopy for Primary Diagnosis in Surgical Pathology: A Multicenter Blinded Randomized Noninferiority Study of 1992 Cases', by: 'Mukhopadhyay and others', j: 'American Journal of Surgical Pathology', y: 2018, url: pm(28961557), tag: 'Digital slides',
-      s: 'Pathologists diagnosed almost 2,000 cases on a screen and again on a glass microscope. Screen reads were about as accurate, which helped digital pathology get approved.' },
-    { a: 'tissue', t: 'Commentary: Whole-slide Images - Good Enough for Primary Diagnosis?', by: 'Commentary', j: '', y: 2018, url: pm(29531848), tag: 'Debate',
-      s: 'A short reply to the study above that asks what screens might still miss. Read the two together to see both sides.' },
+      s: 'Sixteen pathologists read 1,992 cases both on a screen and on a glass microscope. Major mistakes came out about the same, 4.9% on screen and 4.6% on glass.' },
+    { a: 'tissue', t: 'Commentary: Whole-slide Images - Good Enough for Primary Diagnosis?', by: 'Bauer', j: 'Journal of Pathology Informatics', y: 2018, url: pm(29531848), tag: 'Debate',
+      s: 'A pathologist reviews the screen versus glass study above and calls it the strongest evidence yet. He also notes limits, like readers not being allowed to ask for more tests.' },
     { a: 'forensic', t: 'The changing profile of autopsied deaths in the United States, 1972-2007', by: 'Hoyert', j: 'NCHS Data Brief', y: 2011, url: pm(22142988), tag: 'Big picture',
-      s: 'US government numbers showing far fewer *autopsies* than in the 1970s, and that more of them are now done for legal reasons.' },
+      s: 'Government numbers on *autopsies* in the US from 1972 to 2007. The share of deaths that get an autopsy began falling in the early 1970s, and the brief shows who still gets one by age and cause.' },
     { a: 'forensic', t: 'Forensic entomology: applications and limitations', by: 'Amendt and others', j: 'Forensic Science, Medicine and Pathology', y: 2011, url: pm(21213072), tag: 'Insects',
-      s: 'How the insects found on a body help estimate time of death, and where that method stops being reliable. A good pair with the body temperature paper.' },
-    { a: 'forensic', t: 'Forensic imaging for causal investigation of death', by: 'Review', j: '', y: 2014, url: pm(24644410), tag: 'Imaging',
-      s: 'How CT and MRI scans of a body are used alongside, or sometimes instead of, a traditional *autopsy*.' },
-    { a: 'forensic', t: 'Minimally invasive autopsies: a promise to revive the procedure', by: 'Review', j: '', y: 2017, url: pm(28573111), tag: 'New methods',
-      s: 'Looks at autopsies done with scans and small needle samples, which some families accept more easily than a full autopsy.' },
-    { a: 'forensic', t: 'Two decades of autopsy-detected diagnostic errors in Japan', by: 'Japanese study', j: '', y: 2025, url: pm(40211933), tag: 'Why autopsy',
-      s: 'Tracks how often an autopsy finds a diagnosis that was missed while the patient was alive, one of the strongest reasons autopsies still matter.' }
+      s: 'How insects on a body help estimate the shortest possible time since death. It also covers using insects to find drugs or identify a person, and why careful collection matters in court.' },
+    { a: 'forensic', t: 'Forensic imaging for causal investigation of death', by: 'Simons and others', j: 'Korean Journal of Radiology', y: 2014, url: pm(24644410), tag: 'Imaging',
+      s: 'A single case: a man was found after being hit by a car, but the CT scan showed broken bones without the bleeding you would expect. Pills in his gut and blood tests showed he had died of a drug overdose first.' },
+    { a: 'forensic', t: 'Minimally invasive autopsies: a promise to revive the procedure', by: 'Saldiva', j: 'Autopsy and Case Reports', y: 2014, url: pm(28573111), tag: 'New methods',
+      s: 'An editorial on autopsies done with CT scans and small needle samples. The author thinks they could bring autopsies back, since many families dislike a full one.' },
+    { a: 'forensic', t: 'Two decades of autopsy-detected diagnostic errors in Japan', by: 'Katayama and others', j: 'Diagnosis', y: 2025, url: pm(40211933), tag: 'Why autopsy',
+      s: 'In 1,213 autopsies in Japan over 20 years, 36% found a main cause of death the doctors had missed. Cancers and infections were missed most often.' }
   ];
   var GAPS = [
     { a: 'cancer', q: 'Why are some cancers found later in rural towns than in cities?', how: 'Compare *stage at diagnosis* for Fresno County with the rest of California using public California Cancer Registry numbers.', from: 39141060 },
@@ -2007,6 +2017,15 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
         '</button>';
     }).join('');
   }
+  var rd = load('susie-path-papers', {}) || {}; rd.read = rd.read || {};
+  function renderProg() {
+    var el = $('xProg'); if (!el || typeof PJ === 'undefined' || !proj) return;
+    var P = PAPERS.filter(function (p) { return p.a === area; }), pr = P.filter(function (p) { return rd.read[p.url]; }).length, jt = 0, jd = 0;
+    Object.keys(PJ[area] || {}).forEach(function (k) { (PJ[area][k] || []).forEach(function (q) { jt++; if (proj.done[area + '-' + k + '-' + slug(q.t)]) jd++; }); });
+    function pg(n, t, w) { return '<span class="pg"><span class="bar"><i style="width:' + (t ? Math.round(100 * n / t) : 0) + '%"></i></span><span><b>' + n + ' of ' + t + '</b> ' + w + '</span></span>'; }
+    el.className = 'xprog t-' + area;
+    el.innerHTML = pg(pr, P.length, 'papers read') + (jt ? pg(jd, jt, 'projects done') : '');
+  }
   function renderPaperList() {
     var all = PAPERS.filter(function (p) { return p.a === area; }), kinds = [];
     all.forEach(function (p) { if (kinds.indexOf(p.k) < 0) kinds.push(p.k); });
@@ -2019,7 +2038,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     L.sort(function (a, b) { return pf.sort === 'new' ? b.y - a.y : pf.sort === 'old' ? a.y - b.y : a.l - b.l || b.y - a.y; });
     $('pcount').textContent = 'Showing ' + L.length + ' of ' + all.length + ' papers';
     $('paperList').innerHTML = L.length ? L.map(function (p) {
-      return '<li class="card paper t-' + p.a + '"><div class="ptags"><span class="tag">' + esc(p.tag) + '</span>' + (p.tag === PLV[p.l] ? '' : '<span class="lvtag">' + PLV[p.l] + '</span>') + '</div><h3>' + esc(p.t) + '</h3><span class="meta">' + esc(p.by) + (p.j ? ' &middot; ' + esc(p.j) : '') + (p.y ? ' &middot; ' + p.y : '') + '</span><p>' + mk(p.s) + '</p><a class="btn sm" href="' + p.url + '" target="_blank" rel="noopener">Read it</a></li>';
+      return '<li class="card paper t-' + p.a + (rd.read[p.url] ? ' done' : '') + '"><div class="ptags"><span class="tag">' + esc(p.tag) + '</span>' + (p.tag === PLV[p.l] ? '' : '<span class="lvtag">' + PLV[p.l] + '</span>') + '</div><h3>' + esc(p.t) + '</h3><span class="meta">' + esc(p.by) + (p.j ? ' &middot; ' + esc(p.j) : '') + (p.y ? ' &middot; ' + p.y : '') + '</span><p>' + mk(p.s) + '</p><div class="pfoot"><a class="btn sm" href="' + p.url + '" target="_blank" rel="noopener">Read it</a><label class="pjdone"><input type="checkbox" data-pread="' + esc(p.url) + '"' + (rd.read[p.url] ? ' checked' : '') + '><span>Read</span></label></div></li>';
     }).join('') : '<li class="pempty">Nothing matches. Try another level or kind.</li>';
   }
   $('pfilters').addEventListener('click', function (e) {
@@ -2033,7 +2052,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     $('areaChips').innerHTML = chipsHTML();
     var A = AREAS.filter(function (a) { return a.id === area; })[0];
     $('areaBlurb').innerHTML = mk(A.blurb);
-    renderPaperList(); xhint();
+    renderPaperList(); renderProg(); xhint();
     $('gapList').innerHTML = GAPS.filter(function (g) { return g.a === area; }).map(function (g) {
       var p = paperFor(g.from);
       return '<li class="t-' + g.a + '"><span class="qmark">?</span><div><div class="q">' + esc(g.q) + '</div><div class="how">' + mk(g.how) + '</div>' +
@@ -2617,7 +2636,8 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
   }
   $('v-explore').addEventListener('change', function (e) {
     var t = e.target;
-    if (t.dataset.pj) { if (t.checked) proj.done[t.dataset.pj] = true; else delete proj.done[t.dataset.pj]; store('susie-path-projects', proj); t.closest('.pj').classList.toggle('done', t.checked); }
+    if (t.dataset.pj) { if (t.checked) proj.done[t.dataset.pj] = true; else delete proj.done[t.dataset.pj]; store('susie-path-projects', proj); t.closest('.pj').classList.toggle('done', t.checked); renderProg(); }
+    if (t.dataset.pread) { if (t.checked) rd.read[t.dataset.pread] = true; else delete rd.read[t.dataset.pread]; store('susie-path-papers', rd); t.closest('.paper').classList.toggle('done', t.checked); renderProg(); }
     if (t.dataset.step) { var p = t.closest('[data-proj]').dataset.proj; proj[p] = proj[p] || {}; proj[p][t.dataset.step] = t.checked; store('susie-path-projects', proj);
       var ul = t.closest('[data-proj]'), c = ul.querySelectorAll('input:checked').length, sm = ul.closest('details').querySelector('summary span'); if (sm) sm.textContent = c + ' of ' + ul.querySelectorAll('input').length; }
   });
@@ -2927,7 +2947,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
     standout: [['s-shadow', 'scope', 'Shadow'], ['s-research', 'flask', 'Experience'], ['s-apart', 'star', 'Set apart'], ['s-hours', 'clock', 'Hours'], ['s-time', 'path', 'Timeline']]
   };
   var BARS = {}, view = 'home', pane = {}, jumping = 0;
-  var XHINT = { 'x-papers': ['Papers', 'real studies about {T}, easiest first. Read the short summary, then tap Read it for the full paper.'],
+  var XHINT = { 'x-papers': ['Papers', 'real studies about {T}, easiest first. Read the short summary, then tap Read it for the full paper and tick Read when you finish.'],
     'x-proj': ['Projects', 'small things you can do yourself for {T}. Start at number 1 and tick Done as you go.'],
     'x-research': ['Research', 'questions about {T} nobody has fully answered yet, a 3D model to explore, and sites to learn more.'] };
   function xhint() {
