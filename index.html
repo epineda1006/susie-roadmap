@@ -170,12 +170,11 @@ main { padding-top: calc(env(safe-area-inset-top, 0px) + var(--topH) + 10px); pa
 .abar a svg { width: var(--tbi); height: var(--tbi); fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .pills a svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 /* The selection pill. On press it lifts into a clear lens that magnifies the labels under it. */
-.glassbar { --itc: var(--dim); --its: var(--hi); --ipc: var(--pg); }
-.glassbar > a.onDark { --itc: rgba(255,255,255,.88); --its: #fff; --ipc: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.28); }
-.glassbar > a.onLight { --itc: #4a3f45; --its: #120e10; --ipc: #120e10; }
+.glassbar { --itc: var(--dim); --its: var(--hi); }
+.glassbar > a.onDark { --itc: rgba(255,255,255,.88); --its: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.28); }
+.glassbar > a.onLight { --itc: #4a3f45; --its: #120e10; }
 .glassbar > a, .glassbar .mag > a { color: var(--itc); }
 .glassbar > a[aria-current="page"], .glassbar > a.near, .glassbar .mag > a.near { color: var(--its); }
-.glassbar > a[aria-current="page"] svg { color: var(--ipc); }
 .glassbar .pill { position: absolute; left: 0; top: 0; z-index: 0; border-radius: 999px; pointer-events: none; overflow: hidden; will-change: transform, width; opacity: 0;
   background: color-mix(in srgb, var(--pg) 16%, rgba(255,255,255,.35));
   box-shadow: inset 0 1px 0 rgba(255,255,255,.7), inset 0 0 0 .5px rgba(0,0,0,.06);
