@@ -152,20 +152,20 @@ main { padding-top: calc(env(safe-area-inset-top, 0px) + var(--topH) + 10px); pa
 .secnav .sec svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; display: none; }
 .iconbtn { justify-self: end; width: 40px; height: 40px; border-radius: 50%; border: 0; display: grid; place-items: center; color: var(--fg); cursor: pointer; padding: 0; }
 .iconbtn svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+/* Phones: the logo bubble and the light/dark bubble sit on either side of the page tabs, and the tabs shrink to fit between them */
 @media (max-width: 699px) {
-  .top .in { grid-template-columns: minmax(0, 1fr); padding-block: 8px; }
-  .brand { display: none; }
-  .secnav { grid-column: 1; justify-self: center; }
-  .top .iconbtn { display: none; }
+  .top .in { grid-template-columns: auto minmax(0, 1fr) auto; gap: 6px; padding: 8px max(10px, env(safe-area-inset-right, 0px)) 8px max(10px, env(safe-area-inset-left, 0px)); }
+  .secnav { grid-column: 2; justify-self: center; --ttw: min(70px, calc((100vw - 20px - 2 * var(--ttbh) - 12px - 8px) / 4)); grid-auto-columns: var(--ttw); }
+  .secnav .sec { font-size: 12.5px; letter-spacing: -.01em; }
 }
-@media (max-width: 374px) { .secnav .sec { font-size: 12px; } }
+@media (max-width: 374px) { .secnav .sec { font-size: 11.5px; letter-spacing: -.02em; } }
+@media (max-width: 359px) { :root { --ttbh: 42px; } }
 
 /* ---------- Bottom bar: sections of the open page, sliding lens, never collapses ---------- */
 .abar { position: fixed; left: 50%; bottom: max(14px, calc(env(safe-area-inset-bottom, 0px) + 6px)); transform: translateX(-50%); z-index: 30; display: grid; grid-auto-flow: column; grid-auto-columns: var(--tbw); height: var(--tbh); padding: 4px; border-radius: 999px; }
 .abar[hidden] { display: none; }
 .top, .abar { will-change: transform; }
 .foottheme { display: none; }
-@media (max-width: 699px) { .foottheme { display: flex; justify-content: center; padding-top: 28px; } }
 .abar a { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 0; text-decoration: none; font: 600 var(--tbf)/1.1 var(--text); letter-spacing: -.005em; border-radius: 999px; white-space: nowrap; cursor: pointer; transition: color .25s var(--ease); }
 .abar a svg { width: var(--tbi); height: var(--tbi); fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .pills a svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
@@ -553,7 +553,10 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 
 /* ---------- Top bar pieces all share the page bar's height ---------- */
 .brand { height: var(--ttbh); padding: 0 16px 0 calc((var(--ttbh) - 30px) / 2); gap: 9px; font-size: 14.5px; }
-.brand i { width: 30px; height: 30px; }
+.brand i { width: 30px; height: 30px; flex: none; }
+.brand { white-space: nowrap; }
+/* Narrow screens: the logo bubble keeps just the logo, so the name never wraps or crowds the tabs */
+@media (max-width: 819px) { .brand { width: var(--ttbh); padding: 0; gap: 0; justify-content: center; } .brand .bt { display: none; } }
 .iconbtn { width: var(--ttbh); height: var(--ttbh); }
 
 /* ---------- Views inside a page: one bottom-bar button, one view ---------- */
@@ -655,7 +658,7 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 
 <header class="top" id="top">
   <div class="in">
-    <a class="brand fglass" href="#home"><i></i>Pathology Lab</a>
+    <a class="brand fglass" href="#home" aria-label="Pathology Lab"><i></i><span class="bt">Pathology Lab</span></a>
     <nav class="secnav fglass" id="secnav" aria-label="Pages">
       <a class="sec" data-p="home" href="#home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-6.5 8 6.5M6.5 9.5V19h11V9.5"/></svg><span class="L">Home</span></a>
       <a class="sec" data-p="classes" href="#classes"><span class="L">Classes</span></a>
