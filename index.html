@@ -41,9 +41,9 @@
   --display: -apple-system, "SF Pro Display", BlinkMacSystemFont, "Helvetica Neue", system-ui, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, monospace;
   --ease: cubic-bezier(.2,.7,.2,1); --spring: cubic-bezier(.3, 1.32, .5, 1); --glide: cubic-bezier(.22, 1.1, .36, 1);
-  --g: 28px; --topH: 62px; --colW: 1760px; /* wide enough that iPad and laptop screens fill edge to edge, only giant monitors get side margins */
-  /* Bar buttons: Apple Music tab bar size on iPhone, every button the same width in both bars */
-  --tbw: 96px; --tbh: 56px; --tbi: 21px; --tbf: 11.5px; --ttbh: 52px; --ttf: 14px;
+  --g: 28px; --topH: 52px; --colW: 1760px; /* wide enough that iPad and laptop screens fill edge to edge, only giant monitors get side margins */
+  /* Bar buttons: Mac and iPad match the macOS Safari toolbar (36px bubbles); iPhone matches iOS Safari's toolbar buttons (48px) */
+  --tbw: 104px; --tbh: 36px; --tbi: 16px; --tbf: 12.5px; --ttbh: 36px; --ttf: 13px; --ttw: 84px;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #000; --bg2: #161616; --card: #121212; --fg: #F5F5F5; --hi: #fff; --dim: #CFCFCF;
@@ -62,7 +62,7 @@
   --good: #A5C86C; --mid: #DDC267; --low: #F2479A; --kh: #F472B0; --tile: var(--tile-d);
   color-scheme: dark; }
 @media (min-width: 1000px) { :root { --g: 32px; } }
-@media (max-width: 699px) { :root { --g: 16px; --topH: 58px; --tbw: min(70px, calc((100vw - 2 * var(--g) - 8px) / 5)); --tbh: 62px; --tbi: 24px; --tbf: 10.5px; --ttbh: 48px; --ttf: 13px; } }
+@media (max-width: 699px) { :root { --g: 16px; --topH: 58px; --tbw: min(70px, calc((100vw - 2 * var(--g) - 8px) / 5)); --tbh: 48px; --tbi: 19px; --tbf: 10px; --ttbh: 48px; --ttf: 13px; } }
 
 /* Topic classes: --c fill, --cd deep, --ci the one that reads as text on the page */
 .t-cancer { --c: var(--cancer); --cd: var(--cancer-d); } .t-blood { --c: var(--blood); --cd: var(--blood-d); } .t-infect { --c: var(--infect); --cd: var(--infect-d); }
@@ -147,7 +147,7 @@ main { padding-top: calc(env(safe-area-inset-top, 0px) + var(--topH) + 10px); pa
   padding: 10px max(var(--g), env(safe-area-inset-right, 0px)) 10px max(var(--g), env(safe-area-inset-left, 0px)); }
 .brand { justify-self: start; font: 700 14px var(--display); letter-spacing: -.02em; color: var(--hi); display: flex; align-items: center; gap: 8px; text-decoration: none; padding: 5px 13px 5px 5px; border-radius: 999px; }
 .brand i { width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--cancer) 0 22%, transparent 23%), radial-gradient(circle at 68% 62%, var(--tissue) 0 18%, transparent 19%), var(--fld); box-shadow: inset 0 0 0 1.5px var(--rule); }
-.secnav { grid-column: 2; position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: var(--tbw); height: var(--ttbh); padding: 4px; border-radius: 999px; }
+.secnav { grid-column: 2; position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: var(--ttw); height: var(--ttbh); padding: 3px; border-radius: 999px; }
 .secnav .sec { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; font: 600 var(--ttf) var(--display); letter-spacing: -.005em; padding: 0; border-radius: 999px; text-decoration: none; white-space: nowrap; transition: color .25s var(--ease); cursor: pointer; }
 .secnav .sec svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; display: none; }
 .iconbtn { justify-self: end; width: 40px; height: 40px; border-radius: 50%; border: 0; display: grid; place-items: center; color: var(--fg); cursor: pointer; padding: 0; }
@@ -551,12 +551,21 @@ input[type="checkbox"]:checked + span { color: var(--dim); }
 
 
 /* ---------- Top bar pieces all share the page bar's height ---------- */
-.brand { height: var(--ttbh); padding: 0 16px 0 calc((var(--ttbh) - 30px) / 2); gap: 9px; font-size: 14.5px; }
-.brand i { width: 30px; height: 30px; flex: none; }
+.brand { height: var(--ttbh); padding: 0 13px 0 calc((var(--ttbh) - var(--lg)) / 2); gap: 7px; font-size: 13px; --lg: 24px; }
+.brand i { width: var(--lg); height: var(--lg); flex: none; }
+@media (max-width: 699px) { .brand { --lg: 30px; } }
 .brand { white-space: nowrap; }
 /* Narrow screens: the logo bubble keeps just the logo, so the name never wraps or crowds the tabs */
 @media (max-width: 819px) { .brand { width: var(--ttbh); padding: 0; gap: 0; justify-content: center; } .brand .bt { display: none; } }
 .iconbtn { width: var(--ttbh); height: var(--ttbh); }
+.iconbtn svg { width: 16px; height: 16px; }
+@media (max-width: 699px) { .iconbtn svg { width: 19px; height: 19px; } }
+@media (max-width: 699px) { .abar { padding: 3px; } .abar a { gap: 2px; } }
+/* Mac and iPad: the bottom bar reads like a Safari toolbar group, icon beside its label in one short row */
+@media (min-width: 700px) {
+  .abar { padding: 3px; }
+  .abar a { flex-direction: row; gap: 6px; }
+}
 
 /* ---------- Views inside a page: one bottom-bar button, one view ---------- */
 [data-pane][hidden] { display: none !important; }
